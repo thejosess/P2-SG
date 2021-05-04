@@ -1,0 +1,26 @@
+{
+  "name": "ejercicios-SG",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thejosess/ejercicios-SG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thejosess/ejercicios-SG/issues"
+  },
+  "homepage": "https://github.com/thejosess/ejercicios-SG#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.6",
+    "@types/three": "^0.126.0",
+    "@types/three-dat.gui": "^2.0.0"
+  }
+}
