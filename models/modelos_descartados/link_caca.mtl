@@ -67,7 +67,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl MI_boots
+newmtl mi_boots
 Ns 18.000005
 Ka 1.000000 1.000000 1.000000
 Kd 0.588000 0.588000 0.588000
@@ -176,8 +176,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_shieldA_alb.png
-map_d MI_shieldA_alb.png
+map_Kd mi_shielda_alb.png
+map_d mi_shielda_alb.png
 
 newmtl linkShieldA_MI_shieldA.001
 Ns 323.999994
@@ -198,8 +198,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_shieldB_alb.png
-map_d MI_shieldB_alb.png
+map_Kd mi_shieldb_alb.png
+map_d mi_shieldb_alb.png
 
 newmtl linkShieldB_MI_shieldB.001
 Ns 323.999994
@@ -242,8 +242,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_sowrdA_alb.png
-map_d MI_sowrdA_alb.png
+map_Kd mi_sowrda_alb.png
+map_d mi_sowrda_alb.png
 
 newmtl linkSwordA_MI_sowrdA.001
 Ns 323.999994
@@ -264,8 +264,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_sowrdA_alb.png
-map_d MI_sowrdA_alb.png
+map_Kd mi_sowrda_alb.png
+map_d mi_sowrda_alb.png
 
 newmtl linkSwordA_MI_sowrdAball.001
 Ns 323.999994
@@ -286,8 +286,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_sowrdB_alb.png
-map_d MI_sowrdB_alb.png
+map_Kd mi_sowrdb_alb.png
+map_d mi_sowrdb_alb.png
 
 newmtl linkSwordB_MI_sowrdB.001
 Ns 323.999994
@@ -308,8 +308,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd MI_sowrdB_alb.png
-map_d MI_sowrdB_alb.png
+map_Kd mi_sowrdb_alb.png
+map_d mi_sowrdb_alb.png
 
 newmtl linkSwordB_MI_sowrdBball.001
 Ns 323.999994
