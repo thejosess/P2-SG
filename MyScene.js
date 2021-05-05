@@ -12,11 +12,19 @@ import Stats from './libs/Stats.js';
 import {Link} from './Link.js'
 
 
+
+
+
+/* ESTADOS INICIALES PARA EL METODO JUGAR */
+
+
+
+
+
 /// La clase fachada del modelo
 /**
  * Usaremos una clase derivada de la clase Scene de Three.js para llevar el control de la escena y de todo lo que ocurre en ella.
  */
-
 class MyScene extends THREE.Scene {
   constructor (myCanvas) {
     super();
@@ -159,7 +167,43 @@ class MyScene extends THREE.Scene {
     
     // Y también el tamaño del renderizador
     this.renderer.setSize (window.innerWidth, window.innerHeight);
+
+    
   }
+
+
+  
+  onKeyPressed(event){
+    var key = event.which || event.keyCode
+
+    //console.log("mostrando tecla" + key)
+    //console.log(String.fromCharCode(key))
+
+    if (String.fromCharCode(key) == 'w'){
+      console.log("mostrando tecla " + String.fromCharCode(key))
+      this.link.orientacionLink(MyScene.LOOK_AT_UP)
+    }
+
+    if (String.fromCharCode(key) == 'a'){
+      console.log("mostrando tecla " + String.fromCharCode(key))
+      this.link.orientacionLink(MyScene.LOOK_AT_RIGHT)
+    }
+
+    if (String.fromCharCode(key) == 'd'){
+      console.log("mostrando tecla " + String.fromCharCode(key))
+      this.link.orientacionLink(MyScene.LOOK_AT_LEFT)
+    }
+
+    if (String.fromCharCode(key) == 's'){
+      console.log("mostrando tecla " + String.fromCharCode(key))
+      this.link.orientacionLink(MyScene.LOOK_AT_DOWN)
+    }
+
+
+  }
+
+
+
 
   update () {
     // Se actualizan los elementos de la escena para cada frame
@@ -190,6 +234,18 @@ class MyScene extends THREE.Scene {
   }
 }
 
+  /* ESTADOS DEL JUEGO */
+  MyScene.NO_START = 0;
+  MyScene.START = 1;
+  MyScene.DEAD = 2;
+
+
+  /* ESTADOS ORIENTACION MUÑECO */
+  MyScene.LOOK_AT_UP = 5;
+  MyScene.LOOK_AT_DOWN = 6;
+  MyScene.LOOK_AT_RIGHT = 7;
+  MyScene.LOOK_AT_LEFT = 7;
+
 /// La función   main
 $(function () {
   
@@ -198,6 +254,12 @@ $(function () {
 
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se modifica el tamaño de la ventana de la aplicación.
   window.addEventListener ("resize", () => scene.onWindowResize());
+
+  // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se pulsa una tecla
+  window.addEventListener ("keypress", (event) => scene.onKeyPressed(event));
+
+  //TODO tambien existen keydown -> se pulsa una tecla y keyup -> se suelta
+
   
   // Que no se nos olvide, la primera visualización.
   scene.update();
