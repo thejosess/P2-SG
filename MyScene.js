@@ -176,12 +176,13 @@ class MyScene extends THREE.Scene {
   onKeyPressed(event){
     var key = event.which || event.keyCode
 
-    //console.log("mostrando tecla" + key)
+    console.log("detecta pulsar tecla")
     //console.log(String.fromCharCode(key))
 
     if (String.fromCharCode(key) == 'w'){
       console.log("mostrando tecla " + String.fromCharCode(key))
       this.link.orientacionLink(MyScene.LOOK_AT_UP)
+      this.link.moverLink(MyScene.LOOK_AT_UP)
     }
 
     if (String.fromCharCode(key) == 'a'){
@@ -198,9 +199,18 @@ class MyScene extends THREE.Scene {
       console.log("mostrando tecla " + String.fromCharCode(key))
       this.link.orientacionLink(MyScene.LOOK_AT_DOWN)
     }
+  }
 
+  onKeyDown(event){
 
   }
+
+  onKeyUp(event){
+    var key = event.which || event.keyCode
+    //console.log("manteniendo pulsada la tecla  " + String.fromCharCode(key))
+
+  }
+
 
 
 
@@ -244,7 +254,8 @@ class MyScene extends THREE.Scene {
   MyScene.LOOK_AT_UP = 5;
   MyScene.LOOK_AT_DOWN = 6;
   MyScene.LOOK_AT_RIGHT = 7;
-  MyScene.LOOK_AT_LEFT = 7;
+  MyScene.LOOK_AT_LEFT = 8;
+
 
 /// La función   main
 $(function () {
@@ -257,6 +268,13 @@ $(function () {
 
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se pulsa una tecla
   window.addEventListener ("keypress", (event) => scene.onKeyPressed(event));
+
+  // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se matiene pulsada una tecla
+  window.addEventListener ("keydown", (event) => scene.onKeyDown(event));
+
+    // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se deja de pulsar una tecla
+    window.addEventListener ("keyup", (event) => scene.onKeyUp(event));
+
 
   //TODO tambien existen keydown -> se pulsa una tecla y keyup -> se suelta
 
