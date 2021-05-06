@@ -77,14 +77,14 @@ class Link extends THREE.Object3D{
 
                 case Link.LOOK_AT_RIGHT:
                     this.orientacion = Link.LOOK_AT_RIGHT;
-                    this.rotation.y=Math.PI/2
+                    this.rotation.y=-Math.PI/2
                     console.log("rotacion de right: " + this.rotation.y)
 
                 break;
 
                 case Link.LOOK_AT_LEFT:
                   this.orientacion = Link.LOOK_AT_LEFT;
-                  this.rotation.y=-Math.PI/2
+                  this.rotation.y=+Math.PI/2
                   console.log("rotacion de left: " + this.rotation.y)
 
                 break;
@@ -97,7 +97,6 @@ class Link extends THREE.Object3D{
 
       switch(direccionMovimiento) {
         case Link.LOOK_AT_UP:
-
           this.mover_delante_o_detras(Link.MOVER_DELANTE);
         break;
 
@@ -106,11 +105,11 @@ class Link extends THREE.Object3D{
         break;
 
         case Link.LOOK_AT_RIGHT:
-          this.mover_derecha();
+          this.mover_izquierda_o_derecha(Link.MOVER_DERECHA);
         break;
 
         case Link.LOOK_AT_LEFT:
-          this.mover_izquierda();
+          this.mover_izquierda_o_derecha(Link.MOVER_IZQUIERDA);
         break;
       }
     }
@@ -131,11 +130,23 @@ class Link extends THREE.Object3D{
           this.posPj_y += this.posicion_final_y;
           this.posPj_z -= 1.75;
         break;
+
+        case Link.LOOK_AT_RIGHT:
+          this.posPj_x -= 1.75;
+          this.posPj_y += this.posicion_final_y;
+          this.posPj_z += 0;
+        break;
+
+        case Link.LOOK_AT_LEFT:
+          this.posPj_x += 1.75;
+          this.posPj_y += this.posicion_final_y;
+          this.posPj_z += 0;
+        break;
       }
     }
 
     mover_delante_o_detras(signo){
-      console.log("animacion mover delante")
+      console.log("animacion mover delante o detras")
 
       var origen = {x: this.posPj_x, y:this.posPj_y, z:this.posPj_z, rotationx:this.rotation_final_x}
       var medio1 = {x: this.posPj_x, y:this.posPj_y+1, z:this.posPj_z+(0.8*signo), rotationx:(Math.PI/7)*signo}
@@ -188,6 +199,62 @@ class Link extends THREE.Object3D{
 
     }
 
+
+    mover_izquierda_o_derecha(signo){
+      console.log("animacion mover izquierda o derecha")
+
+      var origen = {x: this.posPj_x, y:this.posPj_y, z:this.posPj_z, rotationx:this.rotation_final_x}
+      var medio1 = {x: this.posPj_x+(0.8*signo), y:this.posPj_y+1, z:this.posPj_z, rotationx:(Math.PI/7)*signo}
+      var medio2 = {x: this.posPj_x+(1.25*signo), y:this.posPj_y+1, z:this.posPj_z,rotationx:(Math.PI/10)*signo}
+      var destino = {x: this.posPj_x+(1.75*signo), y:this.posPj_y = this.posicion_final_y, z:this.posPj_z, rotationx:this.rotation_final_x}
+      
+      //TODO hacer una rotation en x para que el muñeco gire hacía delante
+      // y luego vuelva a su estado original de z y se quede recto
+
+      //TODO hay que hacer con javascript que se espere hasta que salga la otra llamada
+
+
+      // 1000 = 1s, 500 = 0.5s, 50 = 0.05s
+      var movimiento1 = new TWEEN.Tween(origen).to(medio1,20)
+      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,20)
+      var movimiento3 = new TWEEN.Tween(medio2).to(destino,20)
+
+      
+      movimiento1.easing(TWEEN.Easing.Linear.None)
+      movimiento2.easing(TWEEN.Easing.Linear.None)
+      movimiento3.easing(TWEEN.Easing.Linear.None)
+
+
+      var that = this;
+
+      movimiento1.onUpdate(function(){
+        that.rotation.x = origen.rotationx
+        that.position.x = origen.x
+        that.position.y = origen.y
+        that.position.z = origen.z
+      })
+
+      movimiento2.onUpdate(function(){
+        that.rotation.x = medio1.rotationx
+        that.position.x = medio1.x
+        that.position.y = medio1.y
+        that.position.z = medio1.z
+      })
+
+      movimiento3.onUpdate(function(){
+        that.rotation.x = medio2.rotationx
+        that.position.x = medio2.x
+        that.position.y = medio2.y
+        that.position.z = medio2.z
+      })
+
+      movimiento2.chain(movimiento3);
+      movimiento1.chain(movimiento2);
+      movimiento1.start();
+
+    }
+
+
   
 
 
@@ -209,6 +276,10 @@ Link.LOOK_AT_LEFT = 8;
 //delante y detras es igual cambiando los valores + por -
 Link.MOVER_DELANTE = 1
 Link.MOVER_DETRAS = -1
+
+//izquierda y derecha es igual cambiando los valores + por -
+Link.MOVER_IZQUIERDA = 1
+Link.MOVER_DERECHA = -1
 
 
 
