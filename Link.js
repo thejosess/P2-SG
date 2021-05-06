@@ -39,6 +39,18 @@ class Link extends THREE.Object3D{
 
         // El personaje siempre acaba en el mismo valor de Y durante todo el juego
         this.posicion_final_y = this.position.y
+        // El personaje siempre acaba con el mismo angulo de rotacion en el eje x
+        this.rotation_final_x = this.rotation.x
+
+        //Valores futuros de la posicion del pj tras animar
+        //necesario debido al caracter asincrono de javascript
+
+            //variables para conocer la posicion del personaje
+
+        this.posPj_x = this.position.x
+        this.posPj_y = this.position.y
+        this.posPj_z = this.position.z
+
     }
 
     //change_model(string url_modelo)
@@ -81,30 +93,54 @@ class Link extends THREE.Object3D{
     }
 
     moverLink(direccionMovimiento){
-      switch(this.orientacion) {
+      this.orientacionLink(direccionMovimiento)
+
+      switch(direccionMovimiento) {
         case Link.LOOK_AT_UP:
-          this.mover_delante();
+
+          this.mover_delante_o_detras(Link.MOVER_DELANTE);
         break;
 
         case Link.LOOK_AT_DOWN:
+          this.mover_delante_o_detras(Link.MOVER_DETRAS);
         break;
 
         case Link.LOOK_AT_RIGHT:
+          this.mover_derecha();
         break;
 
         case Link.LOOK_AT_LEFT:
+          this.mover_izquierda();
         break;
       }
     }
 
-    mover_delante(){
+    // se actualiza la informacion del Pj
+    //sacar estos valores a contastees y los de abajo?
+    actualizarInfoPosicion(movimiento){
 
+      switch(movimiento) {
+        case Link.LOOK_AT_UP:
+          this.posPj_x += 0;
+          this.posPj_y += this.posicion_final_y;
+          this.posPj_z += 1.75;
+        break;
+
+        case Link.LOOK_AT_DOWN:
+          this.posPj_x += 0;
+          this.posPj_y += this.posicion_final_y;
+          this.posPj_z -= 1.75;
+        break;
+      }
+    }
+
+    mover_delante_o_detras(signo){
       console.log("animacion mover delante")
 
-      var origen = {x: this.position.x, y:this.position.y, z:this.position.z}
-      var medio1 = {x: this.position.x, y:this.position.y+2, z:this.position.z+1}
-      var medio2 = {x: this.position.x, y:this.position.y+2, z:this.position.z+1}
-      var destino = {x: this.position.x, y:this.position.y = this.posicion_final_y, z:this.position.z+1}
+      var origen = {x: this.posPj_x, y:this.posPj_y, z:this.posPj_z, rotationx:this.rotation_final_x}
+      var medio1 = {x: this.posPj_x, y:this.posPj_y+1, z:this.posPj_z+(0.8*signo), rotationx:(Math.PI/7)*signo}
+      var medio2 = {x: this.posPj_x, y:this.posPj_y+1, z:this.posPj_z+(1.25*signo),rotationx:(Math.PI/10)*signo}
+      var destino = {x: this.posPj_x, y:this.posPj_y = this.posicion_final_y, z:this.posPj_z+(1.75*signo), rotationx:this.rotation_final_x}
       
       //TODO hacer una rotation en x para que el muñeco gire hacía delante
       // y luego vuelva a su estado original de z y se quede recto
@@ -113,9 +149,9 @@ class Link extends THREE.Object3D{
 
 
       // 1000 = 1s, 500 = 0.5s, 50 = 0.05s
-      var movimiento1 = new TWEEN.Tween(origen).to(medio1,70)
-      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,70)
-      var movimiento3 = new TWEEN.Tween(medio2).to(destino,70)
+      var movimiento1 = new TWEEN.Tween(origen).to(medio1,20)
+      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,20)
+      var movimiento3 = new TWEEN.Tween(medio2).to(destino,20)
 
       
       movimiento1.easing(TWEEN.Easing.Linear.None)
@@ -126,18 +162,21 @@ class Link extends THREE.Object3D{
       var that = this;
 
       movimiento1.onUpdate(function(){
+        that.rotation.x = origen.rotationx
         that.position.x = origen.x
         that.position.y = origen.y
         that.position.z = origen.z
       })
 
       movimiento2.onUpdate(function(){
+        that.rotation.x = medio1.rotationx
         that.position.x = medio1.x
         that.position.y = medio1.y
         that.position.z = medio1.z
       })
 
       movimiento3.onUpdate(function(){
+        that.rotation.x = medio2.rotationx
         that.position.x = medio2.x
         that.position.y = medio2.y
         that.position.z = medio2.z
@@ -146,8 +185,10 @@ class Link extends THREE.Object3D{
       movimiento2.chain(movimiento3);
       movimiento1.chain(movimiento2);
       movimiento1.start();
+
     }
 
+  
 
 
 
@@ -164,6 +205,10 @@ Link.LOOK_AT_UP = 5;
 Link.LOOK_AT_DOWN = 6;
 Link.LOOK_AT_RIGHT = 7;
 Link.LOOK_AT_LEFT = 8;
+
+//delante y detras es igual cambiando los valores + por -
+Link.MOVER_DELANTE = 1
+Link.MOVER_DETRAS = -1
 
 
 
