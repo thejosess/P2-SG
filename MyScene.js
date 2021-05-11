@@ -60,6 +60,7 @@ class MyScene extends THREE.Scene {
     this.link = new Link();
     this.add (this.link);
 
+
   }
   
   createCamera () {
@@ -171,36 +172,57 @@ class MyScene extends THREE.Scene {
     
   }
 
-
-  
   onKeyPressed(event){
     var key = event.which || event.keyCode
 
-    //console.log("mostrando tecla" + key)
+    console.log("detecta pulsar tecla pressed")
     //console.log(String.fromCharCode(key))
 
-    if (String.fromCharCode(key) == 'w'){
-      console.log("mostrando tecla " + String.fromCharCode(key))
-      this.link.orientacionLink(MyScene.LOOK_AT_UP)
+    //se admite tanto w como W, por eso se hace lowerCase de la key
+
+    key = String.fromCharCode(key).toLowerCase()
+
+    if (key == 'w' ){
+      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+      this.link.moverLink(MyScene.LOOK_AT_UP)
+      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
+      //this.link.posPj_x cambiar a amano
     }
 
-    if (String.fromCharCode(key) == 'a'){
-      console.log("mostrando tecla " + String.fromCharCode(key))
-      this.link.orientacionLink(MyScene.LOOK_AT_RIGHT)
+    if (key == 'a'){
+      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+      this.link.moverLink(MyScene.LOOK_AT_LEFT)
+      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
     }
 
-    if (String.fromCharCode(key) == 'd'){
-      console.log("mostrando tecla " + String.fromCharCode(key))
-      this.link.orientacionLink(MyScene.LOOK_AT_LEFT)
+    if (key == 'd'){
+      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+
+
+      this.link.moverLink(MyScene.LOOK_AT_RIGHT)
+      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
+
     }
 
-    if (String.fromCharCode(key) == 's'){
-      console.log("mostrando tecla " + String.fromCharCode(key))
-      this.link.orientacionLink(MyScene.LOOK_AT_DOWN)
+    if (key == 's'){
+      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+      this.link.moverLink(MyScene.LOOK_AT_DOWN)
+      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
     }
-
 
   }
+  
+  onKeyDown(event){
+
+  }
+
+
+  onKeyUp(event){
+    var key = event.which || event.keyCode
+    console.log("has dejado de pulsar la teclad " + String.fromCharCode(key).toLowerCase())
+    
+  }
+
 
 
 
@@ -244,7 +266,8 @@ class MyScene extends THREE.Scene {
   MyScene.LOOK_AT_UP = 5;
   MyScene.LOOK_AT_DOWN = 6;
   MyScene.LOOK_AT_RIGHT = 7;
-  MyScene.LOOK_AT_LEFT = 7;
+  MyScene.LOOK_AT_LEFT = 8;
+
 
 /// La función   main
 $(function () {
@@ -257,6 +280,13 @@ $(function () {
 
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se pulsa una tecla
   window.addEventListener ("keypress", (event) => scene.onKeyPressed(event));
+
+  // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se matiene pulsada una tecla
+  window.addEventListener ("keydown", (event) => scene.onKeyDown(event));
+
+    // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se deja de pulsar una tecla
+    window.addEventListener ("keyup", (event) => scene.onKeyUp(event));
+
 
   //TODO tambien existen keydown -> se pulsa una tecla y keyup -> se suelta
 
