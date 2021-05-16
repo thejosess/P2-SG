@@ -232,7 +232,7 @@ class MyScene extends THREE.Scene {
       if(this.link.moverLink(MyScene.LOOK_AT_UP)){
         this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
       }
-      //this.link.posPj_x cambiar a amano
+      //this.link.posPj_x cambiar a amano  
     }
 
     if (key == 'a'){
