@@ -50,9 +50,14 @@ class Link extends THREE.Object3D{
 
         //this.rotation.y = -Math.PI
 
+        //esta posicion es la 0,0
         this.posPj_x = this.position.x
         this.posPj_y = this.position.y
         this.posPj_z = this.position.z
+
+        //el pj empieza en el nivel bosque 1
+        this.game_level = Link.BOSQUE_1
+
 
     }
 
@@ -119,6 +124,7 @@ class Link extends THREE.Object3D{
     }
 
     // se actualiza la informacion del Pj
+    //esta posicion es necesaria para poder usarla en las animaciones al encadenarse con las llamadas de Scene
     //sacar estos valores a contastees y los de abajo?
     actualizarInfoPosicion(movimiento){
 
@@ -147,6 +153,7 @@ class Link extends THREE.Object3D{
           this.posPj_z += 0;
         break;
       }
+            console.log("posicion de link: " + this.posPj_x + " , " + this.posPj_y +  " , " +  this.posPj_z)
     }
 
     mover_delante_o_detras(signo){
@@ -166,9 +173,9 @@ class Link extends THREE.Object3D{
 
 
       // 1000 = 1s, 500 = 0.5s, 50 = 0.05s
-      var movimiento1 = new TWEEN.Tween(origen).to(medio1,40)
-      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,40)
-      var movimiento3 = new TWEEN.Tween(medio2).to(destino,40)
+      var movimiento1 = new TWEEN.Tween(origen).to(medio1,35)
+      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,35)
+      var movimiento3 = new TWEEN.Tween(medio2).to(destino,35)
 
       
       movimiento1.easing(TWEEN.Easing.Linear.None)
@@ -222,9 +229,9 @@ class Link extends THREE.Object3D{
 
 
       // 1000 = 1s, 500 = 0.5s, 50 = 0.05s
-      var movimiento1 = new TWEEN.Tween(origen).to(medio1,40)
-      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,40)
-      var movimiento3 = new TWEEN.Tween(medio2).to(destino,40)
+      var movimiento1 = new TWEEN.Tween(origen).to(medio1,35)
+      var movimiento2 = new TWEEN.Tween(medio1).to(medio2,35)
+      var movimiento3 = new TWEEN.Tween(medio2).to(destino,35)
 
       
       movimiento1.easing(TWEEN.Easing.Linear.None)
@@ -269,7 +276,7 @@ class Link extends THREE.Object3D{
 
     update(){
       TWEEN.update();
-
+      
     }
     
 }
@@ -287,6 +294,15 @@ Link.MOVER_DETRAS = -1
 //izquierda y derecha es igual cambiando los valores + por -
 Link.MOVER_IZQUIERDA = 1
 Link.MOVER_DERECHA = -1
+
+/*ESTADOS NIVEL EN QUE SE ENCUENTRA EL PJ*/
+Link.BOSQUE_1 = 15
+Link.BOSQUE_2 = 16
+Link.MAR = 17
+Link.DESIERTO = 18
+Link.MAZMORRA = 19
+Link.BOSS = 20
+Link.SECRETA = 21
 
 
 

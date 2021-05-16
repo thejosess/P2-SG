@@ -8,11 +8,14 @@ import { Vector3 } from './libs/three.module.js'
 
 
 class NivelBosque extends THREE.Object3D{
-    constructor(altura, anchura){
+    constructor(anchura, altura){
         super();
 
         // Se crea un plano para el suelo
-        var geometryGround = new THREE.BoxGeometry (altura/5,0.2,anchura/5);
+        // altura/5,0.2,anchura/5
+        //tal y como tenemos el juego, no queremos altura
+        // y la altura será nuestra profundidad
+        var geometryGround = new THREE.BoxGeometry (anchura/5,0.2,altura/5);
         
         // El material se hará con una textura de arena o tierra
         var texture = new THREE.TextureLoader().load('./imgs/sand_ground.jpg');
@@ -25,6 +28,12 @@ class NivelBosque extends THREE.Object3D{
         // El suelo lo bajamos la mitad de su altura para que el origen del mundo se quede en su lado superior
         ground.position.y = -0.1;
         this.add(ground)
+    }
+
+    resizeBosque(anchura,altura){
+        // Se cambia el tamaño de la geometria y por tanto de la textura 
+        this.geometry.parameters.depth = altura/5;
+        this.geometry.parameters.width = anchura/5;
     }
 }
 

@@ -202,6 +202,12 @@ class MyScene extends THREE.Scene {
     
     // Y también el tamaño del renderizador
     this.renderer.setSize (window.innerWidth, window.innerHeight);
+
+    //volver a llamar a crearNiveles para adecuarlos al tamaño de la ventana
+    //TODO revisar esto
+    //this.bosque.resizeBosque(window.innerWidth, window.innerHeight)
+
+
   }
 
   changeCamera(){
@@ -236,8 +242,6 @@ class MyScene extends THREE.Scene {
 
     if (key == 'd'){
       console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-
-
       this.link.moverLink(MyScene.LOOK_AT_RIGHT)
       this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
 
@@ -301,9 +305,7 @@ class MyScene extends THREE.Scene {
 
   crearNiveles(){
     this.bosque = new NivelBosque(window.innerWidth, window.innerHeight)
-    console.log(window.innerWidth)
-    console.log(window.innerHeight)
-    console.log()
+    console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
     console.log(this.bosque)
     this.add(this.bosque)
   }
@@ -322,6 +324,16 @@ class MyScene extends THREE.Scene {
   MyScene.LOOK_AT_DOWN = 6;
   MyScene.LOOK_AT_RIGHT = 7;
   MyScene.LOOK_AT_LEFT = 8;
+
+
+  /*ESTADOS NIVEL EN QUE SE ENCUENTRA EL PJ*/
+  MyScene.BOSQUE_1 = 15
+  MyScene.BOSQUE_2 = 16
+  MyScene.MAR = 17
+  MyScene.DESIERTO = 18
+  MyScene.MAZMORRA = 19
+  MyScene.BOSS = 20
+  MyScene.SECRETA = 21
 
 
 /// La función   main
