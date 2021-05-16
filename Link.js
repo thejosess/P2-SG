@@ -103,23 +103,43 @@ class Link extends THREE.Object3D{
     moverLink(direccionMovimiento){
       this.orientacionLink(direccionMovimiento)
       console.log("orientacion Link" + direccionMovimiento)
+      var puede_avanzar
 
       switch(direccionMovimiento) {
         case Link.LOOK_AT_UP:
-          this.mover_delante_o_detras(Link.MOVER_DELANTE);
-        break;
+          //se comprueba que se puede avanzar
+          puede_avanzar = this.puede_avanzar(Link.LOOK_AT_UP)
+          if(puede_avanzar){
+            this.mover_delante_o_detras(Link.MOVER_DELANTE);
+          }
+          return puede_avanzar
+        //break;
 
         case Link.LOOK_AT_DOWN:
-          this.mover_delante_o_detras(Link.MOVER_DETRAS);
-        break;
+          //se comprueba que se puede avanzar
+          puede_avanzar = this.puede_avanzar(Link.LOOK_AT_DOWN)
+
+          if(puede_avanzar){
+            this.mover_delante_o_detras(Link.MOVER_DETRAS);
+          }
+        return puede_avanzar
+        //break;
 
         case Link.LOOK_AT_RIGHT:
-          this.mover_izquierda_o_derecha(Link.MOVER_DERECHA,direccionMovimiento);
-        break;
+          //se comprueba que se puede avanzar
+          puede_avanzar = this.puede_avanzar(Link.LOOK_AT_RIGHT)
+          if(puede_avanzar){        
+            this.mover_izquierda_o_derecha(Link.MOVER_DERECHA);
+          }
+        return puede_avanzar
 
         case Link.LOOK_AT_LEFT:
-          this.mover_izquierda_o_derecha(Link.MOVER_IZQUIERDA,direccionMovimiento);
-        break;
+          //se comprueba que se puede avanzar
+          puede_avanzar = this.puede_avanzar(Link.LOOK_AT_LEFT)
+          if(puede_avanzar){             
+            this.mover_izquierda_o_derecha(Link.MOVER_IZQUIERDA);
+          }
+        return puede_avanzar
       }
     }
 
@@ -153,7 +173,7 @@ class Link extends THREE.Object3D{
           this.posPj_z += 0;
         break;
       }
-            console.log("posicion de link: " + this.posPj_x + " , " + this.posPj_y +  " , " +  this.posPj_z)
+            console.log("posicion de link: x:" + this.posPj_x + " , y:" + this.posPj_y +  " , z:" +  this.posPj_z)
     }
 
     mover_delante_o_detras(signo){
@@ -213,9 +233,8 @@ class Link extends THREE.Object3D{
     }
 
 
-    mover_izquierda_o_derecha(signo,direccionMovimiento){
+    mover_izquierda_o_derecha(signo){
       console.log("animacion mover izquierda o derecha")
-      this.orientacionLink(direccionMovimiento)
 
       var origen = {x: this.posPj_x, y:this.posPj_y, z:this.posPj_z, rotationz:this.rotation_final_z}
       var medio1 = {x: this.posPj_x+(0.8*signo), y:this.posPj_y+1, z:this.posPj_z, rotationz:(Math.PI/7)*signo}
@@ -268,6 +287,59 @@ class Link extends THREE.Object3D{
 
     }
 
+    //devuelve true o false si puede avanzar
+    puede_avanzar(movimiento){
+      var puede_avanzar = true
+      var posicion_simulada = this.simular_movimiento(movimiento)
+
+      switch(this.game_level) {
+        case Link.BOSQUE_1:
+          if(posicion_simulada.x == 1 || posicion_simulada.y == 1 || posicion_simulada.z == -7 || posicion_simulada.z == 22.75){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+      }
+
+
+
+      return puede_avanzar
+    }
+
+    //simula donde iria el PJ dada su posicion actual y una orientación
+    simular_movimiento(movimiento){
+      var posicion_simulada = new Vector3
+
+      switch(movimiento) {
+        case Link.LOOK_AT_UP:
+          posicion_simulada.x = this.posPj_x + 0;
+          posicion_simulada.y = this.posPj_y + this.posicion_final_y;
+          posicion_simulada.z = this.posPj_z + 1.75;
+        break;
+
+        case Link.LOOK_AT_DOWN:
+          posicion_simulada.x = this.posPj_x + 0;
+          posicion_simulada.y = this.posPj_y + this.posicion_final_y;
+          posicion_simulada.z = this.posPj_z - 1.75;
+        break;
+
+        case Link.LOOK_AT_RIGHT:
+          posicion_simulada.x = this.posPj_x - 1.75;
+          posicion_simulada.y = this.posPj_y + this.posicion_final_y;
+          posicion_simulada.z = this.posPj_z + 0;
+        break;
+
+        case Link.LOOK_AT_LEFT:
+          posicion_simulada.x = this.posPj_x + 1.75;
+          posicion_simulada.y = this.posPj_y + this.posicion_final_y;
+          posicion_simulada.z = this.posPj_z + 0;
+        break;
+      }
+      return posicion_simulada
+    }
 
   
 

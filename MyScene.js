@@ -229,30 +229,31 @@ class MyScene extends THREE.Scene {
 
     if (key == 'w' ){
       console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      this.link.moverLink(MyScene.LOOK_AT_UP)
-      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
+      if(this.link.moverLink(MyScene.LOOK_AT_UP)){
+        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
+      }
       //this.link.posPj_x cambiar a amano
     }
 
     if (key == 'a'){
       console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      this.link.moverLink(MyScene.LOOK_AT_LEFT)
-      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
+      if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
+        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
+      }
     }
 
     if (key == 'd'){
       console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      this.link.moverLink(MyScene.LOOK_AT_RIGHT)
-      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
-
+      if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
+        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
+      }
     }
 
     if (key == 's'){
       console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      this.link.moverLink(MyScene.LOOK_AT_DOWN)
-      this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
-      console.log(this.camera)
-
+      if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
+        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
+      }
     }
 
   }
