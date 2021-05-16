@@ -141,6 +141,18 @@ class Link extends THREE.Object3D{
           }
         return puede_avanzar
       }
+      this.comprobar_cambio_nivel()
+    }
+
+    //comprueba que el pj no esté en posicion para poder cambiar de nivel
+    //si lo está devuelve el nivel al que ha pasado y cambia el estado del nivel de Link
+    comprobar_cambio_nivel(){
+
+    }
+
+    //cambia el nivel del pj y por tanto mueve la camara
+    cambiar_nivel(){
+
     }
 
     // se actualiza la informacion del Pj
@@ -294,7 +306,7 @@ class Link extends THREE.Object3D{
 
       switch(this.game_level) {
         case Link.BOSQUE_1:
-          if(posicion_simulada.x == 1 || posicion_simulada.y == 1 || posicion_simulada.z == -7 || posicion_simulada.z == 22.75){
+          if(posicion_simulada.x == 21 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
             console.log("BLOQUEANDO")
 

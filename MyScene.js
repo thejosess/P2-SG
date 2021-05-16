@@ -62,6 +62,10 @@ class MyScene extends THREE.Scene {
     this.link = new Link();
     this.add (this.link);
 
+    //el nivel en el que se comienza es en el de bosque 1
+    this.game_level = MyScene.BOSQUE_1
+
+
     this.crearNiveles();
 
 
@@ -73,34 +77,7 @@ class MyScene extends THREE.Scene {
     //   La razón de aspecto ancho/alto
     //   Los planos de recorte cercano y lejano
 
-      var up = new THREE.Vector3( -0.08009958271611227,0.865490497835347,0.49447978220085154)
-      //true
-      //var position = new THREE.Vector3( -3.435924245707634,60.6655141505778,-45.97753906777961)
-      var position = new THREE.Vector3( -0.08009958271611227,36.865490497835347,-23.49447978220085154)
-      //-15 en position se queda desde arriba
-      var rotation = new THREE.Vector3(-2.1246586541587327,-0.0537805424392576,3.079561236042315)
-
-
-      //euler
-      //fov = 45
-      // var up = new THREE.Vector3(-0.06788891400033552, 0.8891681046899276, 0.4525164935755731)
-      // var position = new THREE.Vector3( -4.505204917695464,41.66389047015811,-11.902781266847628)
-      // var rotation = new THREE.Vector3(-2.1551048566816746,-0.06808445750529712, 3.1021422474744784)
-
-      //var position = new THREE.Vector3(8.847507907031964,38.7397508004901,-4.0338561222327485) 
-      //var rotation = new THREE.Vector3(-2.062089036380966,-0.09519846145527582, 3.0877678033323477)
-      //var up = new THREE.Vector3(-0.09361878004296405,0.8401916389867847, 0.5341474831916081)
-
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    // También se indica dónde se coloca
-    //this.camera.position.set (position.x, position.y, position.z);
-    //this.camera.up.set(up.x,up.y,up.z)
-    //this.camera.rotation.set(rotation.x,rotation.y,rotation.z)
-    //    this.camera.position.set (0, 30,-10);
-    //    var look = new THREE.Vector3 (0,20,0);
-
-    //this.camera.position.set (0, 30,-10);
-    //var look = new THREE.Vector3 (0,0,0);
 
     this.camera.position.set (0, 35,-5);
     // Y hacia dónde mira
@@ -255,6 +232,11 @@ class MyScene extends THREE.Scene {
         this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
       }
     }
+
+    //comprobar si hay cambio de estado de nivel
+    //this.link.comprobar_cambio_nivel()
+    //cambia el nivel tambien en Myscene
+    //si cambia de nivel, hay que hacerle el cambio de la camara
 
   }
   
