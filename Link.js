@@ -306,7 +306,7 @@ class Link extends THREE.Object3D{
 
       switch(this.game_level) {
         case Link.BOSQUE_1:
-          if(posicion_simulada.x == 21 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+          if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
             console.log("BLOQUEANDO")
 

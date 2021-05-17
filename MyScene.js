@@ -65,6 +65,9 @@ class MyScene extends THREE.Scene {
     //el nivel en el que se comienza es en el de bosque 1
     this.game_level = MyScene.BOSQUE_1
 
+    //estado del juego
+    this.estado_juego = MyScene.START
+
 
     this.crearNiveles();
 
@@ -187,9 +190,32 @@ class MyScene extends THREE.Scene {
 
   }
 
-  changeCamera(){
+  changeCamera(game_level){
     //Metodo para cambiar la camara de posicion
     //this.camera.
+    switch(game_level){
+      case MyScene.BOSQUE_1:
+        //this.camera.position.set (-56, 35,-5);
+        this.camera.position.x = 0
+        var look = new THREE.Vector3 (0,20,0);
+        this.camera.lookAt(look);
+        this.cameraControl.target = look;
+
+        this.estado_juego = MyScene.START
+      break;
+
+      case MyScene.BOSQUE_2:
+        //this.camera.position.set (-56, 35,-5);
+        this.camera.position.x = -56
+        var look = new THREE.Vector3 (-56,20,0);
+        this.camera.lookAt(look);
+        this.cameraControl.target = look;
+
+        this.estado_juego = MyScene.START
+      break;
+
+    }
+    
   }
 
 
@@ -204,32 +230,34 @@ class MyScene extends THREE.Scene {
 
     key = String.fromCharCode(key).toLowerCase()
 
-    if (key == 'w' ){
-      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      if(this.link.moverLink(MyScene.LOOK_AT_UP)){
-        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
+    if(this.estado_juego != MyScene.CHANGE_CAMERA){
+      if (key == 'w' ){
+        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        if(this.link.moverLink(MyScene.LOOK_AT_UP)){
+          this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
+        }
+        //this.link.posPj_x cambiar a amano  
       }
-      //this.link.posPj_x cambiar a amano  
-    }
 
-    if (key == 'a'){
-      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
-        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
+      if (key == 'a'){
+        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
+          this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
+        }
       }
-    }
 
-    if (key == 'd'){
-      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
-        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
+      if (key == 'd'){
+        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
+          this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
+        }
       }
-    }
 
-    if (key == 's'){
-      console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
-      if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
-        this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
+      if (key == 's'){
+        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
+          this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
+        }
       }
     }
 
@@ -237,6 +265,26 @@ class MyScene extends THREE.Scene {
     //this.link.comprobar_cambio_nivel()
     //cambia el nivel tambien en Myscene
     //si cambia de nivel, hay que hacerle el cambio de la camara
+
+    switch (this.link.game_level){
+      case MyScene.BOSQUE_1:
+        if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+          this.estado_juego = MyScene.CHANGE_CAMERA
+          this.link.game_level = MyScene.BOSQUE_2
+          this.game_level = MyScene.BOSQUE_2
+          this.changeCamera(MyScene.BOSQUE_2)
+        }
+        break;
+
+      case MyScene.BOSQUE_2:
+      if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+          this.estado_juego = MyScene.CHANGE_CAMERA
+          this.link.game_level = MyScene.BOSQUE_1
+          this.game_level = MyScene.BOSQUE_1
+          this.changeCamera(MyScene.BOSQUE_1)
+      }
+        break;  
+    }
 
   }
   
@@ -300,6 +348,8 @@ class MyScene extends THREE.Scene {
   MyScene.NO_START = 0;
   MyScene.START = 1;
   MyScene.DEAD = 2;
+  MyScene.CHANGE_CAMERA = 3;
+
 
 
   /* ESTADOS ORIENTACION MUÑECO */
