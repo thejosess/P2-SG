@@ -58,6 +58,9 @@ class Link extends THREE.Object3D{
         //el pj empieza en el nivel bosque 1
         this.game_level = Link.BOSQUE_1
 
+        //TODO por defecto la tiene a false, tiene que encontrar la llave, rompiendo algun arbusto o algo?
+        this.tieneLlave = true
+
 
     }
 
@@ -353,6 +356,10 @@ class Link extends THREE.Object3D{
       return posicion_simulada
     }
 
+
+    //TODO comprobacion de que la llave la ha conseguido, es decir el collider coincide
+
+    //TODO collider tambien por si te quitan vida
   
 
 

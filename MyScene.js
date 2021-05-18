@@ -11,6 +11,7 @@ import Stats from './libs/Stats.js';
 
 import {Link} from './Link.js'
 import {NivelBosque} from './NivelBosque.js'
+import {NivelSecreto} from './NivelSecreto.js'
 
 
 
@@ -195,8 +196,8 @@ class MyScene extends THREE.Scene {
     //this.camera.
     switch(game_level){
       case MyScene.BOSQUE_1:
-        //this.camera.position.set (-56, 35,-5);
-        this.camera.position.x = 0
+        this.camera.position.set (0, this.camera.position.y,-5);
+        //this.camera.position.x = 0
         var look = new THREE.Vector3 (0,20,0);
         this.camera.lookAt(look);
         this.cameraControl.target = look;
@@ -205,9 +206,19 @@ class MyScene extends THREE.Scene {
       break;
 
       case MyScene.BOSQUE_2:
-        //this.camera.position.set (-56, 35,-5);
-        this.camera.position.x = -56
+        this.camera.position.set (-56, this.camera.position.y,-5);
+        //this.camera.position.x = -56
         var look = new THREE.Vector3 (-56,20,0);
+        this.camera.lookAt(look);
+        this.cameraControl.target = look;
+
+        this.estado_juego = MyScene.START
+      break;
+
+      case MyScene.SECRETA:
+        this.camera.position.set (this.camera.position.x, this.camera.position.y,24.75);
+        //this.camera.position.z = 24.75
+        var look = new THREE.Vector3 (0,20,29.75);
         this.camera.lookAt(look);
         this.cameraControl.target = look;
 
@@ -261,6 +272,11 @@ class MyScene extends THREE.Scene {
       }
     }
 
+    this.comprobarCambioNivel()
+
+  }
+
+  comprobarCambioNivel(){
     //comprobar si hay cambio de estado de nivel
     //this.link.comprobar_cambio_nivel()
     //cambia el nivel tambien en Myscene
@@ -274,6 +290,13 @@ class MyScene extends THREE.Scene {
           this.game_level = MyScene.BOSQUE_2
           this.changeCamera(MyScene.BOSQUE_2)
         }
+
+        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 && this.link.tieneLlave){
+          this.estado_juego = MyScene.CHANGE_CAMERA
+          this.link.game_level = MyScene.SECRETA
+          this.game_level =  MyScene.SECRETA
+          this.changeCamera( MyScene.SECRETA)
+        }        
         break;
 
       case MyScene.BOSQUE_2:
@@ -283,9 +306,19 @@ class MyScene extends THREE.Scene {
           this.game_level = MyScene.BOSQUE_1
           this.changeCamera(MyScene.BOSQUE_1)
       }
-        break;  
-    }
+      break;
+      
+      case MyScene.SECRETA:
+        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 && this.link.tieneLlave){
+          this.estado_juego = MyScene.CHANGE_CAMERA
+          this.link.game_level = MyScene.BOSQUE_1
+          this.game_level = MyScene.BOSQUE_1
+          this.changeCamera(MyScene.BOSQUE_1)
+        }
+      break; 
 
+      
+    }
   }
   
   onKeyDown(event){
@@ -339,6 +372,13 @@ class MyScene extends THREE.Scene {
     console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
     console.log(this.bosque)
     this.add(this.bosque)
+
+    this.secreto = new NivelSecreto(window.innerWidth, window.innerHeight)
+    console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
+    console.log(this.secreto)
+    this.add(this.secreto)
+
+
   }
 
 
