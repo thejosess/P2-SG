@@ -309,7 +309,9 @@ class MyScene extends THREE.Scene {
       break;
       
       case MyScene.SECRETA:
-        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 && this.link.tieneLlave){
+        //solo puedes acceder a esta posicion se rompes las rocas y te acercas despues
+        //pero para pasar solo puedes con llave y abriendo la zona secreta
+        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSQUE_1
           this.game_level = MyScene.BOSQUE_1

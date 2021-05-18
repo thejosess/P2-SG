@@ -317,6 +317,24 @@ class Link extends THREE.Object3D{
           console.log("comprobando si puede avanzar")
         break;
 
+        case Link.BOSQUE_2:
+          if(posicion_simulada.x == -84|| (posicion_simulada.x == -28 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+        case Link.SECRETA:
+          if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
       }
 
 
