@@ -318,7 +318,7 @@ class Link extends THREE.Object3D{
         break;
 
         case Link.BOSQUE_2:
-          if(posicion_simulada.x == -84|| (posicion_simulada.x == -28 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+          if((posicion_simulada.x == -84 && posicion_simulada.z !=0)|| (posicion_simulada.x == -28 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
             console.log("BLOQUEANDO")
 
@@ -326,8 +326,46 @@ class Link extends THREE.Object3D{
           console.log("comprobando si puede avanzar")
         break;
 
+        case Link.DESIERTO:
+          if((posicion_simulada.x == -84 && posicion_simulada.z !=0)|| (posicion_simulada.x == -140 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+
+        case Link.MAZMORRA:
+          if((posicion_simulada.x == -196 && posicion_simulada.z !=0)|| (posicion_simulada.x == -140 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+        case Link.BOSS:
+          if((posicion_simulada.x == -196 && posicion_simulada.z !=0)|| posicion_simulada.x == -252   || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+        case Link.MAR:
+          if(posicion_simulada.x == -28 || posicion_simulada.x == -84  || (posicion_simulada.z == 22.75 && posicion_simulada.x !=-56) || posicion_simulada.z == 54.25){
+            puede_avanzar = false
+            console.log("BLOQUEANDO")
+
+          }
+          console.log("comprobando si puede avanzar")
+        break;
+
+
         case Link.SECRETA:
-          if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
+          if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || (posicion_simulada.z == 22.75 && posicion_simulada.x !=0) || posicion_simulada.z == 54.25){
             puede_avanzar = false
             console.log("BLOQUEANDO")
 

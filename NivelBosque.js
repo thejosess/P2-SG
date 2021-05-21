@@ -19,7 +19,9 @@ class NivelBosque extends THREE.Object3D{
         
         // El material se hará con una textura de arena o tierra
         var texture = new THREE.TextureLoader().load('./imgs/sand_ground.jpg');
-        var materialGround = new THREE.MeshPhongMaterial ({map: texture});
+        var materialGround = new THREE.MeshPhongMaterial ({map: texture, /*color:0x00FF00*/});
+        //este crea la textura mas larga para el resto de niveles porque es la misma
+        //y asi no se ven los "cortes" de la textura
         
         // Ya se puede construir el Mesh
         var ground = new THREE.Mesh (geometryGround, materialGround);
