@@ -10,6 +10,7 @@ import Stats from './libs/Stats.js';
 // Clases de mi proyecto
 
 import {Link} from './Link.js'
+import {AttackSword} from './AttackSword.js'
 
 
 
@@ -58,8 +59,9 @@ class MyScene extends THREE.Scene {
     this.add (this.glass); */
 
     this.link = new Link();
+    this.attack_sword = new AttackSword();
     this.add (this.link);
-
+    this.add(this.attack_sword);
   }
   
   createCamera () {
@@ -176,7 +178,7 @@ class MyScene extends THREE.Scene {
   onKeyPressed(event){
     var key = event.which || event.keyCode
 
-    //console.log("mostrando tecla" + key)
+    console.log("tecla pulsada")
     //console.log(String.fromCharCode(key))
 
     if (String.fromCharCode(key) == 'w'){
@@ -199,10 +201,18 @@ class MyScene extends THREE.Scene {
       this.link.orientacionLink(MyScene.LOOK_AT_DOWN)
     }
 
+    if (key == 32){
+      console.log("mostrando tecla " + String.fromCharCode(key))
+      this.attack_sword.lanzarEspada(this.link.orientacion)
+    }
+
 
   }
 
-
+  onKeyUp(event) {
+    var key = event.which || event.keyCode
+    console.log("has dejado de pulsar la tecla " + String.fromCharCode(key).toLowerCase())
+  }
 
 
   update () {
@@ -220,6 +230,7 @@ class MyScene extends THREE.Scene {
     
     // Se actualiza el resto del modelo
     this.link.update();
+    this.attack_sword.update();
 
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
