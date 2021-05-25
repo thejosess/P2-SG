@@ -8,9 +8,6 @@ import { Vector3 } from './libs/three.module.js'
 
 
 class Link extends THREE.Object3D{
-
-
-
     constructor(){
         super();
         var that = this;
@@ -61,8 +58,16 @@ class Link extends THREE.Object3D{
         //TODO por defecto la tiene a false, tiene que encontrar la llave, rompiendo algun arbusto o algo?
         this.tieneLlave = true
 
+        //array con los obstaculos segun el nivel en el que estés
+        this.array_obstaculos = new Array()
+
 
     }
+
+    cargarObstaculos(array_obstaculos){
+      this.array_obstaculos = array_obstaculos
+    }
+
 
     //change_model(string url_modelo)
     //para cambiar el tema del modelo del personaje segun el objeto que lleve?
@@ -372,10 +377,15 @@ class Link extends THREE.Object3D{
           }
           console.log("comprobando si puede avanzar")
         break;
-
       }
 
-
+      //compruebo si colisiona con algun objeto en mitad del nivel
+      //solo compruebo cuando no ha sido bloqueado por otra circunstancia
+      if(puede_avanzar){
+        if(this.comprobarColisionesObjetos(posicion_simulada))
+          puede_avanzar = false
+          console.log("Bloqueando por objeto")
+      }
 
       return puede_avanzar
     }
@@ -418,7 +428,30 @@ class Link extends THREE.Object3D{
     //TODO collider tambien por si te quitan vida
   
 
+    comprobarColisionesObjetos(position){
+      //console.log("Buscando colision objetos")
+      var colision = false;
+      switch(this.orientacion){
+        case Link.LOOK_AT_DOWN:
+          var casterJugador = new THREE.Raycaster();
 
+          casterJugador.set(position, new THREE.Vector3(0, 0, -3.5));
+          casterJugador.far = 3.5;
+          //TODO poner que dependiendo del nivel buscas unos objetos u otros
+          console.log(this.array_obstaculos)
+          //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+          var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
+          if(objetos.length>0){
+            console.log(objetos)
+            console.log("HA ENCONTRADOOOO ALGO ")
+            //aqui se podria llamar a otras funciones que hagan calculos con esas colisiones
+            //si son enemigos y tal
+            colision = true;
+          }
+      }
+      console.log(colision)
+      return colision;  
+    }
 
 
     update(){

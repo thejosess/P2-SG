@@ -20,6 +20,7 @@ class NivelBoss extends THREE.Object3D{
         // El material se hará con una textura de arena o tierra
         var texture = new THREE.TextureLoader().load('./imgs/boss.jpeg');
         var materialGround = new THREE.MeshPhongMaterial ({map: texture,emissive:0xFFFFFF, emissiveIntensity:0.2 /*color:0x00FF00*/});
+        //se pone emissive para dar la sensación de estar en una zona de boss, con menos luz y menos directa como la general
         //este crea la textura mas larga para el resto de niveles porque es la misma
         //y asi no se ven los "cortes" de la textura
         
@@ -35,6 +36,14 @@ class NivelBoss extends THREE.Object3D{
         //ground.position.x = 
 
         this.add(ground)
+
+        this.array_obstaculos = new Array ();
+        
+    }
+
+    devolverObstaculos(){
+        //TODO añadir los objetos que meta despues
+        return this.array_obstaculos
     }
 
     resizeMazmorra(anchura,altura){

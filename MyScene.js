@@ -11,6 +11,7 @@ import Stats from './libs/Stats.js';
 
 import {Link} from './Link.js'
 import {NivelBosque} from './NivelBosque.js'
+import {NivelBosque2} from './NivelBosque2.js'
 import {NivelSecreto} from './NivelSecreto.js'
 import {NivelMazmorra} from './NivelMazmorra.js'
 import {NivelBoss} from './NivelBoss.js'
@@ -67,8 +68,8 @@ class MyScene extends THREE.Scene {
     //estado del juego
     this.estado_juego = MyScene.START
 
-    this.crearPersonajes();
     this.crearNiveles();
+    this.crearPersonajes();
 
     
 
@@ -77,6 +78,9 @@ class MyScene extends THREE.Scene {
   crearPersonajes(){
     this.link = new Link();
     this.add (this.link);
+    //link necesita tener iniciado el array de obstaculos segun el primer nivel
+    this.link.cargarObstaculos(this.bosque.devolverObstaculos())
+
   }
   
   createCamera () {
@@ -340,6 +344,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.BOSQUE_2
           this.game_level = MyScene.BOSQUE_2
           this.changeCamera(MyScene.BOSQUE_2)
+
+          //cargas los obstaculos del mundo que se cambia
+          this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
         }
 
         if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 /*&&this.link.tieneLlave*/){
@@ -347,6 +354,8 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.SECRETA
           this.game_level =  MyScene.SECRETA
           this.changeCamera( MyScene.SECRETA)
+
+          this.link.cargarObstaculos(this.secreto.devolverObstaculos())
         }        
         break;
 
@@ -356,6 +365,8 @@ class MyScene extends THREE.Scene {
             this.link.game_level = MyScene.BOSQUE_1
             this.game_level = MyScene.BOSQUE_1
             this.changeCamera(MyScene.BOSQUE_1)
+
+            this.link.cargarObstaculos(this.bosque.devolverObstaculos())
         }
 
         if(this.link.posPj_x == -82.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -364,6 +375,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.DESIERTO
           this.game_level = MyScene.DESIERTO
           this.changeCamera(MyScene.DESIERTO)
+
+          this.link.cargarObstaculos(this.desierto.devolverObstaculos())
+
         }
 
         if(this.link.posPj_x == -56 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
@@ -371,6 +385,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.MAR
           this.game_level =  MyScene.MAR
           this.changeCamera( MyScene.MAR)
+
+          this.link.cargarObstaculos(this.mar.devolverObstaculos())
+
         } 
       break;
 
@@ -380,6 +397,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.BOSQUE_2
           this.game_level =  MyScene.BOSQUE_2
           this.changeCamera( MyScene.BOSQUE_2)
+
+          this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
+
         } 
       break;
 
@@ -389,6 +409,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.BOSQUE_2
           this.game_level = MyScene.BOSQUE_2
           this.changeCamera(MyScene.BOSQUE_2)
+
+          this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
+
         }
 
         if(this.link.posPj_x == -138.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -396,6 +419,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.MAZMORRA
           this.game_level = MyScene.MAZMORRA
           this.changeCamera(MyScene.MAZMORRA)
+
+          this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
+
         }
 
        break;
@@ -407,6 +433,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.DESIERTO
           this.game_level = MyScene.DESIERTO
           this.changeCamera(MyScene.DESIERTO)
+
+          this.link.cargarObstaculos(this.desierto.devolverObstaculos())
+
         }
         
         if(this.link.posPj_x == -196 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -414,6 +443,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.BOSS
           this.game_level = MyScene.BOSS
           this.changeCamera(MyScene.BOSS)
+
+          this.link.cargarObstaculos(this.boss.devolverObstaculos())
+
         }
         
       break;
@@ -424,6 +456,9 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.MAZMORRA
           this.game_level = MyScene.MAZMORRA
           this.changeCamera(MyScene.MAZMORRA)
+
+          this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
+
         }
       break;
 
@@ -435,6 +470,8 @@ class MyScene extends THREE.Scene {
           this.link.game_level = MyScene.BOSQUE_1
           this.game_level = MyScene.BOSQUE_1
           this.changeCamera(MyScene.BOSQUE_1)
+
+          this.link.cargarObstaculos(this.bosque.devolverObstaculos())
         }
       break; 
 
@@ -493,6 +530,10 @@ class MyScene extends THREE.Scene {
     this.bosque = new NivelBosque(this.resolucion_altura, this.resolucoin_anchura)
     console.log(this.bosque)
     this.add(this.bosque)
+
+    this.bosque2 = new NivelBosque2(this.resolucion_altura, this.resolucoin_anchura)
+    console.log(this.bosque2)
+    this.add(this.bosque2)
 
     this.secreto = new NivelSecreto(this.resolucion_altura, this.resolucoin_anchura)
     console.log(this.secreto)

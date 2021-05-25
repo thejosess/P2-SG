@@ -35,6 +35,14 @@ class NivelMazmorra extends THREE.Object3D{
         ground.position.x = -175
 
         this.add(ground)
+
+        this.array_obstaculos = new Array ();
+        
+    }
+
+    devolverObstaculos(){
+        //TODO añadir los objetos que meta despues
+        return this.array_obstaculos
     }
 
     resizeMazmorra(anchura,altura){
