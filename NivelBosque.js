@@ -4,7 +4,7 @@ import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import {Arbol} from './Arbol.js'
-
+import {Roca} from './Roca.js'
 
 
 
@@ -36,8 +36,20 @@ class NivelBosque extends THREE.Object3D{
         this.position.x = 5
         this.add(this.arbol)
 
+        //rocas importantes que dan acceso al sitio secreto
+        this.roca = new Roca();
+        this.roca.position.z = 24.5
+        this.add(this.roca)
+
+        this.roca2 = new Roca();
+        this.roca2.position.z = 24.5
+        this.roca2.position.x = -4.5
+        this.add(this.roca2)
+
         this.array_obstaculos = new Array()
-        this.array_obstaculos = this.children
+        //TODO probando esto deberían ser los objetos
+        //he probado tambien con los objetos
+        this.array_obstaculos =  [this.arbol, this.roca2, this.roca]
     }
 
     devolverObstaculos(){

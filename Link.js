@@ -8,9 +8,10 @@ import { Vector3 } from './libs/three.module.js'
 
 
 class Link extends THREE.Object3D{
-    constructor(){
+    constructor(scene){
         super();
         var that = this;
+        this.scene = scene;
         var materiaLoader = new MTLLoader();
         var objectLoader = new OBJLoader();
         materiaLoader.load('models/link_model/link_base.mtl',
@@ -382,6 +383,7 @@ class Link extends THREE.Object3D{
       //compruebo si colisiona con algun objeto en mitad del nivel
       //solo compruebo cuando no ha sido bloqueado por otra circunstancia
       if(puede_avanzar){
+        var pos
         if(this.comprobarColisionesObjetos(posicion_simulada))
           puede_avanzar = false
           console.log("Bloqueando por objeto")
@@ -435,19 +437,64 @@ class Link extends THREE.Object3D{
         case Link.LOOK_AT_DOWN:
           var casterJugador = new THREE.Raycaster();
 
-          casterJugador.set(position, new THREE.Vector3(0, 0, -3.5));
-          casterJugador.far = 3.5;
+          var normalized_vector = new THREE.Vector3(0, 0, -1.75)
+          normalized_vector = normalized_vector.normalize()
+          casterJugador.set(position,normalized_vector);
+          casterJugador.far = 1.75;
           //TODO poner que dependiendo del nivel buscas unos objetos u otros
           console.log(this.array_obstaculos)
           //tienes que comprobar que scene.children[0] su parent sea NivelBosque
           var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
           if(objetos.length>0){
-            console.log(objetos)
-            console.log("HA ENCONTRADOOOO ALGO ")
             //aqui se podria llamar a otras funciones que hagan calculos con esas colisiones
             //si son enemigos y tal
             colision = true;
           }
+
+          case Link.LOOK_AT_UP:
+            var casterJugador = new THREE.Raycaster();
+  
+            var normalized_vector = new THREE.Vector3(0, 0, 1.75)
+            normalized_vector = normalized_vector.normalize()
+            casterJugador.set(position,normalized_vector);
+            casterJugador.far = 1.75;
+            //TODO poner que dependiendo del nivel buscas unos objetos u otros
+            console.log(this.array_obstaculos)
+            //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+            var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
+            if(objetos.length>0){
+              colision = true;
+            }
+
+            case Link.LOOK_AT_LEFT:
+              var casterJugador = new THREE.Raycaster();
+    
+              var normalized_vector = new THREE.Vector3(1.75, 0, 0)
+              normalized_vector = normalized_vector.normalize()
+              casterJugador.set(position,normalized_vector);
+              casterJugador.far = 1.75;
+              //TODO poner que dependiendo del nivel buscas unos objetos u otros
+              console.log(this.array_obstaculos)
+              //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+              var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
+              if(objetos.length>0){
+                colision = true;
+              }
+
+              case Link.LOOK_AT_RIGHT:
+                var casterJugador = new THREE.Raycaster();
+                //TODO revisar si 1.75 o 3.5 que son dos saltos, creo que en 1.75 está bien
+                var normalized_vector = new THREE.Vector3(-1.75, 0, 0)
+                normalized_vector = normalized_vector.normalize()
+                casterJugador.set(position,normalized_vector);
+                casterJugador.far = 1.75;
+                //TODO poner que dependiendo del nivel buscas unos objetos u otros
+                console.log(this.array_obstaculos)
+                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+                var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
+                if(objetos.length>0){
+                  colision = true;
+                }
       }
       console.log(colision)
       return colision;  

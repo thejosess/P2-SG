@@ -76,7 +76,7 @@ class MyScene extends THREE.Scene {
   }
 
   crearPersonajes(){
-    this.link = new Link();
+    this.link = new Link(this);
     this.add (this.link);
     //link necesita tener iniciado el array de obstaculos segun el primer nivel
     this.link.cargarObstaculos(this.bosque.devolverObstaculos())
@@ -474,7 +474,6 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.bosque.devolverObstaculos())
         }
       break; 
-
       
     }
   }
