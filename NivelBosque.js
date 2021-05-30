@@ -31,10 +31,10 @@ class NivelBosque extends THREE.Object3D{
         // El suelo lo bajamos la mitad de su altura para que el origen del mundo se quede en su lado superior
         ground.position.y = -0.1;
         this.add(ground)
-
         this.arbol = new Arbol();
-        this.position.x = 5
-        this.add(this.arbol)
+
+        this.array_obstaculos = new Array()
+        this.crearArboleda()
 
         //rocas importantes que dan acceso al sitio secreto
         this.roca = new Roca();
@@ -43,21 +43,224 @@ class NivelBosque extends THREE.Object3D{
 
         this.roca2 = new Roca();
         this.roca2.position.z = 24.5
-        this.roca2.position.x = -4.5
+        this.roca2.position.x = -3.5
         this.add(this.roca2)
 
-        this.array_obstaculos = new Array()
         //TODO probando esto deberían ser los objetos
         //he probado tambien con los objetos
-        this.array_obstaculos =  [this.arbol, this.roca2, this.roca]
+        this.array_obstaculos =  [
+            this.arbol,this.arbol2,this.arbol3, this.arbol4, this.arbol5,this.arbol6, this.arbol7, this.arbol8,
+            this.arbol9,this.arbol10,this.arbol11, this.arbol12, this.arbol13,this.arbol14, this.arbol15, this.arbol16,
+            this.arbol17,this.arbol18,this.arbol19, this.arbol20, this.arbol21,this.arbol22, this.arbol23, this.arbol24,
+            this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
+            this.arbol33,this.arbol34,this.arbol35,
+            this.roca2, this.roca]
     }
 
     devolverObstaculos(){
-        //TODO añadir los objetos que meta despues
         return this.array_obstaculos
     }
 
     crearArboleda(){
+
+        //lateral izquierda
+        this.arbol.position.x = 25
+        this.add(this.arbol)
+
+        this.arbol2 = new Arbol();
+        this.arbol2.position.x = 25.5
+        this.arbol2.position.z = 3.6
+        this.add(this.arbol2)
+
+        this.arbol3 = new Arbol();
+        this.arbol3.position.x = 26
+        this.arbol3.position.z = 7.2
+        this.add(this.arbol3)
+
+        this.arbol4 = new Arbol();
+        this.arbol4.position.x = 26.5
+        this.arbol4.position.z = 10.8
+        this.add(this.arbol4)
+
+
+        this.arbol5 = new Arbol();
+        this.arbol5.position.x = 27.4
+        this.arbol5.position.z = 14.4
+        this.add(this.arbol5)
+
+        this.arbol6 = new Arbol();
+        this.arbol6.position.x = 28
+        this.arbol6.position.z = 18
+        this.add(this.arbol6)
+
+        //esquina inferior abajo
+        this.arbol7 = new Arbol();
+        this.arbol7.position.x = 24.5
+        this.arbol7.position.z = -3
+        this.add(this.arbol7)
+
+        this.arbol8 = new Arbol();
+        this.arbol8.position.x = 24
+        this.arbol8.position.z = -6
+        this.add(this.arbol8) 
+        
+        //lateral abajo
+
+        //lateral izquierda
+        this.arbol9 = new Arbol();
+        this.arbol9.position.x = 21
+        this.arbol9.position.z = -8
+        this.add(this.arbol9)
+
+        this.arbol10 = new Arbol();
+        this.arbol10.position.x = 17.4
+        this.arbol10.position.z = -8
+        this.add(this.arbol10)
+
+        this.arbol11 = new Arbol();
+        this.arbol11.position.x = 13.8
+        this.arbol11.position.z = -8
+        this.add(this.arbol11)
+
+        this.arbol12 = new Arbol();
+        this.arbol12.position.x = 10.2
+        this.arbol12.position.z = -8
+        this.add(this.arbol12)
+
+
+        this.arbol13 = new Arbol();
+        this.arbol13.position.x = 6.6
+        this.arbol13.position.z = -8
+        this.add(this.arbol13)
+
+        this.arbol14 = new Arbol();
+        this.arbol14.position.x = 3
+        this.arbol14.position.z = -8
+        this.add(this.arbol14)
+
+        this.arbol15 = new Arbol();
+        this.arbol15.position.x = -0.6
+        this.arbol15.position.z = -8
+        this.add(this.arbol15)
+
+        this.arbol16 = new Arbol();
+        this.arbol16.position.x = -4.2
+        this.arbol16.position.z = -8
+        this.add(this.arbol16)
+
+        this.arbol17 = new Arbol();
+        this.arbol17.position.x = -7.4
+        this.arbol17.position.z = -8
+        this.add(this.arbol17)
+
+        this.arbol17 = new Arbol();
+        this.arbol17.position.x = -11
+        this.arbol17.position.z = -8
+        this.add(this.arbol17)
+
+
+        this.arbol18 = new Arbol();
+        this.arbol18.position.x = -14.6
+        this.arbol18.position.z = -8
+        this.add(this.arbol18)
+
+        this.arbol19 = new Arbol();
+        this.arbol19.position.x = -18.2
+        this.arbol19.position.z = -8
+        this.add(this.arbol19)
+
+        this.arbol20 = new Arbol();
+        this.arbol20.position.x = -21.8
+        this.arbol20.position.z = -8
+        this.add(this.arbol20)
+
+        
+        //lateral derecha
+
+
+        this.arbol21 = new Arbol();
+        this.arbol21.position.x = -21.8
+        this.arbol21.position.z = 7.2
+        this.add(this.arbol21)
+
+        this.arbol22 = new Arbol();
+        this.arbol22.position.x = -21.8
+        this.arbol22.position.z = 10.8
+        this.add(this.arbol22)
+
+
+        this.arbol23 = new Arbol();
+        this.arbol23.position.x = -21.8
+        this.arbol23.position.z = 14.4
+        this.add(this.arbol23)
+
+        this.arbol24 = new Arbol();
+        this.arbol24.position.x = -21.8
+        this.arbol24.position.z = 18
+        this.add(this.arbol24)
+
+        //esquina inferior abajo
+        this.arbol25 = new Arbol();
+        this.arbol25.position.x = -21.8
+        this.arbol25.position.z = -3
+        this.add(this.arbol25)
+
+        this.arbol26 = new Arbol();
+        this.arbol26.position.x = -21.8
+        this.arbol26.position.z = -6
+        this.add(this.arbol26) 
+
+
+
+        //lateral arriba
+
+        this.arbol27 = new Arbol();
+        this.arbol27.position.x = 24
+        this.arbol27.position.z = 20
+        this.add(this.arbol27)
+
+        this.arbol28 = new Arbol();
+        this.arbol28.position.x = 20.4
+        this.arbol28.position.z = 20
+        this.add(this.arbol28)
+
+        this.arbol29 = new Arbol();
+        this.arbol29.position.x = 16.8
+        this.arbol29.position.z = 20
+        this.add(this.arbol29)
+
+        this.arbol30 = new Arbol();
+        this.arbol30.position.x = 13.2
+        this.arbol30.position.z = 20
+        this.add(this.arbol30)
+
+
+        this.arbol31 = new Arbol();
+        this.arbol31.position.x = 9.6
+        this.arbol31.position.z = 20
+        this.add(this.arbol31)
+
+        this.arbol32 = new Arbol();
+        this.arbol32.position.x = 6
+        this.arbol32.position.z = 20
+        this.add(this.arbol32)
+
+        this.arbol33 = new Arbol();
+        this.arbol33.position.x = -9.2
+        this.arbol33.position.z = 20
+        this.add(this.arbol33)
+
+        this.arbol34 = new Arbol();
+        this.arbol34.position.x = -12.8
+        this.arbol34.position.z = 20
+        this.add(this.arbol34)
+
+        this.arbol35 = new Arbol();
+        this.arbol35.position.x = -16.4
+        this.arbol35.position.z = 20
+        this.add(this.arbol35)
+
+
 
     }
 
