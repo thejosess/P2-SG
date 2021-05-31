@@ -59,7 +59,7 @@ class MyScene extends THREE.Scene {
     this.add (this.glass); */
 
     this.link = new Link();
-    this.attack_sword = new AttackSword();
+    this.attack_sword = new AttackSword(this.link);
     this.add (this.link);
     this.add(this.attack_sword);
   }
@@ -180,9 +180,10 @@ class MyScene extends THREE.Scene {
 
   onKeyPressed(event){
     var key = event.which || event.keyCode
+    var key_int = event.which || event.keyCode
 
     console.log("detecta pulsar tecla pressed")
-    //console.log(String.fromCharCode(key))
+    // console.log(String.fromCharCode(key))
 
     //se admite tanto w como W, por eso se hace lowerCase de la key
 
@@ -216,7 +217,7 @@ class MyScene extends THREE.Scene {
       this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
     }
 
-    if (key == 32){
+    if (key_int == 32){
       console.log("mostrando tecla " + String.fromCharCode(key))
       this.attack_sword.lanzarEspada(this.link.orientacion)
     }
