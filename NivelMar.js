@@ -3,7 +3,8 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
-
+import { Camino } from './Camino.js'
+import { Alga } from './Alga.js'
 
 
 
@@ -33,7 +34,31 @@ class NivelMar extends THREE.Object3D{
 
         this.add(ground)
 
+        this.camino1 = new Camino();
+        this.camino1.rotateY(-Math.PI/2)
+        this.camino1.position.z = 22.5
+        this.camino1.position.x = -67
+        this.add(this.camino1)
+
+
+        this.camino2 = new Camino();
+        this.camino2.rotateY(-Math.PI/2)
+        this.camino2.position.z = 22.5
+        this.camino2.position.x = -61
+        this.add(this.camino2)
+
+        this.alga1 = new Alga()
+        this.add(this.alga1)
+        this.alga1.position.z = 28
+        this.alga1.position.x = -42
+
+        this.alga2 = new Alga()
+        this.add(this.alga2)
+        this.alga2.position.z = 50
+        this.alga2.position.x = -80
+
         this.array_obstaculos = new Array ();
+        this.array_obstaculos = [this.camino1, this.camino2, this.alga1, this.alga2]
         
     }
 

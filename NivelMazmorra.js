@@ -5,6 +5,7 @@ import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
 import { Interruptor } from './Interruptor.js'
+import { Fire } from './Fire.js'
 
 
 
@@ -51,7 +52,50 @@ class NivelMazmorra extends THREE.Object3D{
         this.camino2.position.x = -142
         this.add(this.camino2)
 
+        this.fire = new Fire();
+        this.fire.position.x = -185
+        this.fire.position.z = 3
+        this.add(this.fire)
+
+        this.fire2 = new Fire();
+        this.fire2.position.x = -185
+        this.fire2.position.z = -5
+        this.add(this.fire2)
+
+        this.fire3 = new Fire();
+        this.fire3.position.x = -185
+        this.fire3.position.z = 6
+        this.add(this.fire3)
+
+        this.fire4 = new Fire();
+        this.fire4.position.x = -185
+        this.fire4.position.z = -8
+        this.add(this.fire4)
+
+        //luz puntual por cada antorcha
+        var pointLight = new THREE.PointLight (0xfcfcfc, 0.5,10)
+        pointLight.position.set(-185,3,3)
+        this.add(pointLight)
+
+        //luz puntual por cada antorcha
+        var pointLight2 = new THREE.PointLight (0xfcfcfc, 0.5,10)
+        pointLight2.position.set(-185,3,-5)
+        this.add(pointLight2)
+
+        //luz puntual por cada antorcha
+        var pointLight3 = new THREE.PointLight (0xfcfcfc, 0.5,10)
+        pointLight3.position.set(-185,3,6)
+        this.add(pointLight3)
+
+        //luz puntual por cada antorcha
+        var pointLight4 = new THREE.PointLight (0xfcfcfc, 0.5,25)
+        pointLight4.position.set(-185,3,-8)
+        this.add(pointLight4)
+
+
         this.interruptor  = new Interruptor()
+        this.interruptor.position.x = -175
+        this.interruptor.position.z = 18
         this.add(this.interruptor)
 
 
@@ -62,15 +106,27 @@ class NivelMazmorra extends THREE.Object3D{
         ]
 
         this.array_obstaculos = new Array ();
-        this.array_obstaculos = [this.camino1, this.camino2]
+        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4]
 
         
         
     }
 
+    cambiarColorInterruptor(){
+        /* var sphereMat = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        this.interruptor.material = sphereMat
+        console.log("cambiando color") */
+        this.interruptor.cambiarColor()
+
+    }
+
     devolverObstaculos(){
         //TODO añadir los objetos que meta despues
         return this.array_obstaculos
+    }
+
+    update(){
+        this.cambiarColorInterruptor()
     }
 
 /*     resizeMazmorra(anchura,altura){

@@ -396,7 +396,7 @@ class MyScene extends THREE.Scene {
 
         }
 
-        if(this.link.posPj_x == -56 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
+        if(this.link.posPj_x == -64.75 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.MAR
           this.game_level =  MyScene.MAR
@@ -408,7 +408,7 @@ class MyScene extends THREE.Scene {
       break;
 
       case MyScene.MAR:
-        if(this.link.posPj_x == -56 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
+        if(this.link.posPj_x == -64.75 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSQUE_2
           this.game_level =  MyScene.BOSQUE_2
@@ -533,6 +533,7 @@ class MyScene extends THREE.Scene {
     // Se actualiza el resto del modelo
     this.link.update();
     this.attack_sword.update();
+
 
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());

@@ -135,13 +135,13 @@ class NivelBosque2 extends THREE.Object3D{
 
         this.roca15 = new Roca()
         this.roca15.position.z = 18
-        this.roca15.position.x = -68
+        this.roca15.position.x = -70
         this.add(this.roca15)
 
 
         this.roca16 = new Roca()
         this.roca16.position.z = 8
-        this.roca16.position.x = -68
+        this.roca16.position.x = -70
         this.add(this.roca16)
 
         this.roca17 = new Roca()

@@ -7,6 +7,7 @@ import {Arbusto} from './Arbusto.js'
 
 import {Roca} from './Roca.js'
 import { Camino } from './Camino.js'
+import { Arbusto_desierto } from './Arbusto_desierto.js'
 
 
 
@@ -28,11 +29,31 @@ class NivelDesierto extends THREE.Object3D{
         this.camino2.position.x = -86
         this.add(this.camino2)
 
+        this.desert_grass = new Arbusto_desierto()
+        this.add(this.desert_grass)
+        this.desert_grass.position.x = -130
+        this.desert_grass.position.z = 5.5
+
+
+        this.desert_grass2 = new Arbusto_desierto()
+        this.add(this.desert_grass2)
+        this.desert_grass2.position.x = -100
+        this.desert_grass2.position.z = 8.5
+        
+        this.desert_grass3 = new Arbusto_desierto()
+        this.add(this.desert_grass3)
+        this.desert_grass3.position.x = -110
+        this.desert_grass3.position.z = 11.5
+
+        this.desert_grass4 = new Arbusto_desierto()
+        this.add(this.desert_grass4)
+        this.desert_grass4.position.x = -95
+        this.desert_grass4.position.z = 20.5
 
 
 
         this.array_obstaculos = [
-            this.camino1, this.camino2
+            this.camino1, this.camino2, this.desert_grass, this.desert_grass2, this.desert_grass3, this.desert_grass4
         ]
 
     }

@@ -3,6 +3,8 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
+import { Camino } from './Camino.js'
+
 
 
 
@@ -35,9 +37,21 @@ class NivelBoss extends THREE.Object3D{
         //posiciones del suelo para que quede en su lugar correspondiente
         //ground.position.x = 
 
+        this.camino1 = new Camino();
+        this.camino1.position.z = 2.5
+        this.camino1.position.x = -194
+        this.add(this.camino1)
+
+
+        this.camino2 = new Camino();
+        this.camino2.position.z = -2.5
+        this.camino2.position.x = -194
+        this.add(this.camino2)
+
         this.add(ground)
 
         this.array_obstaculos = new Array ();
+        this.array_obstaculos = [ this.camino1, this.camino2]
         
     }
 

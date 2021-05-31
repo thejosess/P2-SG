@@ -7,11 +7,11 @@ class Interruptor extends THREE.Object3D {
     // Un Mesh se compone de geometría y material
     var sphereGeom = new THREE.SphereGeometry (2,8,30);
     // Como material se crea uno a partir de un color
-    var sphereMat =new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var sphereMat =new THREE.MeshBasicMaterial( {color: 0xff0000});
 
     //TODO revisar si ponerle emisse
 
-
+    
     
     
     // Ya podemos construir el Mesh
@@ -21,6 +21,13 @@ class Interruptor extends THREE.Object3D {
     //un poco menos de 4 para la unión de ambas partes
     this.add (this.sphere);
 
+
+   }
+
+   cambiarColor(){
+    // Como material se crea uno a partir de un color
+    var sphereMat =new THREE.MeshBasicMaterial( {color:0xffff00} );
+    this.sphere.material = sphereMat
 
    }
 }

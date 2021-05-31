@@ -361,7 +361,7 @@ class Link extends THREE.Object3D{
         break;
 
         case Link.MAR:
-          if(posicion_simulada.x == -28 || posicion_simulada.x == -84  || (posicion_simulada.z == 22.75 && posicion_simulada.x !=-56) || posicion_simulada.z == 54.25){
+          if(posicion_simulada.x == -28 || posicion_simulada.x == -84  || (posicion_simulada.z == 22.75 && posicion_simulada.x !=-64.75) || posicion_simulada.z == 54.25){
             puede_avanzar = false
             console.log("BLOQUEANDO")
 
