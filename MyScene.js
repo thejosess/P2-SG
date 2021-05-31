@@ -16,6 +16,7 @@ import {NivelSecreto} from './NivelSecreto.js'
 import {NivelMazmorra} from './NivelMazmorra.js'
 import {NivelBoss} from './NivelBoss.js'
 import {NivelMar} from './NivelMar.js'
+import {NivelDesierto} from './NivelDesierto.js'
 
 /* ESTADOS INICIALES PARA EL METODO JUGAR */
 
@@ -32,7 +33,7 @@ class MyScene extends THREE.Scene {
     super();
     
     this.resolucion_altura = 1920
-    this.resolucoin_anchura = 915
+    this.resolucion_anchura = 915
 
     // Lo primero, crear el visualizador, pasándole el lienzo sobre el que realizar los renderizados.
     this.renderer = this.createRenderer(myCanvas);
@@ -339,7 +340,8 @@ class MyScene extends THREE.Scene {
 
     switch (this.link.game_level){
       case MyScene.BOSQUE_1:
-        if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+        if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && (this.link.posPj_z == 0 ||
+          this.link.posPj_z == 1.75 || this.link.posPj_z == 3.5 || this.link.posPj_z == 5.25)){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSQUE_2
           this.game_level = MyScene.BOSQUE_2
@@ -349,7 +351,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
         }
 
-        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 /*&&this.link.tieneLlave*/){
+        if((this.link.posPj_x == 0 ||this.link.posPj_x == 1.75 || this.link.posPj_x == 3.5 || this.link.posPj_x == 5.25)
+        && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 /*&&this.link.tieneLlave*/){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.SECRETA
           this.game_level =  MyScene.SECRETA
@@ -360,7 +363,8 @@ class MyScene extends THREE.Scene {
         break;
 
       case MyScene.BOSQUE_2:
-        if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+        if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && (this.link.posPj_z == 0 ||
+          this.link.posPj_z == 1.75 || this.link.posPj_z == 3.5 || this.link.posPj_z == 5.25)){
             this.estado_juego = MyScene.CHANGE_CAMERA
             this.link.game_level = MyScene.BOSQUE_1
             this.game_level = MyScene.BOSQUE_1
@@ -526,27 +530,31 @@ class MyScene extends THREE.Scene {
 
   crearNiveles(){
     this.resolucion_altura
-    this.bosque = new NivelBosque(this.resolucion_altura, this.resolucoin_anchura)
+    this.bosque = new NivelBosque(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.bosque)
     this.add(this.bosque)
 
-    this.bosque2 = new NivelBosque2(this.resolucion_altura, this.resolucoin_anchura)
+    this.bosque2 = new NivelBosque2(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.bosque2)
     this.add(this.bosque2)
 
-    this.secreto = new NivelSecreto(this.resolucion_altura, this.resolucoin_anchura)
+    this.desierto = new NivelDesierto()
+    console.log(this.desierto)
+    this.add(this.desierto)
+
+    this.secreto = new NivelSecreto(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.secreto)
     this.add(this.secreto)
 
-    this.mazmorra = new NivelMazmorra(this.resolucion_altura, this.resolucoin_anchura)
+    this.mazmorra = new NivelMazmorra(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.mazmorra)
     this.add(this.mazmorra)
 
-    this.boss = new NivelBoss(this.resolucion_altura, this.resolucoin_anchura)
+    this.boss = new NivelBoss(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.boss)
     this.add(this.boss)
 
-    this.mar = new NivelMar(this.resolucion_altura, this.resolucoin_anchura)
+    this.mar = new NivelMar(this.resolucion_altura, this.resolucion_anchura)
     console.log(this.mar)
     this.add(this.mar)
     

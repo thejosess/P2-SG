@@ -3,6 +3,8 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
+import { Camino } from './Camino.js'
+import { Interruptor } from './Interruptor.js'
 
 
 
@@ -36,7 +38,33 @@ class NivelMazmorra extends THREE.Object3D{
 
         this.add(ground)
 
+        this.array_obstaculos = new Array()
+
+        this.camino1 = new Camino();
+        this.camino1.position.z = 2.5
+        this.camino1.position.x = -142
+        this.add(this.camino1)
+
+
+        this.camino2 = new Camino();
+        this.camino2.position.z = -2.5
+        this.camino2.position.x = -142
+        this.add(this.camino2)
+
+        this.interruptor  = new Interruptor()
+        this.add(this.interruptor)
+
+
+
+
+        this.array_obstaculos = [
+            this.camino1, this.camino2
+        ]
+
         this.array_obstaculos = new Array ();
+        this.array_obstaculos = [this.camino1, this.camino2]
+
+        
         
     }
 
@@ -45,11 +73,11 @@ class NivelMazmorra extends THREE.Object3D{
         return this.array_obstaculos
     }
 
-    resizeMazmorra(anchura,altura){
+/*     resizeMazmorra(anchura,altura){
         // Se cambia el tamaño de la geometria y por tanto de la textura 
         this.geometry.parameters.depth = altura/6;
         this.geometry.parameters.width = anchura/6;
-    }
+    } */
 }
 
 export { NivelMazmorra };

@@ -5,6 +5,8 @@ import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import {Arbol} from './Arbol.js'
 import {Roca} from './Roca.js'
+import {Arbusto} from './Arbusto.js'
+import { Roca3 } from './Roca3.js'
 
 
 
@@ -46,6 +48,7 @@ class NivelBosque extends THREE.Object3D{
         this.roca2.position.x = -3.5
         this.add(this.roca2)
 
+
         //TODO probando esto deberían ser los objetos
         //he probado tambien con los objetos
         this.array_obstaculos =  [
@@ -53,8 +56,9 @@ class NivelBosque extends THREE.Object3D{
             this.arbol9,this.arbol10,this.arbol11, this.arbol12, this.arbol13,this.arbol14, this.arbol15, this.arbol16,
             this.arbol17,this.arbol18,this.arbol19, this.arbol20, this.arbol21,this.arbol22, this.arbol23, this.arbol24,
             this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
-            this.arbol33,this.arbol34,this.arbol35,
-            this.roca2, this.roca]
+            this.arbol33,this.arbol34,this.arbol35
+            //this.roca2, this.roca 
+        ]
     }
 
     devolverObstaculos(){
@@ -263,12 +267,12 @@ class NivelBosque extends THREE.Object3D{
 
 
     }
-
+/* 
     resizeBosque(anchura,altura){
         // Se cambia el tamaño de la geometria y por tanto de la textura 
         this.geometry.parameters.depth = altura/6;
         this.geometry.parameters.width = anchura/6;
-    }
+    } */
 }
 
 export { NivelBosque };

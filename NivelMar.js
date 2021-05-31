@@ -42,11 +42,11 @@ class NivelMar extends THREE.Object3D{
         return this.array_obstaculos
     }
 
-    resizeSecreto(anchura,altura){
+/*     resizeSecreto(anchura,altura){
         // Se cambia el tamaño de la geometria y por tanto de la textura 
         this.geometry.parameters.depth = altura/6;
         this.geometry.parameters.width = anchura/6;
-    }
+    } */
 }
 
 export { NivelMar };
