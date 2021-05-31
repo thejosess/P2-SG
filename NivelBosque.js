@@ -56,9 +56,22 @@ class NivelBosque extends THREE.Object3D{
             this.arbol9,this.arbol10,this.arbol11, this.arbol12, this.arbol13,this.arbol14, this.arbol15, this.arbol16,
             this.arbol17,this.arbol18,this.arbol19, this.arbol20, this.arbol21,this.arbol22, this.arbol23, this.arbol24,
             this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
-            this.arbol33,this.arbol34,this.arbol35
+            this.arbol33,this.arbol34,this.arbol35, this.roca, this.roca2
             //this.roca2, this.roca 
         ]
+    }
+
+    quitarRoca(){
+        //ponemos roca invisible y en el array de obstaculos la quitamos
+        this.roca.visible = false
+        this.roca2.visible = false
+        this.array_obstaculos =  [
+            this.arbol,this.arbol2,this.arbol3, this.arbol4, this.arbol5,this.arbol6, this.arbol7, this.arbol8,
+            this.arbol9,this.arbol10,this.arbol11, this.arbol12, this.arbol13,this.arbol14, this.arbol15, this.arbol16,
+            this.arbol17,this.arbol18,this.arbol19, this.arbol20, this.arbol21,this.arbol22, this.arbol23, this.arbol24,
+            this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
+            this.arbol33,this.arbol34,this.arbol35, 
+        ]    
     }
 
     devolverObstaculos(){

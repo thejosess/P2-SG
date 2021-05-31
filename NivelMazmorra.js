@@ -6,6 +6,7 @@ import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
 import { Interruptor } from './Interruptor.js'
 import { Fire } from './Fire.js'
+import { Roca } from './Roca.js'
 
 
 
@@ -91,6 +92,7 @@ class NivelMazmorra extends THREE.Object3D{
         var pointLight4 = new THREE.PointLight (0xfcfcfc, 0.5,25)
         pointLight4.position.set(-185,3,-8)
         this.add(pointLight4)
+        
 
 
         this.interruptor  = new Interruptor()
@@ -99,17 +101,26 @@ class NivelMazmorra extends THREE.Object3D{
         this.add(this.interruptor)
 
 
-
+        this.roca = new Roca()
+        this.roca.position.x = -185
+        this.roca.position.z = 0
+        this.add(this.roca)
 
         this.array_obstaculos = [
             this.camino1, this.camino2
         ]
 
         this.array_obstaculos = new Array ();
-        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4]
+        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor,this.roca]
 
         
         
+    }
+
+    quitarRoca(){
+        //ponemos roca invisible y en el array de obstaculos la quitamos
+        this.roca.visible = false
+        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor]
     }
 
     cambiarColorInterruptor(){

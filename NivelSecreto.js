@@ -77,6 +77,9 @@ class NivelSecreto extends THREE.Object3D{
         ]
     }
 
+
+
+
     devolverObstaculos(){
         //TODO añadir los objetos que meta despues
         return this.array_obstaculos
