@@ -17,6 +17,11 @@ import {NivelMazmorra} from './NivelMazmorra.js'
 import {NivelBoss} from './NivelBoss.js'
 import {NivelMar} from './NivelMar.js'
 import {NivelDesierto} from './NivelDesierto.js'
+import {AttackSword} from './AttackSword.js'
+
+
+
+
 
 /* ESTADOS INICIALES PARA EL METODO JUGAR */
 
@@ -81,7 +86,8 @@ class MyScene extends THREE.Scene {
     this.add (this.link);
     //link necesita tener iniciado el array de obstaculos segun el primer nivel
     this.link.cargarObstaculos(this.bosque.devolverObstaculos())
-
+    this.attack_sword = new AttackSword(this.link);
+    this.add(this.attack_sword);
   }
   
   createCamera () {
@@ -284,9 +290,10 @@ class MyScene extends THREE.Scene {
 
   onKeyPressed(event){
     var key = event.which || event.keyCode
+    var key_int = event.which || event.keyCode
 
     console.log("detecta pulsar tecla pressed")
-    //console.log(String.fromCharCode(key))
+    // console.log(String.fromCharCode(key))
 
     //se admite tanto w como W, por eso se hace lowerCase de la key
 
@@ -321,7 +328,12 @@ class MyScene extends THREE.Scene {
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
         }
       }
+      if (key_int == 32){
+        console.log("mostrando tecla " + String.fromCharCode(key))
+        this.attack_sword.lanzarEspada(this.link.orientacion)
+      }  
     }
+
 
     this.comprobarCambioNivel()
 
@@ -480,6 +492,9 @@ class MyScene extends THREE.Scene {
       break; 
       
     }
+
+
+
   }
   
   onKeyDown(event){
@@ -493,7 +508,10 @@ class MyScene extends THREE.Scene {
     
   }
 
-
+  onKeyUp(event) {
+    var key = event.which || event.keyCode
+    console.log("has dejado de pulsar la tecla " + String.fromCharCode(key).toLowerCase())
+  }
 
 
 
@@ -514,6 +532,7 @@ class MyScene extends THREE.Scene {
     
     // Se actualiza el resto del modelo
     this.link.update();
+    this.attack_sword.update();
 
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
