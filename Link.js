@@ -69,6 +69,10 @@ class Link extends THREE.Object3D{
       this.array_obstaculos = array_obstaculos
     }
 
+    cargarEnemigos(array_enemigos){
+      this.array_enemigos = array_enemigos
+    }
+
 
     //change_model(string url_modelo)
     //para cambiar el tema del modelo del personaje segun el objeto que lleve?
@@ -121,6 +125,13 @@ class Link extends THREE.Object3D{
           if(puede_avanzar){
             this.mover_delante_o_detras(Link.MOVER_DELANTE);
           }
+
+          var colisiona_enemigo = this.comprobarColisionesEnemigo()
+          if(colisiona_enemigo){
+            //pequeña animacion que lo haga retrocer para atrás y le quite vida
+            this.mover_delante_o_detras(Link.MOVER_DETRAS)
+          }
+
           return puede_avanzar
         //break;
 
@@ -150,18 +161,6 @@ class Link extends THREE.Object3D{
           }
         return puede_avanzar
       }
-      this.comprobar_cambio_nivel()
-    }
-
-    //comprueba que el pj no esté en posicion para poder cambiar de nivel
-    //si lo está devuelve el nivel al que ha pasado y cambia el estado del nivel de Link
-    comprobar_cambio_nivel(){
-
-    }
-
-    //cambia el nivel del pj y por tanto mueve la camara
-    cambiar_nivel(){
-
     }
 
     // se actualiza la informacion del Pj
@@ -428,6 +427,31 @@ class Link extends THREE.Object3D{
     //TODO comprobacion de que la llave la ha conseguido, es decir el collider coincide
 
     //TODO collider tambien por si te quitan vida
+
+    comprobarColisionesEnemigo(){
+      //aqui se usa la posicion actual de Link
+      var colision = false;
+      switch(this.orientacion){
+
+          case Link.LOOK_AT_UP:
+            var casterJugador = new THREE.Raycaster();
+  
+            var normalized_vector = new THREE.Vector3(0, 0, 1)
+            normalized_vector = normalized_vector.normalize()
+            casterJugador.set(this.position,normalized_vector);
+            casterJugador.far = 1;
+            //TODO poner que dependiendo del nivel buscas unos objetos u otros
+            console.log(this.array_enemigos)
+            //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+            var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+            if(objetos.length>0){
+              colision = true;
+            }
+
+      }
+      return colision;  
+    }
+
   
 
     comprobarColisionesObjetos(position){

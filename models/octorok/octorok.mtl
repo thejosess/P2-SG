@@ -21,26 +21,22 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl MI_body.002
-Ns 18.000005
+newmtl Material
+Ns 323.999994
 Ka 1.000000 1.000000 1.000000
-Kd 0.588000 0.588000 0.588000
-Ks 0.000000 0.000000 0.000000
+Kd 0.800000 0.137970 0.183098
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
-illum 1
-map_Kd /home/jose/Descargas/modelos/Octorok/mi_body_alb.png
-map_d /home/jose/Descargas/modelos/Octorok/mi_body_alb.png
+illum 2
 
-newmtl MI_body.003
-Ns 18.000005
+newmtl Material.001
+Ns 225.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.588000 0.588000 0.588000
-Ks 0.000000 0.000000 0.000000
+Kd 0.800000 0.778759 0.494990
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
-illum 1
-map_Kd /home/jose/Descargas/modelos/Octorok/mi_body_alb.png
-map_d /home/jose/Descargas/modelos/Octorok/mi_body_alb.png
+illum 2

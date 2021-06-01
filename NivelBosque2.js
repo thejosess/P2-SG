@@ -30,7 +30,9 @@ class NivelBosque2 extends THREE.Object3D{
         this.add(this.camino2)
 
 
+        //array enemigos
 
+        this.array_enemigos = new Array()
 
         this.array_obstaculos = [
             this.roca, this.roca2, this.roca3, this.roca4,this.roca5, this.roca6, this.arbusto7, this.arbusto8,
@@ -39,6 +41,10 @@ class NivelBosque2 extends THREE.Object3D{
             this.camino1, this.camino2
         ]
 
+    }
+
+    devolverEnemigos(){
+       return this.array_enemigos
     }
 
     devolverObstaculos(){

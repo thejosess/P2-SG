@@ -113,8 +113,12 @@ class NivelMazmorra extends THREE.Object3D{
         this.array_obstaculos = new Array ();
         this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor,this.roca]
 
+        this.array_enemigos = new Array
         
-        
+    }
+
+    devolverEnemigos(){
+        return this.array_enemigos
     }
 
     quitarRoca(){

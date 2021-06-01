@@ -56,8 +56,15 @@ class NivelDesierto extends THREE.Object3D{
             this.camino1, this.camino2, this.desert_grass, this.desert_grass2, this.desert_grass3, this.desert_grass4
         ]
 
+
+        this.array_enemigos = new Array
+        
     }
 
+    devolverEnemigos(){
+        return this.array_enemigos
+    }
+    
     devolverObstaculos(){
         //TODO añadir los objetos que meta despues
         return this.array_obstaculos

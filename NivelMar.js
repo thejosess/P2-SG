@@ -60,7 +60,14 @@ class NivelMar extends THREE.Object3D{
         this.array_obstaculos = new Array ();
         this.array_obstaculos = [this.camino1, this.camino2, this.alga1, this.alga2]
         
+        this.array_enemigos = new Array
+        
     }
+
+    devolverEnemigos(){
+        return this.array_enemigos
+    }
+
 
     devolverObstaculos(){
         //TODO añadir los objetos que meta despues

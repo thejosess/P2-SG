@@ -86,6 +86,7 @@ class MyScene extends THREE.Scene {
     this.add (this.link);
     //link necesita tener iniciado el array de obstaculos segun el primer nivel
     this.link.cargarObstaculos(this.bosque.devolverObstaculos())
+    this.link.cargarEnemigos(this.bosque.devolverEnemigos())
     this.attack_sword = new AttackSword(this.link);
     this.add(this.attack_sword);
   }
@@ -361,6 +362,7 @@ class MyScene extends THREE.Scene {
 
           //cargas los obstaculos del mundo que se cambia
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
 
         if((this.link.posPj_x == 0 ||this.link.posPj_x == 1.75 || this.link.posPj_x == 3.5 || this.link.posPj_x == 5.25)
@@ -371,6 +373,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera( MyScene.SECRETA)
 
           this.link.cargarObstaculos(this.secreto.devolverObstaculos())
+
         }        
         break;
 
@@ -383,6 +386,8 @@ class MyScene extends THREE.Scene {
             this.changeCamera(MyScene.BOSQUE_1)
 
             this.link.cargarObstaculos(this.bosque.devolverObstaculos())
+            this.link.cargarEnemigos(this.bosque.devolverEnemigos())
+
         }
 
         if(this.link.posPj_x == -82.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -393,6 +398,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.DESIERTO)
 
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
+          this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
         }
 
@@ -403,6 +409,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera( MyScene.MAR)
 
           this.link.cargarObstaculos(this.mar.devolverObstaculos())
+          this.link.cargarEnemigos(this.mar.devolverEnemigos())
 
         } 
       break;
@@ -415,6 +422,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera( MyScene.BOSQUE_2)
 
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
 
         } 
       break;
@@ -427,6 +435,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.BOSQUE_2)
 
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
 
         }
 
@@ -437,6 +446,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.MAZMORRA)
 
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
+          this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
         }
 
@@ -451,6 +461,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.DESIERTO)
 
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
+          this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
         }
         
@@ -461,6 +472,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.BOSS)
 
           this.link.cargarObstaculos(this.boss.devolverObstaculos())
+          this.link.cargarEnemigos(this.boss.devolverEnemigos())
 
         }
         
@@ -474,6 +486,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.MAZMORRA)
 
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
+          this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
         }
       break;
@@ -488,6 +501,8 @@ class MyScene extends THREE.Scene {
           this.changeCamera(MyScene.BOSQUE_1)
 
           this.link.cargarObstaculos(this.bosque.devolverObstaculos())
+          this.link.cargarEnemigos(this.bosque.devolverEnemigos())
+
         }
       break; 
       

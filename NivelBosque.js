@@ -7,6 +7,7 @@ import {Arbol} from './Arbol.js'
 import {Roca} from './Roca.js'
 import {Arbusto} from './Arbusto.js'
 import { Roca3 } from './Roca3.js'
+import {Octorok} from './Octorok.js'
 
 
 
@@ -48,6 +49,17 @@ class NivelBosque extends THREE.Object3D{
         this.roca2.position.x = -3.5
         this.add(this.roca2)
 
+        this.octorok = new Octorok()
+        this.octorok.position.x = -5
+        this.octorok.position.z = 12
+        this.octorok.rotateY(Math.PI)
+        this.add(this.octorok)
+
+        //array con los enemigos
+
+        this.array_enemigos = new Array()
+        this.array_enemigos =  [this.octorok]
+
 
         //TODO probando esto deberían ser los objetos
         //he probado tambien con los objetos
@@ -72,6 +84,10 @@ class NivelBosque extends THREE.Object3D{
             this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
             this.arbol33,this.arbol34,this.arbol35, 
         ]    
+    }
+
+    devolverEnemigos(){
+        return this.array_enemigos
     }
 
     devolverObstaculos(){

@@ -52,7 +52,14 @@ class NivelBoss extends THREE.Object3D{
 
         this.array_obstaculos = new Array ();
         this.array_obstaculos = [ this.camino1, this.camino2]
+
+        //array enemigos
+        this.array_enemigos = new Array
         
+    }
+
+    devolverEnemigos(){
+        return this.array_enemigos
     }
 
     devolverObstaculos(){
