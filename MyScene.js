@@ -306,6 +306,7 @@ class MyScene extends THREE.Scene {
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
         }
+        this.link.comprobarMovimientoColisionEnemigo()
         //this.link.posPj_x cambiar a amano  
       }
 
@@ -314,6 +315,7 @@ class MyScene extends THREE.Scene {
         if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
         }
+        this.link.comprobarMovimientoColisionEnemigo()
       }
 
       if (key == 'd'){
@@ -321,6 +323,7 @@ class MyScene extends THREE.Scene {
         if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
         }
+        this.link.comprobarMovimientoColisionEnemigo()
       }
 
       if (key == 's'){
@@ -328,6 +331,7 @@ class MyScene extends THREE.Scene {
         if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
         }
+        this.link.comprobarMovimientoColisionEnemigo()
       }
       if (key_int == 32){
         console.log("mostrando tecla " + String.fromCharCode(key))
