@@ -552,7 +552,7 @@ class MyScene extends THREE.Scene {
     // Se actualiza el resto del modelo
     this.link.update();
     this.attack_sword.update();
-
+    this.bosque.update();
 
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());

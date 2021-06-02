@@ -3,6 +3,7 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
+import { AttackOctorok } from './AttackOctorok.js'
 
 
 class Octorok extends THREE.Object3D{
@@ -28,11 +29,87 @@ class Octorok extends THREE.Object3D{
         this.cube = new THREE.Mesh( geometry, material );
         this.cube.visible = false
         this.add(this.cube)
+        this.fin_recorrido_z = false
+        this.fin_recorrido_x = true
+
+        this.fin_recorrido_z_2 = true
+        this.fin_recorrido_x_2 = true
+
+        this.signo_recorrido_z = +1
+        this.signo_recorrido_x = +1
+
+
         
+
+        this.orientacion = Octorok.LOOK_AT_DOWN;
+
         /* Se hace este escalado tan grande porque en blender al exportar el modelo
         nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
         y luego al importarlo aqui, se escala a un tamaño apropiado. */
+
     }
+
+    rutaOctorok(){
+        if(!this.fin_recorrido_z){
+            if((this.position.z | 0) == 10){
+                this.fin_recorrido_z = true
+                this.fin_recorrido_x = false
+                this.rotateY(Math.PI/2)
+                this.orientacion = Octorok.LOOK_AT_RIGHT;
+            }
+            if(!this.fin_recorrido_z){
+                this.orientacion = Octorok.LOOK_AT_DOWN
+                this.position.z += 0.15
+            }
+        }
+
+        if(!this.fin_recorrido_x){
+            if((this.position.x | 0) == 12){
+                
+                this.fin_recorrido_x = true
+                this.fin_recorrido_z_2 = false
+                this.rotateY(Math.PI/2)
+                this.orientacion = Octorok.LOOK_AT_UP;
+            } 
+            if(!this.fin_recorrido_x){
+                this.position.x += 0.15 
+
+            }
+        }
+
+        if(!this.fin_recorrido_z_2){
+            if((this.position.z | 0) == 0){
+                this.fin_recorrido_z_2 = true
+                this.fin_recorrido_x_2 = false
+                this.rotateY(Math.PI/2)
+                this.orientacion = Octorok.LOOK_AT_LEFT;
+            }
+            if(!this.fin_recorrido_z_2){
+                this.position.z -= 0.15
+            }  
+        }
+
+        if(!this.fin_recorrido_x_2){
+            if((this.position.x | 0) == 0){
+                this.fin_recorrido_x_2 = true
+                this.fin_recorrido_z = false
+                this.rotateY(Math.PI/2)
+            } 
+            if(!this.fin_recorrido_x_2){
+                this.position.x -= 0.15 
+
+            }
+        }
+
+
+    }
+
 }
+
+//Orientaciones de Link
+Octorok.LOOK_AT_UP = 5;
+Octorok.LOOK_AT_DOWN = 6;
+Octorok.LOOK_AT_RIGHT = 7;
+Octorok.LOOK_AT_LEFT = 8;
 
 export { Octorok };

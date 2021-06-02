@@ -7,7 +7,7 @@ import {Arbol} from './Arbol.js'
 import {Roca} from './Roca.js'
 import {Arbusto} from './Arbusto.js'
 import { Roca3 } from './Roca3.js'
-import {Octorok} from './Octorok.js'
+import {Octorok_with_attack} from './Octorok_with_attack.js'
 
 
 
@@ -49,7 +49,7 @@ class NivelBosque extends THREE.Object3D{
         this.roca2.position.x = -3.5
         this.add(this.roca2)
 
-        this.octorok = new Octorok()
+        this.octorok = new Octorok_with_attack()
         this.octorok.position.x = -5
         this.octorok.position.z = 12
         this.octorok.rotateY(Math.PI)
@@ -302,6 +302,10 @@ class NivelBosque extends THREE.Object3D{
         this.geometry.parameters.depth = altura/6;
         this.geometry.parameters.width = anchura/6;
     } */
+
+    update(){
+        this.octorok.update()
+    }
 }
 
 export { NivelBosque };
