@@ -11,7 +11,7 @@ class Interruptor extends THREE.Object3D {
 
     //TODO revisar si ponerle emisse
 
-    
+    this.name = "interruptor"
     
     
     // Ya podemos construir el Mesh

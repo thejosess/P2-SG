@@ -295,8 +295,8 @@ class MyScene extends THREE.Scene {
     var key = event.which || event.keyCode
     var key_int = event.which || event.keyCode
 
-    console.log("detecta pulsar tecla pressed")
-    // console.log(String.fromCharCode(key))
+    //console.log("detecta pulsar tecla pressed")
+    // //console.log(String.fromCharCode(key))
 
     //se admite tanto w como W, por eso se hace lowerCase de la key
 
@@ -304,7 +304,7 @@ class MyScene extends THREE.Scene {
 
     if(this.estado_juego != MyScene.CHANGE_CAMERA){
       if (key == 'w' ){
-        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
         }
@@ -313,7 +313,7 @@ class MyScene extends THREE.Scene {
       }
 
       if (key == 'a'){
-        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
         }
@@ -321,7 +321,7 @@ class MyScene extends THREE.Scene {
       }
 
       if (key == 'd'){
-        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
         }
@@ -329,14 +329,14 @@ class MyScene extends THREE.Scene {
       }
 
       if (key == 's'){
-        console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
+        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
         }
         this.link.comprobarMovimientoColisionEnemigo()
       }
       if (key_int == 32){
-        //console.log("mostrando tecla " + String.fromCharCode(key))
+        ////console.log("mostrando tecla " + String.fromCharCode(key))
         this.attack_sword.lanzarEspada(this.link.orientacion)
       }  
     }
@@ -351,9 +351,9 @@ class MyScene extends THREE.Scene {
     //this.link.comprobar_cambio_nivel()
     //cambia el nivel tambien en Myscene
     //si cambia de nivel, hay que hacerle el cambio de la camara
-    /* console.log("nivel en el que está")
-    console.log(this.link.game_level)
-    console.log(this.game_level)
+    /* //console.log("nivel en el que está")
+    //console.log(this.link.game_level)
+    //console.log(this.game_level)
     */
 
 
@@ -397,12 +397,12 @@ class MyScene extends THREE.Scene {
             this.link.cargarObstaculos(this.bosque.devolverObstaculos())
             this.link.cargarEnemigos(this.bosque.devolverEnemigos())
             
-            this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-            this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+            this.attack_sword.cargarObstaculos(this.bosque.devolverObstaculos())
+            this.attack_sword.cargarEnemigos(this.bosque.devolverEnemigos())
         }
 
         if(this.link.posPj_x == -82.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
-          console.log("entra aqui?")
+          //console.log("entra aqui?")
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.DESIERTO
           this.game_level = MyScene.DESIERTO
@@ -411,8 +411,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
           this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.desierto.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.desierto.devolverEnemigos())
         }
 
         if(this.link.posPj_x == -64.75 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
@@ -424,8 +424,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mar.devolverObstaculos())
           this.link.cargarEnemigos(this.mar.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.mar.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.mar.devolverEnemigos())
         } 
       break;
 
@@ -469,8 +469,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
           this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.mazmorra.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.mazmorra.devolverEnemigos())
         } 
 
        break;
@@ -486,8 +486,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
           this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.desierto.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.desierto.devolverEnemigos())
         }
         
         if(this.link.posPj_x == -196 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -499,8 +499,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.boss.devolverObstaculos())
           this.link.cargarEnemigos(this.boss.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.boss.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.boss.devolverEnemigos())
         } 
         
       break;
@@ -515,8 +515,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
           this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.mazmorra.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.mazmorra.devolverEnemigos())
         }
       break;
 
@@ -532,8 +532,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.bosque.devolverObstaculos())
           this.link.cargarEnemigos(this.bosque.devolverEnemigos())
 
-          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
-          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+          this.attack_sword.cargarObstaculos(this.bosque.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque.devolverEnemigos())
         }
       break; 
       
@@ -550,13 +550,13 @@ class MyScene extends THREE.Scene {
 
   onKeyUp(event){
     var key = event.which || event.keyCode
-    console.log("has dejado de pulsar la teclad " + String.fromCharCode(key).toLowerCase())
+    //console.log("has dejado de pulsar la teclad " + String.fromCharCode(key).toLowerCase())
     
   }
 
   onKeyUp(event) {
     var key = event.which || event.keyCode
-    console.log("has dejado de pulsar la tecla " + String.fromCharCode(key).toLowerCase())
+    //console.log("has dejado de pulsar la tecla " + String.fromCharCode(key).toLowerCase())
   }
 
 
@@ -597,34 +597,34 @@ class MyScene extends THREE.Scene {
   crearNiveles(){
     this.resolucion_altura
     this.bosque = new NivelBosque(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.bosque)
+    //console.log(this.bosque)
     this.add(this.bosque)
 
     this.bosque2 = new NivelBosque2(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.bosque2)
+    //console.log(this.bosque2)
     this.add(this.bosque2)
 
     this.desierto = new NivelDesierto()
-    console.log(this.desierto)
+    //console.log(this.desierto)
     this.add(this.desierto)
 
     this.secreto = new NivelSecreto(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.secreto)
+    //console.log(this.secreto)
     this.add(this.secreto)
 
     this.mazmorra = new NivelMazmorra(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.mazmorra)
+    //console.log(this.mazmorra)
     this.add(this.mazmorra)
 
     this.boss = new NivelBoss(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.boss)
+    //console.log(this.boss)
     this.add(this.boss)
 
     this.mar = new NivelMar(this.resolucion_altura, this.resolucion_anchura)
-    console.log(this.mar)
+    //console.log(this.mar)
     this.add(this.mar)
     
-    console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
+    //console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
   }
 
 

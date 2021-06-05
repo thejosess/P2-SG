@@ -12,7 +12,7 @@ class Arbol extends THREE.Object3D {
     //TODO revisar si ponerle emisse
 
 
-    
+    this.name="arbol"
     
     // Ya podemos construir el Mesh
     this.sphere = new THREE.Mesh (sphereGeom, sphereMat);
