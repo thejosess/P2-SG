@@ -50,9 +50,7 @@ class AttackOctorok extends THREE.Object3D{
     ataque(){
 /*         console.log("position del atack" + this.position.z)
         console.log("position de octorok" + this.ref_octorok.position.z) */
-        console.log("position de octorok" + this.ref_octorok.position.x)
 
-        console.log(this.position.x)
             switch(this.ref_octorok.orientacion) {
 
 

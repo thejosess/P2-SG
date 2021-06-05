@@ -5,9 +5,10 @@ import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import { AttackOctorok } from './AttackOctorok.js'
 import { Octorok } from './Octorok.js'
+import {Enemigo} from './Enemigo.js'
 
 
-class Octorok_with_attack extends THREE.Object3D{
+class Octorok_with_attack extends Enemigo{
     constructor(){
         super();
         this.octorok = new Octorok()
