@@ -161,13 +161,15 @@ class AttackSword extends THREE.Object3D {
                 var pos = this.array_enemigos.indexOf(monstruo)
                 this.array_enemigos.splice(pos,1)
 
-                if(monstruo.parent.children[1].name == 'Attack' && monstruo.name== 'Octorok'){
-                    monstruo.parent.children[1].muerto = true
-                    monstruo.parent.children[1].visible = false 
-
-                    console.log(monstruo.parent.children[1])
-                    //console.log(muerto())
+                var array_children = monstruo.parent.children
+                for(var i=0; i < array_children.length; i++) {
+                    if(array_children[i].name == 'Attack'){
+                        array_children[i].visible = false
+                        array_children[i].muerto = true
+                    }
                 }
+
+
                 
 
             }
