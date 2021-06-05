@@ -29,16 +29,8 @@ class AttackSword extends THREE.Object3D {
         this.direccion = 0  
         this.aux = false
 
-        // TODO No sé donde se hace el collider y to el rollo
-        
-        // var geometriCollider = new THREE.BoxGeometry(this.position.x, this.position.y, this.position.z);
-        // var matInvisible = new THREE.MeshBasicMaterial({transparent:true, opacity:0});
-        // var texture = new THREE.TextureLoader().load('../imgs/wood.jpg');
-        // var material = new THREE.MeshPhongMaterial ({map: texture});    
-        // var matFisico = Physijs.createMaterial(material, 0.2, 0.1);
-        // var collider = new Physijs.BoxMesh(geometriCollider, matFisico, 0);
-        // collider.add(AttackSword)
-        // raizEscena.add(collider)
+        //array con los obstaculos segun el nivel en el que estés
+        this.array_obstaculos = new Array()
     }
 
     lanzarEspada(orientacionLink) {
@@ -84,28 +76,99 @@ class AttackSword extends THREE.Object3D {
         }
     }
 
-    superaLimite(orientacionLink) {
-        switch(orientacionLink) {
+    cargarObstaculos(array_obstaculos){
+        this.array_obstaculos = array_obstaculos
+      }
+  
+      cargarEnemigos(array_enemigos){
+        this.array_enemigos = array_enemigos
+      }
+
+    comprobarColisionObjeto() {
+
+    }
+
+    comprobarColisionEnemigo() {
+        switch(this.ref_link.orientacion) {
             case Link.LOOK_AT_UP:
-                if(this.position.z > this.position.z+10 || this.position.y > this.position.y+10) {
-                    return true
-                }
-            break;
+                var casterJugador = new THREE.Raycaster();
+    
+                var normalized_vector = new THREE.Vector3(0, 0, 1.25)
+                normalized_vector = normalized_vector.normalize()
+                casterJugador.set(this.position,normalized_vector);
+                casterJugador.far = 1.25;
+                //TODO poner que dependiendo del nivel buscas unos objetos u otros
+                //console.log(this.array_enemigos)
+                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+                var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+
+            break
 
             case Link.LOOK_AT_DOWN:
-                this.position.x = this.ref_link.posPj_x-0.8
-                this.position.y = this.ref_link.posPj_y+0.15
-            break;
+                var casterJugador = new THREE.Raycaster();
+    
+                var normalized_vector = new THREE.Vector3(0, 0, -1.25)
+                normalized_vector = normalized_vector.normalize()
+                casterJugador.set(this.position,normalized_vector);
+                casterJugador.far = 1.25;
+                //TODO poner que dependiendo del nivel buscas unos objetos u otros
+                //console.log(this.array_enemigos)
+                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+                var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
 
-            case Link.LOOK_AT_RIGHT:
-                this.position.y = this.ref_link.posPj_y+0.1
-                this.position.z = this.ref_link.posPj_z+0.8
-            break;
+            break
 
             case Link.LOOK_AT_LEFT:
-                this.position.y = this.ref_link.posPj_y+1.1
-                this.position.z = this.ref_link.posPj_z-0.8
-            break;
+                var casterJugador = new THREE.Raycaster();
+    
+                var normalized_vector = new THREE.Vector3(1.25, 0, 0)
+                normalized_vector = normalized_vector.normalize()
+                casterJugador.set(this.position,normalized_vector);
+                casterJugador.far = 1.25;
+                //TODO poner que dependiendo del nivel buscas unos objetos u otros
+                //console.log(this.array_enemigos)
+                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+                var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+            
+            break
+
+            case Link.LOOK_AT_RIGHT:
+                var casterJugador = new THREE.Raycaster();
+        
+                var normalized_vector = new THREE.Vector3(-1.25, 0, 0)
+                normalized_vector = normalized_vector.normalize()
+                casterJugador.set(this.position,normalized_vector);
+                casterJugador.far = 1.25;
+                //TODO poner que dependiendo del nivel buscas unos objetos u otros
+                //console.log(this.array_enemigos)
+                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
+                var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+            
+            break
+        }
+
+        return objetos;
+    }
+
+    comprobarMovimientoColisionEnemigo() {
+        var colisiona_enemigo = this.comprobarColisionEnemigo()
+
+        if(colisiona_enemigo.length > 0) {
+            var monstruo = colisiona_enemigo[0].object.parent
+            this.aux=false
+            monstruo.vida -= 1  
+
+            if(monstruo.vida == 0) {
+                //Eliminar Octorok
+                var pos = this.array_enemigos.indexOf(monstruo)
+                monstruo.visible = false
+                this.array_enemigos.splice(pos,1)
+            }
+            // Quita vida
+            this.visible=false
+            this.position.x = this.ref_link.posPj_x
+            this.position.y = this.ref_link.posPj_y
+            this.position.z = this.ref_link.posPj_z
         }
     }
 
@@ -125,6 +188,7 @@ class AttackSword extends THREE.Object3D {
                     else {
                         this.visible = true
                         this.position.z+=0.4
+                        this.comprobarMovimientoColisionEnemigo()
                     }
 
                 break;
@@ -142,6 +206,7 @@ class AttackSword extends THREE.Object3D {
                     else {
                         this.visible = true
                         this.position.z+=-0.4
+                        this.comprobarMovimientoColisionEnemigo()
                     }
 
                 break;
@@ -159,6 +224,7 @@ class AttackSword extends THREE.Object3D {
                     else {
                         this.visible = true
                         this.position.x+=-0.4
+                        this.comprobarMovimientoColisionEnemigo()
                     }
 
                 break;
@@ -176,6 +242,7 @@ class AttackSword extends THREE.Object3D {
                     else {
                         this.visible = true
                         this.position.x+=0.4
+                        this.comprobarMovimientoColisionEnemigo()
                     }
 
                 break;

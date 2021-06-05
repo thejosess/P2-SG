@@ -28,6 +28,9 @@ class Octorok extends THREE.Object3D{
         this.cube = new THREE.Mesh( geometry, material );
         this.cube.visible = false
         this.add(this.cube)
+
+        this.vida = 2
+        this.name = "Octorok"
         
         /* Se hace este escalado tan grande porque en blender al exportar el modelo
         nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño

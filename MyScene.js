@@ -89,6 +89,8 @@ class MyScene extends THREE.Scene {
     this.link.cargarEnemigos(this.bosque.devolverEnemigos())
     this.attack_sword = new AttackSword(this.link);
     this.add(this.attack_sword);
+    this.attack_sword.cargarObstaculos(this.bosque.devolverObstaculos())
+    this.attack_sword.cargarEnemigos(this.bosque.devolverEnemigos())
   }
   
   createCamera () {
@@ -334,7 +336,7 @@ class MyScene extends THREE.Scene {
         this.link.comprobarMovimientoColisionEnemigo()
       }
       if (key_int == 32){
-        console.log("mostrando tecla " + String.fromCharCode(key))
+        //console.log("mostrando tecla " + String.fromCharCode(key))
         this.attack_sword.lanzarEspada(this.link.orientacion)
       }  
     }
@@ -367,6 +369,9 @@ class MyScene extends THREE.Scene {
           //cargas los obstaculos del mundo que se cambia
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
           this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
+
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
 
         if((this.link.posPj_x == 0 ||this.link.posPj_x == 1.75 || this.link.posPj_x == 3.5 || this.link.posPj_x == 5.25)
@@ -377,7 +382,7 @@ class MyScene extends THREE.Scene {
           this.changeCamera( MyScene.SECRETA)
 
           this.link.cargarObstaculos(this.secreto.devolverObstaculos())
-
+          this.attack_sword.cargarObstaculos(this.secreto.devolverObstaculos())
         }        
         break;
 
@@ -391,7 +396,9 @@ class MyScene extends THREE.Scene {
 
             this.link.cargarObstaculos(this.bosque.devolverObstaculos())
             this.link.cargarEnemigos(this.bosque.devolverEnemigos())
-
+            
+            this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+            this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
 
         if(this.link.posPj_x == -82.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -404,6 +411,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
           this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
 
         if(this.link.posPj_x == -64.75 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
@@ -415,6 +424,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mar.devolverObstaculos())
           this.link.cargarEnemigos(this.mar.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         } 
       break;
 
@@ -427,6 +438,9 @@ class MyScene extends THREE.Scene {
 
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
           this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
+
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
 
         } 
       break;
@@ -441,6 +455,9 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.bosque2.devolverObstaculos())
           this.link.cargarEnemigos(this.bosque2.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+
         }
 
         if(this.link.posPj_x == -138.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -452,7 +469,9 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
           this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
-        }
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+        } 
 
        break;
       
@@ -467,6 +486,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.desierto.devolverObstaculos())
           this.link.cargarEnemigos(this.desierto.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
         
         if(this.link.posPj_x == -196 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
@@ -478,7 +499,9 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.boss.devolverObstaculos())
           this.link.cargarEnemigos(this.boss.devolverEnemigos())
 
-        }
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
+        } 
         
       break;
 
@@ -492,6 +515,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.mazmorra.devolverObstaculos())
           this.link.cargarEnemigos(this.mazmorra.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
       break;
 
@@ -507,6 +532,8 @@ class MyScene extends THREE.Scene {
           this.link.cargarObstaculos(this.bosque.devolverObstaculos())
           this.link.cargarEnemigos(this.bosque.devolverEnemigos())
 
+          this.attack_sword.cargarObstaculos(this.bosque2.devolverObstaculos())
+          this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
       break; 
       

@@ -62,7 +62,7 @@ class Link extends THREE.Object3D{
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
 
-
+        this.vidas = 3
     }
 
     cargarObstaculos(array_obstaculos){
@@ -507,6 +507,7 @@ class Link extends THREE.Object3D{
             console.log(this.array_enemigos)
             //tienes que comprobar que scene.children[0] su parent sea NivelBosque
             var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+            
             if(objetos.length>0){
               colision = true;
             }
