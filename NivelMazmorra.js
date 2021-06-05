@@ -120,7 +120,7 @@ class NivelMazmorra extends THREE.Object3D{
     quitarRoca(){
         //ponemos roca invisible y en el array de obstaculos la quitamos
         this.roca.visible = false
-        this.array_obstaculos.pop()
+        this.array_obstaculos.splice(6,1)
     }
 
     cambiarColorInterruptor(){
