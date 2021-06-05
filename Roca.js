@@ -22,6 +22,8 @@ class Roca extends THREE.Object3D{
             },null,null);
         });
 
+        this.name="roca"
+
 
         
         /* Se hace este escalado tan grande porque en blender al exportar el modelo

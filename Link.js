@@ -28,7 +28,7 @@ class Link extends THREE.Object3D{
         //construccion de las variables del modelo
         //empieza mirando hacia arriba
         this.orientacion = Link.LOOK_AT_UP
-        console.log(this.rotation.y)
+        //console.log(this.rotation.y)
         
         /* Se hace este escalado tan grande porque en blender al exportar el modelo
         nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
@@ -62,7 +62,7 @@ class Link extends THREE.Object3D{
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
 
-
+        this.vidas = 3
     }
 
     cargarObstaculos(array_obstaculos){
@@ -86,27 +86,27 @@ class Link extends THREE.Object3D{
                 case Link.LOOK_AT_UP:
                   this.orientacion = Link.LOOK_AT_UP;
                   this.rotation.y=2*Math.PI
-                  console.log("rotacion de up: " + this.rotation.y)
+                  //console.log("rotacion de up: " + this.rotation.y)
                 break;
 
                 case Link.LOOK_AT_DOWN:
                   this.orientacion = Link.LOOK_AT_DOWN;
                   this.rotation.y=Math.PI
-                  console.log("rotacion de down: " + this.rotation.y)
+                  //console.log("rotacion de down: " + this.rotation.y)
 
                 break;
 
                 case Link.LOOK_AT_RIGHT:
                     this.orientacion = Link.LOOK_AT_RIGHT;
                     this.rotation.y=-Math.PI/2
-                    console.log("rotacion de right: " + this.rotation.y)
+                    //console.log("rotacion de right: " + this.rotation.y)
 
                 break;
 
                 case Link.LOOK_AT_LEFT:
                   this.orientacion = Link.LOOK_AT_LEFT;
                   this.rotation.y=+Math.PI/2
-                  console.log("rotacion de left: " + this.rotation.y)
+                  //console.log("rotacion de left: " + this.rotation.y)
 
                 break;
               }
@@ -115,7 +115,7 @@ class Link extends THREE.Object3D{
 
     moverLink(direccionMovimiento){
       this.orientacionLink(direccionMovimiento)
-      console.log("orientacion Link" + direccionMovimiento)
+      //console.log("orientacion Link" + direccionMovimiento)
       var puede_avanzar
 
       switch(direccionMovimiento) {
@@ -187,11 +187,11 @@ class Link extends THREE.Object3D{
           this.posPj_z += 0;
         break;
       }
-            console.log("posicion de link: x:" + this.posPj_x + " , y:" + this.posPj_y +  " , z:" +  this.posPj_z)
+            //console.log("posicion de link: x:" + this.posPj_x + " , y:" + this.posPj_y +  " , z:" +  this.posPj_z)
     }
 
     mover_delante_o_detras(signo){
-      console.log("animacion mover delante o detras")
+      //console.log("animacion mover delante o detras")
 
 
 
@@ -248,7 +248,7 @@ class Link extends THREE.Object3D{
 
 
     mover_izquierda_o_derecha(signo){
-      console.log("animacion mover izquierda o derecha")
+      //console.log("animacion mover izquierda o derecha")
 
       var origen = {x: this.posPj_x, y:this.posPj_y, z:this.posPj_z, rotationz:this.rotation_final_z}
       var medio1 = {x: this.posPj_x+(0.8*signo), y:this.posPj_y+1, z:this.posPj_z, rotationz:(Math.PI/7)*signo}
@@ -310,66 +310,66 @@ class Link extends THREE.Object3D{
         case Link.BOSQUE_1:
           if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
         case Link.BOSQUE_2:
           if((posicion_simulada.x == -84 && posicion_simulada.z !=0)|| (posicion_simulada.x == -28 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
         case Link.DESIERTO:
           if((posicion_simulada.x == -84 && posicion_simulada.z !=0)|| (posicion_simulada.x == -140 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
 
         case Link.MAZMORRA:
           if((posicion_simulada.x == -196 && posicion_simulada.z !=0)|| (posicion_simulada.x == -140 && posicion_simulada.z !=0)  || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
         case Link.BOSS:
           if((posicion_simulada.x == -196 && posicion_simulada.z !=0)|| posicion_simulada.x == -252   || posicion_simulada.z == -8.75 || posicion_simulada.z == 24.5){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
         case Link.MAR:
           if(posicion_simulada.x == -28 || posicion_simulada.x == -84  || (posicion_simulada.z == 22.75 && posicion_simulada.x !=-64.75) || posicion_simulada.z == 54.25){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
 
 
         case Link.SECRETA:
           if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 || (posicion_simulada.z == 22.75 && posicion_simulada.x !=0) || posicion_simulada.z == 54.25){
             puede_avanzar = false
-            console.log("BLOQUEANDO")
+            //console.log("BLOQUEANDO")
 
           }
-          console.log("comprobando si puede avanzar")
+          //console.log("comprobando si puede avanzar")
         break;
       }
 
@@ -379,7 +379,7 @@ class Link extends THREE.Object3D{
         var pos
         if(this.comprobarColisionesObjetos(posicion_simulada))
           puede_avanzar = false
-          console.log("Bloqueando por objeto")
+          //console.log("Bloqueando por objeto")
       }
 
       return puede_avanzar
@@ -419,7 +419,7 @@ class Link extends THREE.Object3D{
 
     comprobarMovimientoColisionEnemigo(){
       var colisiona_enemigo = this.comprobarColisionesEnemigo()
-      console.log(this.orientacion)
+      //console.log(this.orientacion)
       switch (this.orientacion){
         case Link.LOOK_AT_UP:
           if(colisiona_enemigo){
@@ -428,7 +428,7 @@ class Link extends THREE.Object3D{
             this.actualizarInfoPosicion(Link.LOOK_AT_DOWN)
             this.mover_delante_o_detras(Link.MOVER_DETRAS)
             this.actualizarInfoPosicion(Link.LOOK_AT_DOWN)
-            console.log("Entra arriba")
+            //console.log("Entra arriba")
           }
         break;
           case Link.LOOK_AT_DOWN:
@@ -438,7 +438,7 @@ class Link extends THREE.Object3D{
               this.actualizarInfoPosicion(Link.LOOK_AT_UP)
               this.mover_delante_o_detras(Link.MOVER_DELANTE)
               this.actualizarInfoPosicion(Link.LOOK_AT_UP)
-              console.log("Entra abajo")
+              //console.log("Entra abajo")
 
             }
           break;
@@ -450,7 +450,7 @@ class Link extends THREE.Object3D{
               this.actualizarInfoPosicion(Link.LOOK_AT_RIGHT)
               this.mover_izquierda_o_derecha(Link.MOVER_DERECHA)
               this.actualizarInfoPosicion(Link.LOOK_AT_RIGHT)
-              console.log("Entra izquierda")
+              //console.log("Entra izquierda")
 
             }
           break;
@@ -463,7 +463,7 @@ class Link extends THREE.Object3D{
               this.actualizarInfoPosicion(Link.LOOK_AT_LEFT)
               this.mover_izquierda_o_derecha(Link.MOVER_IZQUIERDA)
               this.actualizarInfoPosicion(Link.LOOK_AT_LEFT)
-              console.log("Entra derecha")
+              //console.log("Entra derecha")
             }
             break;
       }
@@ -489,7 +489,7 @@ class Link extends THREE.Object3D{
             casterJugador.set(this.position,normalized_vector);
             casterJugador.far = 1.25;
             //TODO poner que dependiendo del nivel buscas unos objetos u otros
-            console.log(this.array_enemigos)
+            //console.log(this.array_enemigos)
             //tienes que comprobar que scene.children[0] su parent sea NivelBosque
             var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
             if(objetos.length>0){
@@ -504,9 +504,10 @@ class Link extends THREE.Object3D{
             casterJugador.set(this.position,normalized_vector);
             casterJugador.far = 1.25;
             //TODO poner que dependiendo del nivel buscas unos objetos u otros
-            console.log(this.array_enemigos)
+            //console.log(this.array_enemigos)
             //tienes que comprobar que scene.children[0] su parent sea NivelBosque
             var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
+            
             if(objetos.length>0){
               colision = true;
             }
@@ -519,7 +520,7 @@ class Link extends THREE.Object3D{
             casterJugador.set(this.position,normalized_vector);
             casterJugador.far = 1.25;
             //TODO poner que dependiendo del nivel buscas unos objetos u otros
-            console.log(this.array_enemigos)
+            //console.log(this.array_enemigos)
             //tienes que comprobar que scene.children[0] su parent sea NivelBosque
             var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
             if(objetos.length>0){
@@ -534,7 +535,7 @@ class Link extends THREE.Object3D{
               casterJugador.set(this.position,normalized_vector);
               casterJugador.far = 1.25;
               //TODO poner que dependiendo del nivel buscas unos objetos u otros
-              console.log(this.array_enemigos)
+              //console.log(this.array_enemigos)
               //tienes que comprobar que scene.children[0] su parent sea NivelBosque
               var objetos = casterJugador.intersectObjects(this.array_enemigos,true);
               if(objetos.length>0){
@@ -548,7 +549,7 @@ class Link extends THREE.Object3D{
   
 
     comprobarColisionesObjetos(position){
-      //console.log("Buscando colision objetos")
+      ////console.log("Buscando colision objetos")
       var colision = false;
       switch(this.orientacion){
         case Link.LOOK_AT_DOWN:
@@ -559,7 +560,7 @@ class Link extends THREE.Object3D{
           casterJugador.set(position,normalized_vector);
           casterJugador.far = 1.75;
           //TODO poner que dependiendo del nivel buscas unos objetos u otros
-          console.log(this.array_obstaculos)
+          //console.log(this.array_obstaculos)
           //tienes que comprobar que scene.children[0] su parent sea NivelBosque
           var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
           if(objetos.length>0){
@@ -576,7 +577,7 @@ class Link extends THREE.Object3D{
             casterJugador.set(position,normalized_vector);
             casterJugador.far = 1.75;
             //TODO poner que dependiendo del nivel buscas unos objetos u otros
-            console.log(this.array_obstaculos)
+            //console.log(this.array_obstaculos)
             //tienes que comprobar que scene.children[0] su parent sea NivelBosque
             var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
             if(objetos.length>0){
@@ -591,7 +592,7 @@ class Link extends THREE.Object3D{
               casterJugador.set(position,normalized_vector);
               casterJugador.far = 1.75;
               //TODO poner que dependiendo del nivel buscas unos objetos u otros
-              console.log(this.array_obstaculos)
+              //console.log(this.array_obstaculos)
               //tienes que comprobar que scene.children[0] su parent sea NivelBosque
               var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
               if(objetos.length>0){
@@ -606,14 +607,14 @@ class Link extends THREE.Object3D{
                 casterJugador.set(position,normalized_vector);
                 casterJugador.far = 1.75;
                 //TODO poner que dependiendo del nivel buscas unos objetos u otros
-                console.log(this.array_obstaculos)
+                //console.log(this.array_obstaculos)
                 //tienes que comprobar que scene.children[0] su parent sea NivelBosque
                 var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
                 if(objetos.length>0){
                   colision = true;
                 }
       }
-      console.log(colision)
+      //console.log(colision)
       return colision;  
     }
 

@@ -50,6 +50,7 @@ class NivelBosque extends THREE.Object3D{
         this.add(this.roca2)
 
         this.octorok = new Octorok_with_attack()
+        this.name = "Octorok"
         this.octorok.position.x = -5
         this.octorok.position.z = 12
         this.octorok.rotateY(Math.PI)

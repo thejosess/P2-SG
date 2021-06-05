@@ -106,12 +106,8 @@ class NivelMazmorra extends THREE.Object3D{
         this.roca.position.z = 0
         this.add(this.roca)
 
-        this.array_obstaculos = [
-            this.camino1, this.camino2
-        ]
-
         this.array_obstaculos = new Array ();
-        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor,this.roca]
+        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor, this.roca]
 
         this.array_enemigos = new Array
         
@@ -124,7 +120,7 @@ class NivelMazmorra extends THREE.Object3D{
     quitarRoca(){
         //ponemos roca invisible y en el array de obstaculos la quitamos
         this.roca.visible = false
-        this.array_obstaculos = [this.camino1, this.camino2, this.fire, this.fire3, this.fire4, this.interruptor]
+        this.array_obstaculos.splice(6,1)
     }
 
     cambiarColorInterruptor(){

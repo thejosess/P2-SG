@@ -8,16 +8,16 @@ class Enemigo
         super();
 
         //por defecto los enemigos tienen dos vidas
-        this.vidas = 2
+        this.vida = 2
         this.visible = true
 
     }
 
     quitarVida(){
-        if(this.vidas != 0){
-            this.vidas -=1
+        if(this.vida != 0){
+            this.vida -=1
         }
-        if(this.vidas == 0){
+        if(this.vida == 0){
             this.visible = false
         }
     }

@@ -29,12 +29,13 @@ class AttackOctorok extends THREE.Object3D{
         this.cube.visible = false
         this.add(this.cube)
 
-        this.variable = false
+        this.muerto = false
 
 
         this.aux = true
 
         this.ref_octorok = octorok;
+        this.name = "Attack"
         //this.visible = false
         
         /* Se hace este escalado tan grande porque en blender al exportar el modelo
@@ -45,11 +46,17 @@ class AttackOctorok extends THREE.Object3D{
 
     }
 
+    paraAtaque(){
+        this.muerto = true
+        this.visible = false
+    }
 
 
     ataque(){
 /*         console.log("position del atack" + this.position.z)
         console.log("position de octorok" + this.ref_octorok.position.z) */
+
+        if(!this.muerto){
 
             switch(this.ref_octorok.orientacion) {
 
@@ -121,7 +128,7 @@ class AttackOctorok extends THREE.Object3D{
                     }
                 break;
             }
-    
+        }
 }
 
 

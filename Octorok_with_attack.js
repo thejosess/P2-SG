@@ -8,7 +8,7 @@ import { Octorok } from './Octorok.js'
 import {Enemigo} from './Enemigo.js'
 
 
-class Octorok_with_attack extends Enemigo{
+class Octorok_with_attack extends  THREE.Object3D{
     constructor(){
         super();
         this.octorok = new Octorok()
@@ -22,6 +22,11 @@ class Octorok_with_attack extends Enemigo{
 
         this.attack = new AttackOctorok(this.octorok)
         this.add(this.attack)
+
+
+        this.vida = 2
+        this.name = 'Octorok'
+        this.muerto = false
     }
 
 
@@ -29,8 +34,13 @@ class Octorok_with_attack extends Enemigo{
     lanzar_ataque(){
 /*         console.log("position fuera attack"+ this.position.x + " " + 
         this.position.y + " " + this.position.z) */
+        if(!this.muerto){
+            this.attack.ataque()
+        }
+    }
 
-        this.attack.ataque()
+    change_attack_visibility(){
+        this.attack.visible = false
     }
 
     update(){
