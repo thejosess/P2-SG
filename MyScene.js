@@ -428,6 +428,7 @@ class MyScene extends THREE.Scene {
 
           this.link.cargarObstaculos(this.mar.devolverObstaculos())
           this.link.cargarEnemigos(this.mar.devolverEnemigos())
+          console.log(this.mar.devolverEnemigos())
 
           this.attack_sword.cargarObstaculos(this.mar.devolverObstaculos())
           this.attack_sword.cargarEnemigos(this.mar.devolverEnemigos())
@@ -599,6 +600,9 @@ class MyScene extends THREE.Scene {
       this.link.update();
       this.attack_sword.update();
       this.bosque.update();
+      this.bosque2.update()
+      this.desierto.update();
+      this.mar.update();
     }
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());

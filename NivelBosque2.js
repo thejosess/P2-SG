@@ -7,7 +7,9 @@ import {Arbusto} from './Arbusto.js'
 
 import {Roca} from './Roca.js'
 import { Camino } from './Camino.js'
+import {Octorok_with_attack} from './Octorok_with_attack.js'
 
+import {Tektite} from './Tektite.js'
 
 
 class NivelBosque2 extends THREE.Object3D{
@@ -29,10 +31,20 @@ class NivelBosque2 extends THREE.Object3D{
         this.camino2.position.x = -30
         this.add(this.camino2)
 
+        this.tektite = new Tektite()
+        this.name = "Tektite"
+        this.tektite.position.x = -60
+        //va desde x = -60 hasta x = -80
+        this.tektite.position.z = -1
+        this.tektite.rotateY(Math.PI/2)
 
+        this.add(this.tektite)
         //array enemigos
 
+        
+
         this.array_enemigos = new Array()
+        this.array_enemigos = [this.tektite]
 
         this.array_obstaculos = [
             this.roca, this.roca2, this.roca3, this.roca4,this.roca5, this.roca6, this.arbusto7, this.arbusto8,
@@ -195,6 +207,10 @@ class NivelBosque2 extends THREE.Object3D{
         this.arbusto24.position.z = -5
         this.arbusto24.position.x = -74
         this.add(this.arbusto24)
+    }
+
+    update(){
+        this.tektite.rutaTektite()
     }
     
 }

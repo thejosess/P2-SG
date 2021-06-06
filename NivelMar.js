@@ -5,6 +5,7 @@ import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
 import { Alga } from './Alga.js'
+import { Walrus } from './Walrus.js'
 
 
 
@@ -57,10 +58,21 @@ class NivelMar extends THREE.Object3D{
         this.alga2.position.z = 50
         this.alga2.position.x = -80
 
+        this.walrus = new Walrus()
+        this.add(this.walrus)
+        this.walrus.position.x = -70
+        this.walrus.position.z = 50
+        this.fin_recorrido_x = false
+        this.fin_recorrido_z = true
+        //walrus se desplaza saltando de su posicion en x
+        //hasta -42
+        this.walrus_signo_recorrido = +1
+
         this.array_obstaculos = new Array ();
         this.array_obstaculos = [this.camino1, this.camino2, this.alga1, this.alga2]
         
         this.array_enemigos = new Array
+        this.array_enemigos = [this.walrus]
         
     }
 
@@ -74,11 +86,53 @@ class NivelMar extends THREE.Object3D{
         return this.array_obstaculos
     }
 
+    rutaWalrus(){
+        if(!this.fin_recorrido_x){
+            if(this.walrus.position.x == -42){
+                this.walrus_signo_recorrido = -1
+                this.fin_recorrido_x = true
+                this.fin_recorrido_z = false
+                this.walrus.rotateY(Math.PI/2)
+            }
+            if(this.walrus.position.x == -71){
+                this.walrus_signo_recorrido = 1
+                this.walrus.rotateY(Math.PI)
+            }
+            this.walrus.position.x = (this.walrus.position.x) + (1 * this.walrus_signo_recorrido)
+        }
+        if(this.fin_recorrido_x && !this.fin_recorrido_z){
+            if(this.walrus.position.z == 40){
+                this.fin_recorrido_z = true
+                this.walrus.rotateY(Math.PI)
+            }
+
+            this.walrus.position.z -= 0.5
+        }   
+        
+        if(this.fin_recorrido_z && this.fin_recorrido_x){
+            if(this.walrus.position.z == 50){
+                this.fin_recorrido_x = false
+                this.walrus.rotateY(-Math.PI/2)
+            }
+            this.walrus.position.z += 0.5
+        }
+
+        /* if(this.walrus.position.x == -70){
+            this.walrus_signo_recorrido = +1
+        }  */
+
+
+    }
+
 /*     resizeSecreto(anchura,altura){
         // Se cambia el tamaño de la geometria y por tanto de la textura 
         this.geometry.parameters.depth = altura/6;
         this.geometry.parameters.width = anchura/6;
     } */
+
+    update(){
+        this.rutaWalrus()
+    }
 }
 
 export { NivelMar };

@@ -140,6 +140,7 @@ class AttackSword extends THREE.Object3D {
         if(colisiona_enemigo.length > 0) {
             var monstruo = colisiona_enemigo[0].object.parent
             this.aux=false
+            console.log(monstruo)
             monstruo.quitarVida()
 
             if(monstruo.vida == 0) {

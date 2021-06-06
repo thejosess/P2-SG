@@ -8,6 +8,7 @@ import {Arbusto} from './Arbusto.js'
 import {Roca} from './Roca.js'
 import { Camino } from './Camino.js'
 import { Arbusto_desierto } from './Arbusto_desierto.js'
+import {Octorok_with_attack} from './Octorok_with_attack.js'
 
 
 
@@ -58,6 +59,23 @@ class NivelDesierto extends THREE.Object3D{
 
 
         this.array_enemigos = new Array
+        //array enemigos
+
+        this.octorok = new Octorok_with_attack()
+        this.name = "Octorok"
+        this.octorok.position.x = -120
+        this.octorok.position.z = -3
+        this.add(this.octorok)
+
+
+        this.octorok2 = new Octorok_with_attack()
+        this.name = "Octorok"
+        this.octorok2.position.x = -140
+        this.octorok2.position.z = 14
+        this.add(this.octorok2)
+
+        this.array_enemigos = new Array()
+        this.array_enemigos =  [this.octorok, this.octorok2]
         
     }
 
@@ -70,7 +88,10 @@ class NivelDesierto extends THREE.Object3D{
         return this.array_obstaculos
     }
 
-
+    update(){
+        this.octorok.update()
+        this.octorok2.update()
+    }
   
     }
     
