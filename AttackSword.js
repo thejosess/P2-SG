@@ -164,12 +164,11 @@ class AttackSword extends THREE.Object3D {
                     if(monstruo.vida == 0) {
                         //Eliminar monstruo
                         var pos = this.array_enemigos.indexOf(monstruo)
-                        if(pos == -1){
-                            this.array_enemigos.splice(0,1)
-                        }
-                        else{
-                            this.array_enemigos.splice(pos,1)
-                        }
+
+                        this.array_enemigos.splice(pos,1)
+                    
+
+
 
                         var array_children = monstruo.parent.children
                         for(var i=0; i < array_children.length; i++) {

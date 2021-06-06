@@ -41,13 +41,27 @@ class NivelBosque extends THREE.Object3D{
 
         //rocas importantes que dan acceso al sitio secreto
         this.roca = new Roca();
-        this.roca.position.z = 24.5
+        this.roca.position.z = 22.5
+        //this.roca.modelo.scale.set(30000,30000,30000)
         this.add(this.roca)
 
         this.roca2 = new Roca();
-        this.roca2.position.z = 24.5
+        this.roca2.position.z = 22.5
         this.roca2.position.x = -3.5
+        //this.roca2.modelo.scale.set(30000,30000,30000)
         this.add(this.roca2)
+
+        this.roca3 = new Roca();
+        this.roca3.position.z = 22.5
+        this.roca3.position.x = -6.5
+        //this.roca3.modelo.scale.set(30000,30000,30000)
+        this.add(this.roca3)
+
+        this.roca4 = new Roca();
+        this.roca4.position.z = 22.5
+        this.roca4.position.x = 5
+        //this.roca4.modelo.scale.set(30000,30000,30000)
+        this.add(this.roca4)
 
         this.octorok = new Octorok_with_attack()
         this.name = "Octorok"
@@ -69,7 +83,7 @@ class NivelBosque extends THREE.Object3D{
             this.arbol9,this.arbol10,this.arbol11, this.arbol12, this.arbol13,this.arbol14, this.arbol15, this.arbol16,
             this.arbol17,this.arbol18,this.arbol19, this.arbol20, this.arbol21,this.arbol22, this.arbol23, this.arbol24,
             this.arbol25,this.arbol26,this.arbol27, this.arbol28, this.arbol29,this.arbol30, this.arbol31, this.arbol32,
-            this.arbol33,this.arbol34,this.arbol35, this.roca, this.roca2
+            this.arbol33,this.arbol34,this.arbol35, this.roca, this.roca2, this.roca3, this.roca4
             //this.roca2, this.roca 
         ]
     }
