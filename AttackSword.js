@@ -166,9 +166,6 @@ class AttackSword extends THREE.Object3D {
                         var pos = this.array_enemigos.indexOf(monstruo)
 
                         this.array_enemigos.splice(pos,1)
-                    
-
-
 
                         var array_children = monstruo.parent.children
                         for(var i=0; i < array_children.length; i++) {
