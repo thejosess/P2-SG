@@ -62,7 +62,7 @@ class Link extends THREE.Object3D{
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
 
-        this.vidas = 5
+        this.vidas = 8
     }
 
     cargarObstaculos(array_obstaculos){

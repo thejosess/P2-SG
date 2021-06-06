@@ -553,7 +553,7 @@ class MyScene extends THREE.Scene {
     this.estado_juego = MyScene.DEAD
 
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "<p>Has muerto</p><p>Pulsa espacio para reinicar</p>"
+    document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa espacio para reinicar</p>"
   }
   
   onKeyDown(event){
