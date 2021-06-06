@@ -124,11 +124,7 @@ class NivelMazmorra extends THREE.Object3D{
     }
 
     cambiarColorInterruptor(){
-        /* var sphereMat = new THREE.MeshBasicMaterial( {color: 0xff0000} );
-        this.interruptor.material = sphereMat
-        console.log("cambiando color") */
         this.interruptor.cambiarColor()
-
     }
 
     devolverObstaculos(){

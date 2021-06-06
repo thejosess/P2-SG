@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Ejemplo Básico: Hola Mundo Three.js</title>
+    <title>The Legend of Child</title>
     <meta charset="utf-8">
     <script type="text/javascript" src="../libs/jquery.js"></script>
     <script type="module" src="MyScene.js"></script>    
@@ -13,6 +13,16 @@
             margin: 0;
             overflow: hidden; 
         }
+
+        #message {
+            position: absolute;
+            top: 35%;
+            width: 100%;
+            text-align: center;
+            display:none;
+            color:black;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
@@ -20,5 +30,6 @@
 <!-- Div which will hold the Output -->
 <div id="WebGL-output">
 </div>
+<div id="message"></div>
 </body>
 </html>

@@ -302,6 +302,10 @@ class MyScene extends THREE.Scene {
 
     key = String.fromCharCode(key).toLowerCase()
 
+    if(this.estado_juego == MyScene.DEAD && key_int == 32){
+      window.location.reload()
+    }
+
     if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD){
       if (key == 'w' ){
         //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
@@ -546,6 +550,9 @@ class MyScene extends THREE.Scene {
 
   terminarJuego(){
     this.estado_juego = MyScene.DEAD
+
+    document.getElementById("message").style.display = "block";
+    document.getElementById("message").innerHTML = "<p>Has muerto</p><p>Pulsa espacio para reinicar</p>"
   }
   
   onKeyDown(event){
@@ -581,16 +588,18 @@ class MyScene extends THREE.Scene {
 
     this.stats.begin();
     
-    // Se actualiza el resto del modelo
-    this.link.update();
-    this.attack_sword.update();
-    this.bosque.update();
-
+    
     var fin_juego = this.link.comprobarFinJuego()
     if(fin_juego){
       this.terminarJuego();
     }
-
+    
+    if(this.estado_juego != MyScene.DEAD){
+      // Se actualiza el resto del modelo
+      this.link.update();
+      this.attack_sword.update();
+      this.bosque.update();
+    }
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
 

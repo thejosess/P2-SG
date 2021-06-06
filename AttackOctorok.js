@@ -53,8 +53,6 @@ class AttackOctorok extends THREE.Object3D{
 
 
     ataque(){
-/*         console.log("position del atack" + this.position.z)
-        console.log("position de octorok" + this.ref_octorok.position.z) */
 
         if(!this.muerto){
 
@@ -78,7 +76,6 @@ class AttackOctorok extends THREE.Object3D{
 
                 // LOOK_AT_UP
                 case AttackOctorok.LOOK_AT_UP:
-                    //console.log("position de octorok" + this.ref_octorok.position.z)
 
                     //valores de posicion del octorok
                     if(this.ref_octorok.position.z > 9.8 ){ 
@@ -91,7 +88,6 @@ class AttackOctorok extends THREE.Object3D{
                         this.visible = false
                     }
                     else {
-                        //console.log("entrando")
                         //this.position.z = 5
                         this.position.z -= 0.3
                     }

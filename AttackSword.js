@@ -93,9 +93,6 @@ class AttackSword extends THREE.Object3D {
                 normalized_vector = normalized_vector.normalize()
                 casterEspada.set(this.position,normalized_vector);
                 casterEspada.far = 1.25;
-                //TODO poner que dependiendo del nivel buscas unos objetos u otros
-                //console.log(array)
-                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
                 var objetos = casterEspada.intersectObjects(array,true);
 
             break
@@ -107,9 +104,6 @@ class AttackSword extends THREE.Object3D {
                 normalized_vector = normalized_vector.normalize()
                 casterEspada.set(this.position,normalized_vector);
                 casterEspada.far = 1.25;
-                //TODO poner que dependiendo del nivel buscas unos objetos u otros
-                //console.log(array)
-                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
                 var objetos = casterEspada.intersectObjects(array,true);
 
             break
@@ -121,9 +115,6 @@ class AttackSword extends THREE.Object3D {
                 normalized_vector = normalized_vector.normalize()
                 casterEspada.set(this.position,normalized_vector);
                 casterEspada.far = 1.25;
-                //TODO poner que dependiendo del nivel buscas unos objetos u otros
-                //console.log(array)
-                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
                 var objetos = casterEspada.intersectObjects(array,true);
             
             break
@@ -135,9 +126,6 @@ class AttackSword extends THREE.Object3D {
                 normalized_vector = normalized_vector.normalize()
                 casterEspada.set(this.position,normalized_vector);
                 casterEspada.far = 1.25;
-                //TODO poner que dependiendo del nivel buscas unos objetos u otros
-                //console.log(array)
-                //tienes que comprobar que scene.children[0] su parent sea NivelBosque
                 var objetos = casterEspada.intersectObjects(array,true);
             
             break
@@ -151,10 +139,8 @@ class AttackSword extends THREE.Object3D {
 
         if(colisiona_enemigo.length > 0) {
             var monstruo = colisiona_enemigo[0].object.parent
-            console.log(monstruo)
             this.aux=false
             monstruo.quitarVida()
-            console.log(monstruo.parent.children)
 
             if(monstruo.vida == 0) {
                 //Eliminar monstruo
@@ -188,7 +174,6 @@ class AttackSword extends THREE.Object3D {
             var obstaculo = colisiona_obstaculo[0].object.parent
             this.aux=false  
             if(obstaculo.name == "interruptor") {
-                console.log("illloo")
                 //Eliminamos la roca
                 var roca = this.getObstaculo("roca")
                 // var pos = this.array_enemigos.indexOf(roca)
@@ -196,7 +181,7 @@ class AttackSword extends THREE.Object3D {
                 // this.array_obstaculos.splice(pos,1)
                 obstaculo.cambiarColor()
                 obstaculo.parent.quitarRoca()  
-                console.log(this.array_obstaculos)
+                //console.log(this.array_obstaculos)
             }
             // Quita vida
             this.visible=false
