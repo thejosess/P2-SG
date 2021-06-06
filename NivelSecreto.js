@@ -5,6 +5,7 @@ import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import { Roca3 } from './Roca3.js'
 import { Libro } from './Libro.js'
+import { RedSword} from './RedSword.js'
 
 
 
@@ -71,9 +72,19 @@ class NivelSecreto extends THREE.Object3D{
         this.libro3.position.x = 15
         this.libro3.rotateY(-Math.PI /4)
         this.add(this.libro3)
+        
+        this.espada_roja = new RedSword()
+        this.espada_roja.position.z = 48
+        this.espada_roja.position.x = -12
+        this.espada_roja.scale.set(300, 300, 300)
+        this.espada_roja.rotateY(-35)
+        this.add(this.espada_roja)
+        this.espada_roja.cube.position.z = 46
+        this.espada_roja.cube.position.x = -11
+        this.add(this.espada_roja.cube)
 
         this.array_obstaculos = [
-            this.roca,this.roca2, this.roca3, this.libro, this.libro2, this.libro3
+            this.roca,this.roca2, this.roca3, this.libro, this.libro2, this.libro3, this.espada_roja, this.espada_roja.cube
         ]
     }
 

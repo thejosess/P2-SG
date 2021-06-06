@@ -56,11 +56,10 @@ class Link extends THREE.Object3D{
         //el pj empieza en el nivel bosque 1
         this.game_level = Link.BOSQUE_1
 
-        //TODO por defecto la tiene a false, tiene que encontrar la llave, rompiendo algun arbusto o algo?
-        this.tieneLlave = true
-
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
+
+        this.espada_roja = false
 
         this.vidas = 8
     }
@@ -555,6 +554,8 @@ class Link extends THREE.Object3D{
     comprobarColisionesObjetos(position){
       ////console.log("Buscando colision objetos")
       var colision = false;
+
+
       switch(this.orientacion){
         case Link.LOOK_AT_DOWN:
           var casterJugador = new THREE.Raycaster();
@@ -571,6 +572,14 @@ class Link extends THREE.Object3D{
             //aqui se podria llamar a otras funciones que hagan calculos con esas colisiones
             //si son enemigos y tal
             colision = true;
+
+            if(objetos[0].object.name == "cubo") {
+              this.array_obstaculos.pop()
+              this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+              this.array_obstaculos.pop()
+              this.espada_roja = true
+              
+            }
           }
 
           case Link.LOOK_AT_UP:
@@ -586,6 +595,13 @@ class Link extends THREE.Object3D{
             var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
             if(objetos.length>0){
               colision = true;
+              if(objetos[0].object.name == "cubo") {
+                this.array_obstaculos.pop()
+                this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                this.array_obstaculos.pop()
+                this.espada_roja = true
+                
+              }
             }
 
             case Link.LOOK_AT_LEFT:
@@ -601,6 +617,13 @@ class Link extends THREE.Object3D{
               var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
               if(objetos.length>0){
                 colision = true;
+                if(objetos[0].object.name == "cubo") {
+                  this.array_obstaculos.pop()
+                  this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                  this.array_obstaculos.pop()
+                  this.espada_roja = true
+                  
+                }
               }
 
               case Link.LOOK_AT_RIGHT:
@@ -616,6 +639,13 @@ class Link extends THREE.Object3D{
                 var objetos = casterJugador.intersectObjects(this.array_obstaculos,true);
                 if(objetos.length>0){
                   colision = true;
+                  if(objetos[0].object.name == "cubo") {
+                    this.array_obstaculos.pop()
+                    this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                    this.array_obstaculos.pop()
+                    this.espada_roja = true
+                    
+                  }
                 }
       }
       //console.log(colision)

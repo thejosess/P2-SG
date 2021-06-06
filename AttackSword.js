@@ -29,6 +29,8 @@ class AttackSword extends THREE.Object3D {
         this.direccion = 0  
         this.aux = false
 
+        this.factor_ataque = 1
+
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
     }
@@ -139,36 +141,45 @@ class AttackSword extends THREE.Object3D {
         console.log(this.array_enemigos)
 
         if(colisiona_enemigo.length > 0) {
-            var monstruo = colisiona_enemigo[0].object.parent
-            this.aux=false
-            console.log(monstruo)
 
-            if(monstruo.type != "Group")
-            {            
-                monstruo.quitarVida()
-                
-
-                if(monstruo.vida == 0) {
-                    //Eliminar monstruo
-                    var pos = this.array_enemigos.indexOf(monstruo)
-                    if(pos == -1){
-                        this.array_enemigos.splice(0,1)
-                    }
-                    else{
-                        this.array_enemigos.splice(pos,1)
-                    }
-
-                    var array_children = monstruo.parent.children
-                    for(var i=0; i < array_children.length; i++) {
-                        if(array_children[i].name == 'Attack'){
-                            array_children[i].visible = false
-                            array_children[i].muerto = true
-                        }
-                    }
+            if(colisiona_enemigo[0].object.parent.name == "Attack") {
+                this.visible=false
+                this.aux = false
+                this.position.x = this.ref_link.posPj_x
+                this.position.y = this.ref_link.posPj_y
+                this.position.z = this.ref_link.posPj_z
             }
 
-                
+            else{
+            
+                var monstruo = colisiona_enemigo[0].object.parent
+                this.aux=false
+                console.log(monstruo)
 
+                if(monstruo.type != "Group")
+                {            
+                    monstruo.quitarVida(this.factor_ataque)
+                    
+
+                    if(monstruo.vida == 0) {
+                        //Eliminar monstruo
+                        var pos = this.array_enemigos.indexOf(monstruo)
+                        if(pos == -1){
+                            this.array_enemigos.splice(0,1)
+                        }
+                        else{
+                            this.array_enemigos.splice(pos,1)
+                        }
+
+                        var array_children = monstruo.parent.children
+                        for(var i=0; i < array_children.length; i++) {
+                            if(array_children[i].name == 'Attack'){
+                                array_children[i].visible = false
+                                array_children[i].muerto = true
+                            }
+                        }
+                    }
+                }
             }
             // Quita vida
             this.visible=false
@@ -176,6 +187,24 @@ class AttackSword extends THREE.Object3D {
             this.position.y = this.ref_link.posPj_y
             this.position.z = this.ref_link.posPj_z
         }
+    }
+
+    cambiarAEspadaRoja(){
+        this.factor_ataque = 2
+        var that = this;
+        var materiaLoader = new MTLLoader();
+        var objectLoader = new OBJLoader();
+        materiaLoader.load('models/attack_sword_model/attack_sword_red.mtl',
+        function(materials){
+            objectLoader.setMaterials(materials);
+            objectLoader.load('models/attack_sword_model/attack_sword_red.obj',
+            function(object){
+                var modelo = object;
+                var modelo = object
+                modelo.scale.set(1, 1, 1)
+                that.add(modelo);
+            },null,null);
+        });
     }
 
     comprobarColisionEspadaObstaculos(array) {

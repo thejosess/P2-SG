@@ -342,7 +342,12 @@ class MyScene extends THREE.Scene {
       if (key_int == 32){
         ////console.log("mostrando tecla " + String.fromCharCode(key))
         this.attack_sword.lanzarEspada(this.link.orientacion)
-      }  
+      }
+      
+      if(this.link.espada_roja){
+        this.attack_sword.cambiarAEspadaRoja()
+        this.link.espada_roja = false
+      }
     }
 
     if(this.estado_juego != MyScene.DEAD){

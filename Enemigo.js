@@ -13,11 +13,11 @@ class Enemigo
 
     }
 
-    quitarVida(){
+    quitarVida(cantidad_vida){
         if(this.vida != 0){
-            this.vida -=1
+            this.vida -= cantidad_vida
         }
-        if(this.vida == 0){
+        if(this.vida <= 0 ){
             this.visible = false
         }
     }
