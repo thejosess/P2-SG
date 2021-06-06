@@ -70,7 +70,7 @@ class NivelDesierto extends THREE.Object3D{
 
         this.octorok2 = new Octorok_with_attack()
         this.name = "Octorok2"
-        this.octorok2.position.x = -140
+        this.octorok2.position.x = -135
         this.octorok2.position.z = 14
         this.add(this.octorok2)
 
