@@ -136,26 +136,36 @@ class AttackSword extends THREE.Object3D {
 
     comprobarColisionEspadaEnemigo(array) {
         var colisiona_enemigo = this.comprobarColision(array)
+        console.log(this.array_enemigos)
 
         if(colisiona_enemigo.length > 0) {
             var monstruo = colisiona_enemigo[0].object.parent
             this.aux=false
             console.log(monstruo)
-            monstruo.quitarVida()
 
-            if(monstruo.vida == 0) {
-                //Eliminar monstruo
-                var pos = this.array_enemigos.indexOf(monstruo)
-                this.array_enemigos.splice(pos,1)
+            if(monstruo.type != "Group")
+            {            
+                monstruo.quitarVida()
+                
 
-                var array_children = monstruo.parent.children
-                for(var i=0; i < array_children.length; i++) {
-                    if(array_children[i].name == 'Attack'){
-                        array_children[i].visible = false
-                        array_children[i].muerto = true
+                if(monstruo.vida == 0) {
+                    //Eliminar monstruo
+                    var pos = this.array_enemigos.indexOf(monstruo)
+                    if(pos == -1){
+                        this.array_enemigos.splice(0,1)
                     }
-                }
+                    else{
+                        this.array_enemigos.splice(pos,1)
+                    }
 
+                    var array_children = monstruo.parent.children
+                    for(var i=0; i < array_children.length; i++) {
+                        if(array_children[i].name == 'Attack'){
+                            array_children[i].visible = false
+                            array_children[i].muerto = true
+                        }
+                    }
+            }
 
                 
 

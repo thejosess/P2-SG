@@ -22,7 +22,7 @@ class Walrus extends Enemigo{
             },null,null);
         });
 
-        var geometry = new THREE.BoxGeometry( 7, 11, 7 );
+        var geometry = new THREE.BoxGeometry( 5, 11, 5 );
         var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
         this.cube = new THREE.Mesh( geometry, material );
         this.cube.visible = false
@@ -31,7 +31,7 @@ class Walrus extends Enemigo{
         this.signo_recorrido = -1
 
         //TODO revisar esto
-        //this.vida = 3
+        this.vida = 4
 
 
         this.rotateY(Math.PI / 2)
