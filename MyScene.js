@@ -302,7 +302,7 @@ class MyScene extends THREE.Scene {
 
     key = String.fromCharCode(key).toLowerCase()
 
-    if(this.estado_juego != MyScene.CHANGE_CAMERA){
+    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD){
       if (key == 'w' ){
         //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
@@ -341,8 +341,9 @@ class MyScene extends THREE.Scene {
       }  
     }
 
-
-    this.comprobarCambioNivel()
+    if(this.estado_juego != MyScene.DEAD){
+      this.comprobarCambioNivel()
+    }
 
   }
 
@@ -542,6 +543,10 @@ class MyScene extends THREE.Scene {
 
 
   }
+
+  terminarJuego(){
+    this.estado_juego = MyScene.DEAD
+  }
   
   onKeyDown(event){
 
@@ -580,6 +585,11 @@ class MyScene extends THREE.Scene {
     this.link.update();
     this.attack_sword.update();
     this.bosque.update();
+
+    var fin_juego = this.link.comprobarFinJuego()
+    if(fin_juego){
+      this.terminarJuego();
+    }
 
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
@@ -676,7 +686,5 @@ $(function () {
 
   //TODO tambien existen keydown -> se pulsa una tecla y keyup -> se suelta
 
-  
-  // Que no se nos olvide, la primera visualización.
-  scene.update();
+    scene.update();
 });

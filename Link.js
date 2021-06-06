@@ -62,7 +62,7 @@ class Link extends THREE.Object3D{
         //array con los obstaculos segun el nivel en el que estés
         this.array_obstaculos = new Array()
 
-        this.vidas = 3
+        this.vidas = 5
     }
 
     cargarObstaculos(array_obstaculos){
@@ -428,8 +428,9 @@ class Link extends THREE.Object3D{
             this.actualizarInfoPosicion(Link.LOOK_AT_DOWN)
             this.mover_delante_o_detras(Link.MOVER_DETRAS)
             this.actualizarInfoPosicion(Link.LOOK_AT_DOWN)
-            //console.log("Entra arriba")
+            //console.log("Entra arriba"
           }
+        return colisiona_enemigo
         break;
           case Link.LOOK_AT_DOWN:
             if(colisiona_enemigo){
@@ -441,6 +442,7 @@ class Link extends THREE.Object3D{
               //console.log("Entra abajo")
 
             }
+            return colisiona_enemigo
           break;
 
           case Link.LOOK_AT_LEFT:
@@ -453,6 +455,7 @@ class Link extends THREE.Object3D{
               //console.log("Entra izquierda")
 
             }
+            return colisiona_enemigo
           break;
 
           
@@ -465,9 +468,9 @@ class Link extends THREE.Object3D{
               this.actualizarInfoPosicion(Link.LOOK_AT_LEFT)
               //console.log("Entra derecha")
             }
+            return colisiona_enemigo
             break;
       }
-
 
     }
 
@@ -546,6 +549,7 @@ class Link extends THREE.Object3D{
       return colision;  
     }
 
+
   
 
     comprobarColisionesObjetos(position){
@@ -618,10 +622,30 @@ class Link extends THREE.Object3D{
       return colision;  
     }
 
+    comprobarQuitarVidas(){
+      //var quitar_vida = this.comprobarColisionesEnemigo()
+      var quitar_vida = this.comprobarMovimientoColisionEnemigo()
+
+      if(quitar_vida && this.vidas != 0){
+        this.vidas -= 1
+        return true
+      }
+      return false
+    }
+
+    comprobarFinJuego(){
+      this.comprobarQuitarVidas()
+      if(this.vidas == 0)
+        return true
+      else 
+        return false
+    }
+
+
+
 
     update(){
       TWEEN.update();
-      
     }
     
 }

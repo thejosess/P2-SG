@@ -194,6 +194,7 @@ class AttackSword extends THREE.Object3D {
                 // var pos = this.array_enemigos.indexOf(roca)
                 // roca.visible = false
                 // this.array_obstaculos.splice(pos,1)
+                obstaculo.cambiarColor()
                 obstaculo.parent.quitarRoca()  
                 console.log(this.array_obstaculos)
             }
