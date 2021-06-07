@@ -18,6 +18,7 @@ import {NivelBoss} from './NivelBoss.js'
 import {NivelMar} from './NivelMar.js'
 import {NivelDesierto} from './NivelDesierto.js'
 import {AttackSword} from './AttackSword.js'
+import {Bomba} from './Bomba.js'
 
 
 
@@ -36,6 +37,21 @@ import {AttackSword} from './AttackSword.js'
 class MyScene extends THREE.Scene {
   constructor (myCanvas) {
     super();
+    // create an AudioListener and add it to the camera
+    const listener = new THREE.AudioListener();
+    this.add( listener );
+
+    // create a global audio source
+    const sound = new THREE.Audio( listener );
+
+    // load a sound and set it as the Audio object's buffer
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sounds/zelda.mp3', function( buffer ) {
+      sound.setBuffer( buffer );
+      sound.setLoop( true );
+      sound.setVolume( 0.3 );
+      sound.play();
+    });
     
     this.resolucion_altura = 1920
     this.resolucion_anchura = 915
@@ -69,7 +85,7 @@ class MyScene extends THREE.Scene {
     this.add (this.glass); */
 
     //el nivel en el que se comienza es en el de bosque 1
-    this.game_level = MyScene.BOSQUE_1
+    this.game_level = MyScene.MAR
 
     //estado del juego
     this.estado_juego = MyScene.START
@@ -77,9 +93,11 @@ class MyScene extends THREE.Scene {
     this.crearNiveles();
     this.crearPersonajes();
 
-    
+    //this.initAudio()
+
 
   }
+
 
   crearPersonajes(){
     this.link = new Link(this);
@@ -210,6 +228,49 @@ class MyScene extends THREE.Scene {
 
 
   }
+
+  usarBomba(position) {
+    this.bomba = new Bomba()
+    this.bomba.position.x = position.x
+    this.bomba.position.y = position.y
+    this.bomba.position.z = position.z
+    //this.link.bombas -= 1
+    this.add(this.bomba)
+    console.log(this.bomba.position.x)
+    if((this.bomba.position.x <= 5.25) && (this.bomba.position.x >= -8.75)) {
+      for(var i = 0; i < this.link.array_obstaculos.length; i++) {
+        //console.log(this.link.array_obstaculos)
+        if(this.link.array_obstaculos[i]['name'] == "roca") {
+          console.log(i)
+          this.link.array_obstaculos[i].visible = false
+          this.link.array_obstaculos.splice(i,1)
+        }
+      }
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()   
+    }
+
+    // create an AudioListener and add it to the camera
+    const listener = new THREE.AudioListener();
+    this.add( listener );
+
+    // create a global audio source
+    const sound = new THREE.Audio( listener );
+
+    // load a sound and set it as the Audio object's buffer
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sounds/explosion.ogg', function( buffer ) {
+      sound.setBuffer( buffer );
+      sound.setLoop( false );
+      sound.setVolume( 0.5 );
+      sound.play();
+    });
+
+}
 
   changeCamera(game_level){
     //Metodo para cambiar la camara de posicion
@@ -342,6 +403,12 @@ class MyScene extends THREE.Scene {
       if (key_int == 32){
         ////console.log("mostrando tecla " + String.fromCharCode(key))
         this.attack_sword.lanzarEspada(this.link.orientacion)
+      }
+
+      if(this.link.bombas > 0) {
+        if (key == 'e'){
+          this.usarBomba(this.link.position)
+        }
       }
       
       if(this.link.espada_roja){

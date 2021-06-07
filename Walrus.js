@@ -33,7 +33,6 @@ class Walrus extends Enemigo{
         //TODO revisar esto
         this.vida = 4
 
-
         this.rotateY(Math.PI / 2)
         
 

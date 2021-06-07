@@ -3,6 +3,7 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
+import { Bomba } from './Bomba.js'
 
 
 
@@ -62,6 +63,8 @@ class Link extends THREE.Object3D{
         this.espada_roja = false
 
         this.vidas = 8
+
+        this.bombas = 1
     }
 
     cargarObstaculos(array_obstaculos){
@@ -580,6 +583,15 @@ class Link extends THREE.Object3D{
               this.espada_roja = true
               
             }
+
+            if(objetos[0].object.name == "cubo_mar") {
+              this.array_obstaculos.pop()
+              this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+              this.array_obstaculos.pop()
+                            
+              this.bombas += 1
+              
+            }
           }
 
           case Link.LOOK_AT_UP:
@@ -600,6 +612,15 @@ class Link extends THREE.Object3D{
                 this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                 this.array_obstaculos.pop()
                 this.espada_roja = true
+                
+              }
+
+              if(objetos[0].object.name == "cubo_mar") {
+                this.array_obstaculos.pop()
+                this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                this.array_obstaculos.pop()
+                                
+                this.bombas += 1
                 
               }
             }
@@ -624,6 +645,15 @@ class Link extends THREE.Object3D{
                   this.espada_roja = true
                   
                 }
+
+                if(objetos[0].object.name == "cubo_mar") {
+                  this.array_obstaculos.pop()
+                  this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                  this.array_obstaculos.pop()
+                                    
+                  this.bombas += 1
+                  
+                }
               }
 
               case Link.LOOK_AT_RIGHT:
@@ -645,6 +675,14 @@ class Link extends THREE.Object3D{
                     this.array_obstaculos.pop()
                     this.espada_roja = true
                     
+                  }
+
+                  if(objetos[0].object.name == "cubo_mar") {
+                    this.array_obstaculos.pop()
+                    this.array_obstaculos[this.array_obstaculos.length-1].visible=false
+                    this.array_obstaculos.pop()
+                                        
+                    this.bombas += 1
                   }
                 }
       }
@@ -670,9 +708,6 @@ class Link extends THREE.Object3D{
       else 
         return false
     }
-
-
-
 
     update(){
       TWEEN.update();

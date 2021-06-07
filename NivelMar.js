@@ -6,6 +6,7 @@ import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
 import { Alga } from './Alga.js'
 import { Walrus } from './Walrus.js'
+import { Bomba } from './Bomba.js'
 
 
 
@@ -122,6 +123,18 @@ class NivelMar extends THREE.Object3D{
         }  */
 
 
+    }
+
+    soltarBomba() {
+        this.bomba = new Bomba()
+        this.bomba.position.x = this.walrus.position.x
+        this.bomba.position.y = this.walrus.position.y + 0.5
+        this.bomba.position.z = this.walrus.position.z
+        this.add(this.bomba)
+        this.bomba.cube.position.x = this.bomba.position.x
+        this.bomba.cube.position.z = this.bomba.position.z
+        this.add(this.bomba.cube)
+        this.array_obstaculos = [this.camino1, this.camino2, this.alga1, this.alga2, this.bomba, this.bomba.cube]
     }
 
 /*     resizeSecreto(anchura,altura){

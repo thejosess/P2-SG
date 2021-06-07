@@ -141,6 +141,21 @@ class AttackSword extends THREE.Object3D {
         console.log(this.array_enemigos)
 
         if(colisiona_enemigo.length > 0) {
+            // create an AudioListener and add it to the camera
+            const listener = new THREE.AudioListener();
+            this.add( listener );
+
+            // create a global audio source
+            const sound = new THREE.Audio( listener );
+
+            // load a sound and set it as the Audio object's buffer
+            const audioLoader = new THREE.AudioLoader();
+            audioLoader.load( 'sounds/ataque.mp3', function( buffer ) {
+            sound.setBuffer( buffer );
+            sound.setLoop( false );
+            sound.setVolume( 0.5 );
+            sound.play();
+            });
 
             if(colisiona_enemigo[0].object.parent.name == "Attack") {
                 this.visible=false
@@ -162,6 +177,10 @@ class AttackSword extends THREE.Object3D {
                     
 
                     if(monstruo.vida == 0) {
+                        if(monstruo.name == "Walrus") {
+                            monstruo.parent.soltarBomba()
+                            this.ref_link.cargarObstaculos(monstruo.parent.devolverObstaculos())
+                        }
                         //Eliminar monstruo
                         var pos = this.array_enemigos.indexOf(monstruo)
 
