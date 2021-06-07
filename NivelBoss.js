@@ -4,7 +4,8 @@ import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
-
+import { Samu } from './Samu.js'
+import { Samu_with_attack } from './Samu_with_attack.js'
 
 
 
@@ -55,6 +56,12 @@ class NivelBoss extends THREE.Object3D{
 
         //array enemigos
         this.array_enemigos = new Array
+
+        this.samu = new Samu_with_attack()
+        this.samu.position.x = -245
+        this.add(this.samu)
+
+        this.array_enemigos = [this.samu]
         
     }
 
@@ -65,6 +72,10 @@ class NivelBoss extends THREE.Object3D{
     devolverObstaculos(){
         //TODO añadir los objetos que meta despues
         return this.array_obstaculos
+    }
+
+    update(){
+        this.samu.update()
     }
 
 /*     resizeMazmorra(anchura,altura){

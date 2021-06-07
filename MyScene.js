@@ -560,6 +560,13 @@ class MyScene extends THREE.Scene {
     document.getElementById("message").style.display = "block";
     document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa espacio para reinicar</p>"
   }
+
+  terminarJuegoGanar(){
+    this.estado_juego = MyScene.WIN
+
+    document.getElementById("message").style.display = "block";
+    document.getElementById("message").innerHTML = "<p>Has GANADO :)</p><p><p><p><p>Pulsa espacio para reinicar</p>"
+  }
   
   onKeyDown(event){
 
@@ -599,6 +606,10 @@ class MyScene extends THREE.Scene {
     if(fin_juego){
       this.terminarJuego();
     }
+
+    if(this.boss.samu.samu.vida == 0){
+      this.terminarJuegoGanar();
+    }
     
     if(this.estado_juego != MyScene.DEAD){
       // Se actualiza el resto del modelo
@@ -608,6 +619,7 @@ class MyScene extends THREE.Scene {
       this.bosque2.update()
       this.desierto.update();
       this.mar.update();
+      this.boss.update();
     }
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
@@ -663,6 +675,7 @@ class MyScene extends THREE.Scene {
   MyScene.START = 1;
   MyScene.DEAD = 2;
   MyScene.CHANGE_CAMERA = 3;
+  MyScene.WIN = 4;
 
 
 

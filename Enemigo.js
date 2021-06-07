@@ -7,7 +7,7 @@ class Enemigo
     constructor(){
         super();
 
-        //por defecto los enemigos tienen dos vidas
+        //por defecto los enemigos tienen dos vidas_link
         this.vida = 2
         this.visible = true
 

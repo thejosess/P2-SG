@@ -3,28 +3,39 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
-import { AttackOctorok } from './AttackOctorok.js'
-import { Octorok } from './Octorok.js'
+import { AttackSamu } from './AttackSamu.js'
+import { Samu } from './Samu.js'
 import {Enemigo} from './Enemigo.js'
 
 
-class Octorok_with_attack extends  THREE.Object3D{
+class Samu_with_attack extends  THREE.Object3D{
     constructor(){
         super();
-        this.octorok = new Octorok()
-        this.add(this.octorok)
+        this.samu = new Samu()
+        this.add(this.samu)
 
-        //this.octorok.orientacion = Octorok.LOOK_AT_DOWN;
+        //this.Samu.orientacion = Samu.LOOK_AT_DOWN;
 
         /* Se hace este escalado tan grande porque en blender al exportar el modelo
         nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
         y luego al importarlo aqui, se escala a un tamaño apropiado. */
 
-        this.attack = new AttackOctorok(this.octorok)
+        this.attack = new AttackSamu(this.samu)
+        this.attack.rotateY(Math.PI/2)
         this.add(this.attack)
+        //this.attack.visible = false
+
+        this.attack2 = new AttackSamu(this.samu)
+        this.attack2.factor_aleatorio = 0.08
+        this.attack2.rotateY(Math.PI/2)
+        this.add(this.attack2)
+        //this.attack.visible = false
 
 
-        this.name = 'Octorok'
+
+        //TODO revisar
+        //this.vida = 1
+        this.name = 'Samu'
         this.muerto = false
     }
 
@@ -35,6 +46,7 @@ class Octorok_with_attack extends  THREE.Object3D{
         this.position.y + " " + this.position.z) */
         if(!this.muerto){
             this.attack.ataque()
+            this.attack2.ataque()
         }
     }
 
@@ -43,15 +55,15 @@ class Octorok_with_attack extends  THREE.Object3D{
     }
 
     update(){
-        this.octorok.rutaOctorok()
+        this.samu.rutaSamu()
         this.lanzar_ataque()
     }
 }
 
 //Orientaciones de Link
-Octorok_with_attack.LOOK_AT_UP = 5;
-Octorok_with_attack.LOOK_AT_DOWN = 6;
-Octorok_with_attack.LOOK_AT_RIGHT = 7;
-Octorok_with_attack.LOOK_AT_LEFT = 8;
+Samu_with_attack.LOOK_AT_UP = 5;
+Samu_with_attack.LOOK_AT_DOWN = 6;
+Samu_with_attack.LOOK_AT_RIGHT = 7;
+Samu_with_attack.LOOK_AT_LEFT = 8;
 
-export { Octorok_with_attack };
+export { Samu_with_attack };

@@ -61,7 +61,7 @@ class Link extends THREE.Object3D{
 
         this.espada_roja = false
 
-        this.vidas = 8
+        this.vidas_link = 8
     }
 
     cargarObstaculos(array_obstaculos){
@@ -652,20 +652,20 @@ class Link extends THREE.Object3D{
       return colision;  
     }
 
-    comprobarQuitarVidas(){
+    comprobarQuitarvidas_link(){
       //var quitar_vida = this.comprobarColisionesEnemigo()
       var quitar_vida = this.comprobarMovimientoColisionEnemigo()
 
-      if(quitar_vida && this.vidas != 0){
-        this.vidas -= 1
+      if(quitar_vida && this.vidas_link != 0){
+        this.vidas_link -= 1
         return true
       }
       return false
     }
 
     comprobarFinJuego(){
-      this.comprobarQuitarVidas()
-      if(this.vidas == 0)
+      this.comprobarQuitarvidas_link()
+      if(this.vidas_link == 0)
         return true
       else 
         return false
