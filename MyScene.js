@@ -167,12 +167,7 @@ class MyScene extends THREE.Scene {
   }
 
   quitarBomba() {
-    console.log("quitaao")
     this.remove(this.bomba)
-  }
-
-  hola() {
-    alert("3 segundos")
   }
 
   usarBomba(position) {
@@ -192,10 +187,6 @@ class MyScene extends THREE.Scene {
         ((this.bomba.position.z == 19.25) || (this.bomba.position.z == 17.5))) {
           for(var i = 0; i < this.link.array_obstaculos.length; i++) {
             if(this.link.array_obstaculos[i]['name'] == "roca") {
-              console.log(this.link.array_obstaculos[i])
-              console.log(this.link.array_obstaculos[i+1])
-              console.log(this.link.array_obstaculos[i+2])
-              console.log(this.link.array_obstaculos[i+3])
               this.link.array_obstaculos[i].visible = false
               this.link.array_obstaculos[i+1].visible = false
               this.link.array_obstaculos[i+2].visible = false
@@ -322,6 +313,7 @@ class MyScene extends THREE.Scene {
     var key = event.which || event.keyCode
     var key_int = event.which || event.keyCode
 
+
     //se admite tanto w como W, por eso se hace lowerCase de la key
 
     key = String.fromCharCode(key).toLowerCase()
@@ -407,6 +399,7 @@ class MyScene extends THREE.Scene {
     }
 
 
+
   }
 
   comprobarCambioNivel(){
@@ -414,7 +407,6 @@ class MyScene extends THREE.Scene {
     //this.link.comprobar_cambio_nivel()
     //cambia el nivel tambien en Myscene
     //si cambia de nivel, hay que hacerle el cambio de la camara
-
     switch (this.link.game_level){
       case MyScene.BOSQUE_1:
         if(this.link.posPj_x == -28 && this.link.posPj_y == 0 && (this.link.posPj_z == 0 ||
@@ -432,7 +424,7 @@ class MyScene extends THREE.Scene {
           this.attack_sword.cargarEnemigos(this.bosque2.devolverEnemigos())
         }
 
-        if((this.link.posPj_x == 0 ||this.link.posPj_x == 1.75 || this.link.posPj_x == 3.5 || this.link.posPj_x == 5.25)
+        if((this.link.posPj_x == 0 ||this.link.posPj_x == -1.75 || this.link.posPj_x == -3.5 || this.link.posPj_x == -5.25 || this.link.posPj_x == 1.75)
         && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.SECRETA
@@ -580,7 +572,8 @@ class MyScene extends THREE.Scene {
       case MyScene.SECRETA:
         //solo puedes acceder a esta posicion se rompes las rocas y te acercas despues
 
-        if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
+        if((this.link.posPj_x == 0 ||this.link.posPj_x == -1.75 || this.link.posPj_x == -3.5 || this.link.posPj_x == -5.25 || this.link.posPj_x == 1.75)
+        && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){        
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSQUE_1
           this.game_level = MyScene.BOSQUE_1
