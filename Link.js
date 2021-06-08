@@ -324,7 +324,6 @@ class Link extends THREE.Object3D{
 
 
         case Link.SECRETA:
-          console.log(posicion_simulada)
           if(posicion_simulada.x == 29.75 || posicion_simulada.x == -29.75 ||((posicion_simulada.z == 24.5 && posicion_simulada.x !=-1.75 && posicion_simulada.x != 1.75 && posicion_simulada.x != -3.5  && 
             posicion_simulada.x != 0 && posicion_simulada.x != -5.25))){
             puede_avanzar = false
