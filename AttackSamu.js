@@ -21,7 +21,7 @@ class AttackSamu extends THREE.Object3D{
             },null,null);
         });
 
-        var geometry = new THREE.BoxGeometry( 3, 10, 3 );
+        var geometry = new THREE.BoxGeometry( 2, 10, 2 );
         var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
         this.cube = new THREE.Mesh( geometry, material );
         this.cube.visible = false

@@ -49,8 +49,8 @@ class MyScene extends THREE.Scene {
 
     //variable que cambia a false cuando el jugador pulsa cualquier tecla por primera vez
     this.comienzo = true
-
-    
+    this.fin=false
+    this.sonido_muerte=false
     // Construimos los distinos elementos que tendremos en la escena
     
     // Todo elemento que se desee sea tenido en cuenta en el renderizado de la escena debe pertenecer a esta. Bien como hijo de la escena (this en esta clase) o como hijo de un elemento que ya esté en la escena.
@@ -69,7 +69,41 @@ class MyScene extends THREE.Scene {
     this.cuadro
     this.crearNiveles();
     this.crearPersonajes();
+    this.crearSonidos();
 
+
+
+  }
+
+  crearSonidos(){
+    const listener = new THREE.AudioListener();
+    // create a global audio source
+    const boss_sound = new THREE.Audio( listener );
+
+    // load a sound and set it as the Audio object's buffer
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sounds/boss.mp3', function( buffer ) {
+      boss_sound.setBuffer( buffer );
+      boss_sound.setLoop( true );
+      boss_sound.setVolume( 0.5 );
+    });
+    this.boss_sound = boss_sound
+
+    const win_sound = new THREE.Audio( listener );
+    audioLoader.load( 'sounds/victoria.mp3', function( buffer ) {
+      win_sound.setBuffer( buffer );
+      win_sound.setLoop( false );
+      win_sound.setVolume( 0.5 );
+    });
+    this.win_sound = win_sound
+
+    const dead_sound = new THREE.Audio( listener );
+    audioLoader.load( 'sounds/morir.mp3', function( buffer ) {
+      dead_sound.setBuffer( buffer );
+      dead_sound.setLoop( false );
+      dead_sound.setVolume( 0.5 );
+    });
+    this.dead_sound = dead_sound
   }
 
 
@@ -197,24 +231,6 @@ class MyScene extends THREE.Scene {
         }
         
       break;
-
-      case MyScene.BOSQUE_2:
-      break;
-
-      case MyScene.DESIERTO:
-      break;
-
-      case MyScene.MAZMORRA:
-      break;
-
-      case MyScene.BOSS:
-      break;
-
-      case MyScene.MAR:
-      break;
-
-      case MyScene.SECRETA:
-      break;
     }
 
 
@@ -340,8 +356,11 @@ class MyScene extends THREE.Scene {
       this.sound = sound
     }
 
-
     if(this.estado_juego == MyScene.DEAD && key_int == 32){
+      window.location.reload()
+    }
+
+    if(this.estado_juego == MyScene.WIN && key_int == 13){
       window.location.reload()
     }
 
@@ -540,6 +559,8 @@ class MyScene extends THREE.Scene {
         }
         
         if(this.link.posPj_x == -196 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+          this.sound.pause()
+          this.boss_sound.play()
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSS
           this.game_level = MyScene.BOSS
@@ -556,6 +577,8 @@ class MyScene extends THREE.Scene {
 
       case MyScene.BOSS:
         if(this.link.posPj_x == -196 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
+          this.boss_sound.pause()
+          this.sound.play()
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.MAZMORRA
           this.game_level = MyScene.MAZMORRA
@@ -606,16 +629,27 @@ class MyScene extends THREE.Scene {
     this.estado_juego = MyScene.DEAD
 
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa espacio para reinicar</p>"
+    document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa 'Espacio' para reinicar</p>"
     this.sound.pause()
+    this.boss_sound.pause()
+    if(!this.sonido_muerte) {
+      this.sonido_muerte=true
+      this.dead_sound.play()
+    }
   }
 
   terminarJuegoGanar(){
     this.estado_juego = MyScene.WIN
 
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "<p>Has GANADO :)</p><p><p><p><p>Pulsa espacio para reinicar</p>"
+    document.getElementById("message").innerHTML = "<p>Has GANADO :)</p><p><p><p><p>Pulsa 'Enter' para reinicar</p>"
     this.sound.pause()
+    this.boss_sound.pause()
+
+    if(!this.fin) {
+      this.win_sound.play()
+      this.fin=true
+    }
   }
  
   update () {
