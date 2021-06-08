@@ -33,6 +33,17 @@ class Bomba extends THREE.Object3D{
 
 
         this.scale.set(125,125,125)
+
+        this.contador = 0
+        this.explotando = false
+    }
+
+    update() {
+        this.contador += 1
+        if(this.contador == 20) {
+            this.explotando = false
+            this.visible = false
+        }
     }
 }
 

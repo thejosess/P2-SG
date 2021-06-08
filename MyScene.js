@@ -229,30 +229,65 @@ class MyScene extends THREE.Scene {
 
   }
 
+  quitarBomba() {
+    console.log("quitaao")
+    this.remove(this.bomba)
+  }
+
+  hola() {
+    alert("3 segundos")
+  }
+
   usarBomba(position) {
     this.bomba = new Bomba()
     this.bomba.position.x = position.x
-    this.bomba.position.y = position.y
+    this.bomba.position.y = position.y + 0.5
     this.bomba.position.z = position.z
     //this.link.bombas -= 1
     this.add(this.bomba)
-    console.log(this.bomba.position.x)
-    if((this.bomba.position.x <= 5.25) && (this.bomba.position.x >= -8.75)) {
-      for(var i = 0; i < this.link.array_obstaculos.length; i++) {
-        //console.log(this.link.array_obstaculos)
-        if(this.link.array_obstaculos[i]['name'] == "roca") {
-          console.log(i)
-          this.link.array_obstaculos[i].visible = false
-          this.link.array_obstaculos.splice(i,1)
+    this.bomba.explotando=true
+
+    switch(this.link.game_level) {
+
+      case MyScene.BOSQUE_1:
+        if((this.bomba.position.x <= 5.25) && (this.bomba.position.x >= -8.75) && 
+        ((this.bomba.position.z == 19.25) || (this.bomba.position.z == 17.5))) {
+          for(var i = 0; i < this.link.array_obstaculos.length; i++) {
+            if(this.link.array_obstaculos[i]['name'] == "roca") {
+              console.log(this.link.array_obstaculos[i])
+              console.log(this.link.array_obstaculos[i+1])
+              console.log(this.link.array_obstaculos[i+2])
+              console.log(this.link.array_obstaculos[i+3])
+              this.link.array_obstaculos[i].visible = false
+              this.link.array_obstaculos[i+1].visible = false
+              this.link.array_obstaculos[i+2].visible = false
+              this.link.array_obstaculos[i+3].visible = false
+              this.link.array_obstaculos.splice(i,4)
+            }
+          }
         }
-      }
-      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
-      // this.link.array_obstaculos.pop()
-      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
-      // this.link.array_obstaculos.pop()
-      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
-      // this.link.array_obstaculos.pop()   
+        
+      break;
+
+      case MyScene.BOSQUE_2:
+      break;
+
+      case MyScene.DESIERTO:
+      break;
+
+      case MyScene.MAZMORRA:
+      break;
+
+      case MyScene.BOSS:
+      break;
+
+      case MyScene.MAR:
+      break;
+
+      case MyScene.SECRETA:
+      break;
     }
+
 
     // create an AudioListener and add it to the camera
     const listener = new THREE.AudioListener();
@@ -683,6 +718,13 @@ class MyScene extends THREE.Scene {
     // Literalmente le decimos al navegador: "La próxima vez que haya que refrescar la pantalla, llama al método que te indico".
     // Si no existiera esta línea,  update()  se ejecutaría solo la primera vez.
     requestAnimationFrame(() => this.update())
+
+    if(this.bomba) {
+      if(this.bomba.explotando) {
+        this.bomba.update()
+      }
+    }
+    
 
     this.stats.end();
 
