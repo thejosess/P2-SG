@@ -639,8 +639,9 @@ class Link extends THREE.Object3D{
     update(){
       TWEEN.update();
     }
+
     
-}
+  }
 
 //Orientaciones de Link
 Link.LOOK_AT_UP = 5;

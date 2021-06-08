@@ -39,7 +39,7 @@ class Octorok_with_attack extends  THREE.Object3D{
     }
 }
 
-//Orientaciones de Link
+//Orientaciones de Octorok_with_attack
 Octorok_with_attack.LOOK_AT_UP = 5;
 Octorok_with_attack.LOOK_AT_DOWN = 6;
 Octorok_with_attack.LOOK_AT_RIGHT = 7;
