@@ -1,8 +1,6 @@
 import * as THREE from './libs/three.module.js'
 import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
-import { Vector3 } from './libs/three.module.js'
-import { Tween } from './libs/tween.esm.js';
 import { Link } from './Link.js';
 
 class AttackSword extends THREE.Object3D {
@@ -36,7 +34,6 @@ class AttackSword extends THREE.Object3D {
     }
 
     lanzarEspada(orientacionLink) {
-        console.log("Lanzando espada ...")
         this.aux=true
 
         switch(orientacionLink) {
@@ -138,9 +135,23 @@ class AttackSword extends THREE.Object3D {
 
     comprobarColisionEspadaEnemigo(array) {
         var colisiona_enemigo = this.comprobarColision(array)
-        console.log(this.array_enemigos)
 
         if(colisiona_enemigo.length > 0) {
+            // create an AudioListener and add it to the camera
+            const listener = new THREE.AudioListener();
+            this.add( listener );
+
+            // create a global audio source
+            const sound = new THREE.Audio( listener );
+
+            // load a sound and set it as the Audio object's buffer
+            const audioLoader = new THREE.AudioLoader();
+            audioLoader.load( 'sounds/ataque.mp3', function( buffer ) {
+            sound.setBuffer( buffer );
+            sound.setLoop( false );
+            sound.setVolume( 0.5 );
+            sound.play();
+            });
 
             if(colisiona_enemigo[0].object.parent.name == "Attack") {
                 this.visible=false
@@ -154,7 +165,6 @@ class AttackSword extends THREE.Object3D {
             
                 var monstruo = colisiona_enemigo[0].object.parent
                 this.aux=false
-                console.log(monstruo)
 
                 if(monstruo.type != "Group")
                 {            
@@ -162,6 +172,10 @@ class AttackSword extends THREE.Object3D {
                     
 
                     if(monstruo.vida == 0) {
+                        if(monstruo.name == "Walrus") {
+                            monstruo.parent.soltarBomba()
+                            this.ref_link.cargarObstaculos(monstruo.parent.devolverObstaculos())
+                        }
                         //Eliminar monstruo
                         var pos = this.array_enemigos.indexOf(monstruo)
 
@@ -212,12 +226,8 @@ class AttackSword extends THREE.Object3D {
             if(obstaculo.name == "interruptor") {
                 //Eliminamos la roca
                 var roca = this.getObstaculo("roca")
-                // var pos = this.array_enemigos.indexOf(roca)
-                // roca.visible = false
-                // this.array_obstaculos.splice(pos,1)
                 obstaculo.cambiarColor()
                 obstaculo.parent.quitarRoca()  
-                //console.log(this.array_obstaculos)
             }
             // Quita vida
             this.visible=false

@@ -1,11 +1,8 @@
 import * as THREE from './libs/three.module.js'
-import { MTLLoader } from './libs/MTLLoader.js'
-import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
 import { Alga } from './Alga.js'
 import { Walrus } from './Walrus.js'
+import { Bomba } from './Bomba.js'
 
 
 
@@ -82,7 +79,6 @@ class NivelMar extends THREE.Object3D{
 
 
     devolverObstaculos(){
-        //TODO añadir los objetos que meta despues
         return this.array_obstaculos
     }
 
@@ -117,18 +113,20 @@ class NivelMar extends THREE.Object3D{
             this.walrus.position.z += 0.5
         }
 
-        /* if(this.walrus.position.x == -70){
-            this.walrus_signo_recorrido = +1
-        }  */
-
-
     }
 
-/*     resizeSecreto(anchura,altura){
-        // Se cambia el tamaño de la geometria y por tanto de la textura 
-        this.geometry.parameters.depth = altura/6;
-        this.geometry.parameters.width = anchura/6;
-    } */
+    soltarBomba() {
+        this.bomba = new Bomba()
+        this.bomba.position.x = this.walrus.position.x
+        this.bomba.position.y = this.walrus.position.y + 0.5
+        this.bomba.position.z = this.walrus.position.z
+        this.add(this.bomba)
+        this.bomba.cube.position.x = this.bomba.position.x
+        this.bomba.cube.position.z = this.bomba.position.z
+        this.add(this.bomba.cube)
+        this.array_obstaculos = [this.camino1, this.camino2, this.alga1, this.alga2, this.bomba, this.bomba.cube]
+    }
+
 
     update(){
         this.rutaWalrus()

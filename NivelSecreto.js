@@ -1,8 +1,4 @@
 import * as THREE from './libs/three.module.js'
-import { MTLLoader } from './libs/MTLLoader.js'
-import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
 import { Roca3 } from './Roca3.js'
 import { Libro } from './Libro.js'
 import { RedSword} from './RedSword.js'
@@ -92,7 +88,6 @@ class NivelSecreto extends THREE.Object3D{
 
 
     devolverObstaculos(){
-        //TODO añadir los objetos que meta despues
         return this.array_obstaculos
     }
 

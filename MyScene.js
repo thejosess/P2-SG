@@ -18,12 +18,10 @@ import {NivelBoss} from './NivelBoss.js'
 import {NivelMar} from './NivelMar.js'
 import {NivelDesierto} from './NivelDesierto.js'
 import {AttackSword} from './AttackSword.js'
+import {Bomba} from './Bomba.js'
 
 
 
-
-
-/* ESTADOS INICIALES PARA EL METODO JUGAR */
 
 
 
@@ -36,15 +34,12 @@ import {AttackSword} from './AttackSword.js'
 class MyScene extends THREE.Scene {
   constructor (myCanvas) {
     super();
-    
+
     this.resolucion_altura = 1920
     this.resolucion_anchura = 915
 
     // Lo primero, crear el visualizador, pasándole el lienzo sobre el que realizar los renderizados.
     this.renderer = this.createRenderer(myCanvas);
-    
-    // Se añade a la gui los controles para manipular los elementos de esta clase
-    this.gui = this.createGUI ();
 
     //creamos la informacion de fps
     this.stats = new Stats();
@@ -52,24 +47,21 @@ class MyScene extends THREE.Scene {
     this.stats.showPanel(0) ;  // 0: fps, 1: ms, 2: mb, 3+: custom
     document.body.appendChild( this.stats.dom );
 
+    //variable que cambia a false cuando el jugador pulsa cualquier tecla por primera vez
+    this.comienzo = true
+
     
     // Construimos los distinos elementos que tendremos en la escena
     
     // Todo elemento que se desee sea tenido en cuenta en el renderizado de la escena debe pertenecer a esta. Bien como hijo de la escena (this en esta clase) o como hijo de un elemento que ya esté en la escena.
     // Tras crear cada elemento se añadirá a la escena con   this.add(variable)
     this.createLights ();
-
-    this.axis = new THREE.AxesHelper (5);
-    this.add (this.axis);
     
     // Tendremos una cámara con un control de movimiento con el ratón
     this.createCamera ();
-/* 
-    this.glass = new Glass(this.gui, "Dimensiones de la Caja");
-    this.add (this.glass); */
 
     //el nivel en el que se comienza es en el de bosque 1
-    this.game_level = MyScene.BOSQUE_1
+    this.game_level = MyScene.MAR
 
     //estado del juego
     this.estado_juego = MyScene.START
@@ -77,9 +69,8 @@ class MyScene extends THREE.Scene {
     this.crearNiveles();
     this.crearPersonajes();
 
-    
-
   }
+
 
   crearPersonajes(){
     this.link = new Link(this);
@@ -110,40 +101,8 @@ class MyScene extends THREE.Scene {
     //var look = new THREE.Vector3 (0,0,0);
     this.camera.lookAt(look);
     this.add (this.camera);
-    
-    // Para el control de cámara usamos una clase que ya tiene implementado los movimientos de órbita
-    this.cameraControl = new TrackballControls (this.camera, this.renderer.domElement);
-    // Se configuran las velocidades de los movimientos
-    this.cameraControl.rotateSpeed = 5;
-    this.cameraControl.zoomSpeed = -2;
-    this.cameraControl.panSpeed = 0.5;
-    // Debe orbitar con respecto al punto de mira de la cámara
-    this.cameraControl.target = look;
-  }
-  
-  createGUI () {
-    // Se crea la interfaz gráfica de usuario
-    var gui = new GUI();
-    
-    // La escena le va a añadir sus propios controles. 
-    // Se definen mediante una   new function()
-    // En este caso la intensidad de la luz y si se muestran o no los ejes
-    this.guiControls = new function() {
-      // En el contexto de una función   this   alude a la función
-      this.lightIntensity = 1;
-      this.axisOnOff = true;
-    }
 
-    // Se crea una sección para los controles de esta clase
-    var folder = gui.addFolder ('Luz y Ejes');
-    
-    // Se le añade un control para la intensidad de la luz
-    folder.add (this.guiControls, 'lightIntensity', 0, 2, 0.1).name('Intensidad de la Luz : ');
-    
-    // Y otro para mostrar u ocultar los ejes
-    folder.add (this.guiControls, 'axisOnOff').name ('Mostrar ejes : ');
-    
-    return gui;
+
   }
   
   createLights () {
@@ -159,7 +118,7 @@ class MyScene extends THREE.Scene {
     // La luz focal, además tiene una posición, y un punto de mira
     // Si no se le da punto de mira, apuntará al (0,0,0) en coordenadas del mundo
     // En este caso se declara como   this.atributo   para que sea un atributo accesible desde otros métodos.
-    this.spotLight = new THREE.SpotLight( 0xffffff, this.guiControls.lightIntensity );
+    this.spotLight = new THREE.SpotLight( 0xffffff, 1 );
     this.spotLight.position.set( 60, 60, 40 );
     this.add (this.spotLight);
   }
@@ -204,12 +163,48 @@ class MyScene extends THREE.Scene {
     // Y también el tamaño del renderizador
     this.renderer.setSize (window.innerWidth, window.innerHeight);
 
-    //volver a llamar a crearNiveles para adecuarlos al tamaño de la ventana
-    //TODO revisar esto
-    //this.bosque.resizeBosque(window.innerWidth, window.innerHeight)
-
-
   }
+
+  usarBomba(position) {
+    this.bomba = new Bomba()
+    this.bomba.position.x = position.x
+    this.bomba.position.y = position.y
+    this.bomba.position.z = position.z
+
+    this.add(this.bomba)
+    if((this.bomba.position.x <= 5.25) && (this.bomba.position.x >= -8.75)) {
+      for(var i = 0; i < this.link.array_obstaculos.length; i++) {
+
+        if(this.link.array_obstaculos[i]['name'] == "roca") {
+          this.link.array_obstaculos[i].visible = false
+          this.link.array_obstaculos.splice(i,1)
+        }
+      }
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()
+      // this.link.array_obstaculos[this.link.array_obstaculos.length - 1].visible = false
+      // this.link.array_obstaculos.pop()   
+    }
+
+    // create an AudioListener and add it to the camera
+    const listener = new THREE.AudioListener();
+    this.camera.add( listener );
+
+    // create a global audio source
+    const sound = new THREE.Audio( listener );
+
+    // load a sound and set it as the Audio object's buffer
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sounds/explosion.ogg', function( buffer ) {
+      sound.setBuffer( buffer );
+      sound.setLoop( false );
+      sound.setVolume( 0.5 );
+      sound.play();
+    });
+
+}
 
   changeCamera(game_level){
     //Metodo para cambiar la camara de posicion
@@ -220,7 +215,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.x = 0
         var look = new THREE.Vector3 (0,20,0);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -230,7 +224,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.x = -56
         var look = new THREE.Vector3 (-56,20,0);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -240,7 +233,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.x = -56
         var look = new THREE.Vector3 (-110.25,20,0);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -250,7 +242,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.x = -56
         var look = new THREE.Vector3 (-166.25,20,0);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -260,7 +251,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.x = -56
         var look = new THREE.Vector3 (-224,20,0);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -270,7 +260,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.z = 24.75
         var look = new THREE.Vector3 (-56,20,29.75);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -280,7 +269,6 @@ class MyScene extends THREE.Scene {
         //this.camera.position.z = 24.75
         var look = new THREE.Vector3 (0,20,29.75);
         this.camera.lookAt(look);
-        this.cameraControl.target = look;
 
         this.estado_juego = MyScene.START
       break;
@@ -295,12 +283,32 @@ class MyScene extends THREE.Scene {
     var key = event.which || event.keyCode
     var key_int = event.which || event.keyCode
 
-    //console.log("detecta pulsar tecla pressed")
-    // //console.log(String.fromCharCode(key))
-
     //se admite tanto w como W, por eso se hace lowerCase de la key
 
     key = String.fromCharCode(key).toLowerCase()
+
+    if(this.comienzo){
+
+      // create an AudioListener and add it to the camera
+      const listener = new THREE.AudioListener();
+      this.add( listener );
+
+      // create a global audio source
+      const sound = new THREE.Audio( listener );
+
+      // load a sound and set it as the Audio object's buffer
+      const audioLoader = new THREE.AudioLoader();
+      audioLoader.load( 'sounds/zelda.mp3', function( buffer ) {
+        sound.setBuffer( buffer );
+        sound.setLoop( true );
+        sound.setVolume( 0.5 );
+        sound.play();
+      });
+
+      this.comienzo = false
+      this.sound = sound
+    }
+
 
     if(this.estado_juego == MyScene.DEAD && key_int == 32){
       window.location.reload()
@@ -308,16 +316,13 @@ class MyScene extends THREE.Scene {
 
     if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD){
       if (key == 'w' ){
-        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
         }
         this.link.comprobarMovimientoColisionEnemigo()
-        //this.link.posPj_x cambiar a amano  
       }
 
       if (key == 'a'){
-        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_LEFT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_LEFT)
         }
@@ -325,7 +330,6 @@ class MyScene extends THREE.Scene {
       }
 
       if (key == 'd'){
-        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_RIGHT)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_RIGHT)
         }
@@ -333,15 +337,19 @@ class MyScene extends THREE.Scene {
       }
 
       if (key == 's'){
-        //console.log("mostrando tecla " + String.fromCharCode(key).toLowerCase())
         if(this.link.moverLink(MyScene.LOOK_AT_DOWN)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_DOWN)
         }
         this.link.comprobarMovimientoColisionEnemigo()
       }
       if (key_int == 32){
-        ////console.log("mostrando tecla " + String.fromCharCode(key))
         this.attack_sword.lanzarEspada(this.link.orientacion)
+      }
+
+      if(this.link.bombas > 0) {
+        if (key == 'e'){
+          this.usarBomba(this.link.position)
+        }
       }
       
       if(this.link.espada_roja){
@@ -361,11 +369,6 @@ class MyScene extends THREE.Scene {
     //this.link.comprobar_cambio_nivel()
     //cambia el nivel tambien en Myscene
     //si cambia de nivel, hay que hacerle el cambio de la camara
-    /* //console.log("nivel en el que está")
-    //console.log(this.link.game_level)
-    //console.log(this.game_level)
-    */
-
 
     switch (this.link.game_level){
       case MyScene.BOSQUE_1:
@@ -385,7 +388,7 @@ class MyScene extends THREE.Scene {
         }
 
         if((this.link.posPj_x == 0 ||this.link.posPj_x == 1.75 || this.link.posPj_x == 3.5 || this.link.posPj_x == 5.25)
-        && this.link.posPj_y == 0 && this.link.posPj_z == 22.75 /*&&this.link.tieneLlave*/){
+        && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.SECRETA
           this.game_level =  MyScene.SECRETA
@@ -412,7 +415,6 @@ class MyScene extends THREE.Scene {
         }
 
         if(this.link.posPj_x == -82.25 && this.link.posPj_y == 0 && this.link.posPj_z == 0){
-          //console.log("entra aqui?")
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.DESIERTO
           this.game_level = MyScene.DESIERTO
@@ -433,7 +435,6 @@ class MyScene extends THREE.Scene {
 
           this.link.cargarObstaculos(this.mar.devolverObstaculos())
           this.link.cargarEnemigos(this.mar.devolverEnemigos())
-          console.log(this.mar.devolverEnemigos())
 
           this.attack_sword.cargarObstaculos(this.mar.devolverObstaculos())
           this.attack_sword.cargarEnemigos(this.mar.devolverEnemigos())
@@ -533,7 +534,7 @@ class MyScene extends THREE.Scene {
 
       case MyScene.SECRETA:
         //solo puedes acceder a esta posicion se rompes las rocas y te acercas despues
-        //pero para pasar solo puedes con llave y abriendo la zona secreta
+
         if(this.link.posPj_x == 0 && this.link.posPj_y == 0 && this.link.posPj_z == 22.75){
           this.estado_juego = MyScene.CHANGE_CAMERA
           this.link.game_level = MyScene.BOSQUE_1
@@ -559,6 +560,7 @@ class MyScene extends THREE.Scene {
 
     document.getElementById("message").style.display = "block";
     document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa espacio para reinicar</p>"
+    this.sound.pause()
   }
 
   terminarJuegoGanar(){
@@ -566,42 +568,13 @@ class MyScene extends THREE.Scene {
 
     document.getElementById("message").style.display = "block";
     document.getElementById("message").innerHTML = "<p>Has GANADO :)</p><p><p><p><p>Pulsa espacio para reinicar</p>"
+    this.sound.pause()
   }
-  
-  onKeyDown(event){
-
-  }
-
-
-  onKeyUp(event){
-    var key = event.which || event.keyCode
-    //console.log("has dejado de pulsar la teclad " + String.fromCharCode(key).toLowerCase())
-    
-  }
-
-  onKeyUp(event) {
-    var key = event.which || event.keyCode
-    //console.log("has dejado de pulsar la tecla " + String.fromCharCode(key).toLowerCase())
-  }
-
-
-
+ 
   update () {
-    // Se actualizan los elementos de la escena para cada frame
-    // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
-    this.spotLight.intensity = this.guiControls.lightIntensity;
-    
-    // Se muestran o no los ejes según lo que idique la GUI.
-    this.axis.visible = this.guiControls.axisOnOff;
-
-    //info camera
-    
-    // Se actualiza la posición de la cámara según su controlador
-    this.cameraControl.update();
 
     this.stats.begin();
-    
-    
+        
     var fin_juego = this.link.comprobarFinJuego()
     if(fin_juego){
       this.terminarJuego();
@@ -637,34 +610,26 @@ class MyScene extends THREE.Scene {
   crearNiveles(){
     this.resolucion_altura
     this.bosque = new NivelBosque(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.bosque)
     this.add(this.bosque)
 
     this.bosque2 = new NivelBosque2(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.bosque2)
     this.add(this.bosque2)
 
     this.desierto = new NivelDesierto()
-    //console.log(this.desierto)
     this.add(this.desierto)
 
     this.secreto = new NivelSecreto(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.secreto)
     this.add(this.secreto)
 
     this.mazmorra = new NivelMazmorra(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.mazmorra)
     this.add(this.mazmorra)
 
     this.boss = new NivelBoss(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.boss)
     this.add(this.boss)
 
     this.mar = new NivelMar(this.resolucion_altura, this.resolucion_anchura)
-    //console.log(this.mar)
     this.add(this.mar)
     
-    //console.log("tamaño de la ventana: "+ window.innerWidth + " , " + window.innerHeight)
   }
 
 
@@ -708,14 +673,6 @@ $(function () {
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se pulsa una tecla
   window.addEventListener ("keypress", (event) => scene.onKeyPressed(event));
 
-  // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se matiene pulsada una tecla
-  window.addEventListener ("keydown", (event) => scene.onKeyDown(event));
+  scene.update();
 
-    // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se deja de pulsar una tecla
-    window.addEventListener ("keyup", (event) => scene.onKeyUp(event));
-
-
-  //TODO tambien existen keydown -> se pulsa una tecla y keyup -> se suelta
-
-    scene.update();
 });

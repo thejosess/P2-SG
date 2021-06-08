@@ -1,9 +1,6 @@
 import * as THREE from './libs/three.module.js'
 import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
-import { AttackOctorok } from './AttackOctorok.js'
 import {Enemigo} from './Enemigo.js'
 
 
@@ -40,16 +37,13 @@ class Samu extends Enemigo{
 
         this.rotateY(Math.PI/2)
 
-        //TODO revisar vidas
         this.vida = 5
         
 
         this.orientacion = Samu.LOOK_AT_DOWN;
         this.name = 'Samu'
 
-        /* Se hace este escalado tan grande porque en blender al exportar el modelo
-        nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
-        y luego al importarlo aqui, se escala a un tamaño apropiado. */
+         
 
     }
 
@@ -67,7 +61,7 @@ class Samu extends Enemigo{
 
 }
 
-//Orientaciones de Link
+//Orientaciones de Samu
 Samu.LOOK_AT_UP = 5;
 Samu.LOOK_AT_DOWN = 6;
 Samu.LOOK_AT_RIGHT = 7;

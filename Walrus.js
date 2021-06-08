@@ -30,9 +30,7 @@ class Walrus extends Enemigo{
         this.fin_recorrido = false
         this.signo_recorrido = -1
 
-        //TODO revisar esto
         this.vida = 4
-
 
         this.rotateY(Math.PI / 2)
         
@@ -40,9 +38,7 @@ class Walrus extends Enemigo{
         this.orientacion = Walrus.LOOK_AT_DOWN;
         this.name = 'Walrus'
 
-        /* Se hace este escalado tan grande porque en blender al exportar el modelo
-        nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
-        y luego al importarlo aqui, se escala a un tamaño apropiado. */
+         
 
     }
 
@@ -59,7 +55,7 @@ class Walrus extends Enemigo{
 
 }
 
-//Orientaciones de Link
+//Orientaciones de Walrus
 Walrus.LOOK_AT_UP = 5;
 Walrus.LOOK_AT_DOWN = 6;
 Walrus.LOOK_AT_RIGHT = 7;

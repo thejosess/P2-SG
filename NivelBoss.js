@@ -1,10 +1,5 @@
 import * as THREE from './libs/three.module.js'
-import { MTLLoader } from './libs/MTLLoader.js'
-import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
 import { Camino } from './Camino.js'
-import { Samu } from './Samu.js'
 import { Samu_with_attack } from './Samu_with_attack.js'
 
 
@@ -22,7 +17,7 @@ class NivelBoss extends THREE.Object3D{
         
         // El material se hará con una textura de arena o tierra
         var texture = new THREE.TextureLoader().load('./imgs/boss.jpeg');
-        var materialGround = new THREE.MeshPhongMaterial ({map: texture,emissive:0xFFFFFF, emissiveIntensity:0.2 /*color:0x00FF00*/});
+        var materialGround = new THREE.MeshPhongMaterial ({map: texture,emissive:0xFFFFFF, emissiveIntensity:0.3 /*color:0x00FF00*/});
         //se pone emissive para dar la sensación de estar en una zona de boss, con menos luz y menos directa como la general
         //este crea la textura mas larga para el resto de niveles porque es la misma
         //y asi no se ven los "cortes" de la textura
@@ -70,7 +65,6 @@ class NivelBoss extends THREE.Object3D{
     }
 
     devolverObstaculos(){
-        //TODO añadir los objetos que meta despues
         return this.array_obstaculos
     }
 
@@ -78,11 +72,6 @@ class NivelBoss extends THREE.Object3D{
         this.samu.update()
     }
 
-/*     resizeMazmorra(anchura,altura){
-        // Se cambia el tamaño de la geometria y por tanto de la textura 
-        this.geometry.parameters.depth = altura/6;
-        this.geometry.parameters.width = anchura/6;
-    } */
 }
 
 export { NivelBoss };

@@ -2,16 +2,16 @@ import * as THREE from './libs/three.module.js'
 import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 
-class Libro extends THREE.Object3D{
+class Bomba extends THREE.Object3D{
     constructor(){
         super();
         var that = this;
         var materiaLoader = new MTLLoader();
         var objectLoader = new OBJLoader();
-        materiaLoader.load('models/books/book.mtl',
+        materiaLoader.load('models/bomb/bomba.mtl',
         function(materials){
             objectLoader.setMaterials(materials);
-            objectLoader.load('models/books/book.obj',
+            objectLoader.load('models/bomb/bomba.obj',
             function(object){
                 var modelo = object;
                 var modelo = object
@@ -19,11 +19,18 @@ class Libro extends THREE.Object3D{
             },null,null);
         });
 
+        this.visible = true
 
-        
-         
-        this.scale.set(170,170,170)     
+        var geometry = new THREE.BoxGeometry(2, 3, 2);
+        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+        this.cube = new THREE.Mesh( geometry, material );
+        this.cube.name="cubo_mar"
+        this.cube.visible=false
+        this.add(this.cube)
+
+
+        this.scale.set(125,125,125)
     }
 }
 
-export { Libro };
+export { Bomba };

@@ -1,9 +1,6 @@
 import * as THREE from './libs/three.module.js'
 import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
-
 
 class AttackOctorok extends THREE.Object3D{
     constructor(octorok){
@@ -36,14 +33,6 @@ class AttackOctorok extends THREE.Object3D{
 
         this.ref_octorok = octorok;
         this.name = "Attack"
-        //this.visible = false
-        
-        /* Se hace este escalado tan grande porque en blender al exportar el modelo
-        nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
-        y luego al importarlo aqui, se escala a un tamaño apropiado. */
-        //this.position.x = 5
-        
-
     }
 
     paraAtaque(){
@@ -88,7 +77,6 @@ class AttackOctorok extends THREE.Object3D{
                         this.visible = false
                     }
                     else {
-                        //this.position.z = 5
                         this.position.z -= 0.3
                     }
 
@@ -126,7 +114,6 @@ class AttackOctorok extends THREE.Object3D{
             }
         }
 }
-
 
 }
 

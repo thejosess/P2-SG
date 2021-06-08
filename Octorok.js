@@ -1,9 +1,6 @@
 import * as THREE from './libs/three.module.js'
 import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
-import { AttackOctorok } from './AttackOctorok.js'
 import {Enemigo} from './Enemigo.js'
 
 
@@ -43,9 +40,7 @@ class Octorok extends Enemigo{
         this.orientacion = Octorok.LOOK_AT_DOWN;
         this.name = 'Octorok'
 
-        /* Se hace este escalado tan grande porque en blender al exportar el modelo
-        nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
-        y luego al importarlo aqui, se escala a un tamaño apropiado. */
+         
 
     }
 

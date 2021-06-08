@@ -1,13 +1,11 @@
 import * as THREE from './libs/three.module.js'
-import { MTLLoader } from './libs/MTLLoader.js'
-import { OBJLoader } from './libs/OBJLoader.js'
 
 class Enemigo
  extends THREE.Object3D{
     constructor(){
         super();
 
-        //por defecto los enemigos tienen dos vidas_link
+        //por defecto los enemigos tienen dos vidas
         this.vida = 2
         this.visible = true
 

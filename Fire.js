@@ -25,12 +25,8 @@ class Fire extends THREE.Object3D{
 
 
         
-        /* Se hace este escalado tan grande porque en blender al exportar el modelo
-        nos salen artifacts que se solucionan si el tamaño en blender es muy pequeño
-        y luego al importarlo aqui, se escala a un tamaño apropiado. */
-        this.scale.set(5,5,5)
-        //this.rotateX(-Math.PI/10)
-     
+         
+        this.scale.set(5,5,5)     
     }
 }
 

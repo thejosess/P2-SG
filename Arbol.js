@@ -4,13 +4,9 @@ class Arbol extends THREE.Object3D {
   constructor() {
     super();
 
-    // Un Mesh se compone de geometría y material
     var sphereGeom = new THREE.SphereGeometry (2,8,5);
-    // Como material se crea uno a partir de un color
     var texture = new THREE.TextureLoader().load('./imgs/leaf_2.jpeg');
     var sphereMat = new THREE.MeshLambertMaterial({map: texture, emissive:0xbebd8a, emissiveIntensity:0.1});
-    //TODO revisar si ponerle emisse
-
 
     this.name="arbol"
     
@@ -22,13 +18,10 @@ class Arbol extends THREE.Object3D {
     this.add (this.sphere);
 
 
-    // Un Mesh se compone de geometría y material
     var cylinderGeom = new THREE.CylinderGeometry (0.5,0.5,4,10);
-    // Como material se crea uno a partir de un color
     
     texture = new THREE.TextureLoader().load('./imgs/woods_2.jpeg');
     var cylinderMat = new THREE.MeshLambertMaterial({map: texture, emissive:0xbebd8a, emissiveIntensity:0.1});
-    //TODO revisar si ponerle emisse
 
     cylinderMat.flatShading = true;
     cylinderMat.needsUpdate = true;
