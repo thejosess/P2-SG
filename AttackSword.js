@@ -171,7 +171,7 @@ class AttackSword extends THREE.Object3D {
                     monstruo.quitarVida(this.factor_ataque)
                     
 
-                    if(monstruo.vida == 0) {
+                    if(monstruo.vida <= 0) {
                         if(monstruo.name == "Walrus") {
                             monstruo.parent.soltarBomba()
                             this.ref_link.cargarObstaculos(monstruo.parent.devolverObstaculos())

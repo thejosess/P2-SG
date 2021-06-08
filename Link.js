@@ -65,7 +65,7 @@ class Link extends THREE.Object3D{
 
         this.vidas_link = 8
 
-        this.bombas = 0
+        this.bombas = 1
     }
 
     cargarObstaculos(array_obstaculos){

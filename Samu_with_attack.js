@@ -33,6 +33,7 @@ class Samu_with_attack extends  THREE.Object3D{
 
     change_attack_visibility(){
         this.attack.visible = false
+        this.attack2.visible = false
     }
 
     update(){

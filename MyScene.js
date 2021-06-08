@@ -356,7 +356,7 @@ class MyScene extends THREE.Scene {
       this.sound = sound
     }
 
-    if(this.estado_juego == MyScene.DEAD && key_int == 32){
+    if(this.estado_juego == MyScene.DEAD && key_int == 13){
       window.location.reload()
     }
 
@@ -369,7 +369,7 @@ class MyScene extends THREE.Scene {
       this.estado_juego = MyScene.START
     }
 
-    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD && this.estado_juego != MyScene.TEXTO) {
+    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD && this.estado_juego != MyScene.TEXTO && this.estado_juego != MyScene.WIN) {
       if (key == 'w' ){
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
@@ -629,7 +629,7 @@ class MyScene extends THREE.Scene {
     this.estado_juego = MyScene.DEAD
 
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa 'Espacio' para reinicar</p>"
+    document.getElementById("message").innerHTML = "<p>Has muerto :(</p><p><p><p><p>Pulsa 'Enter' para reinicar</p>"
     this.sound.pause()
     this.boss_sound.pause()
     if(!this.sonido_muerte) {
@@ -661,7 +661,8 @@ class MyScene extends THREE.Scene {
       this.terminarJuego();
     }
 
-    if(this.boss.samu.samu.vida == 0){
+    if(this.boss.samu.samu.vida <= 0){
+      //this.boss.samu.change_attack_visibility()
       this.terminarJuegoGanar();
     }
     
