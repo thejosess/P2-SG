@@ -353,7 +353,12 @@ class MyScene extends THREE.Scene {
       window.location.reload()
     }
 
-    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD) {
+    if(this.estado_juego == MyScene.TEXTO && key_int == 13) {
+      document.getElementById("message").style.display = "none";
+      this.estado_juego = MyScene.START
+    }
+
+    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD && this.estado_juego != MyScene.TEXTO) {
       if (key == 'w' ){
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
@@ -385,10 +390,6 @@ class MyScene extends THREE.Scene {
         this.attack_sword.lanzarEspada(this.link.orientacion)
       }
       
-      if(this.estado_juego == MyScene.TEXTO && key_int == 13) {
-        document.getElementById("message").style.display = "none";
-      }
-
       if(this.link.bombas > 0) {
         if (key == 'e'){
           this.usarBomba(this.link.position)
