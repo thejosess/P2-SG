@@ -65,7 +65,8 @@ class MyScene extends THREE.Scene {
 
     //estado del juego
     this.estado_juego = MyScene.START
-
+    this.texto
+    this.cuadro
     this.crearNiveles();
     this.crearPersonajes();
 
@@ -181,6 +182,7 @@ class MyScene extends THREE.Scene {
     this.bomba.position.z = position.z
 
     this.add(this.bomba)
+    this.link.bombas -= 1
     this.bomba.explotando=true
 
     switch(this.link.game_level) {
@@ -351,7 +353,7 @@ class MyScene extends THREE.Scene {
       window.location.reload()
     }
 
-    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD){
+    if(this.estado_juego != MyScene.CHANGE_CAMERA && this.estado_juego != MyScene.DEAD) {
       if (key == 'w' ){
         if(this.link.moverLink(MyScene.LOOK_AT_UP)){
           this.link.actualizarInfoPosicion(MyScene.LOOK_AT_UP)
@@ -382,6 +384,10 @@ class MyScene extends THREE.Scene {
       if (key_int == 32){
         this.attack_sword.lanzarEspada(this.link.orientacion)
       }
+      
+      if(this.estado_juego == MyScene.TEXTO && key_int == 13) {
+        document.getElementById("message").style.display = "none";
+      }
 
       if(this.link.bombas > 0) {
         if (key == 'e'){
@@ -398,6 +404,7 @@ class MyScene extends THREE.Scene {
     if(this.estado_juego != MyScene.DEAD){
       this.comprobarCambioNivel()
     }
+
 
   }
 
@@ -587,9 +594,18 @@ class MyScene extends THREE.Scene {
       break; 
       
     }
+  }
 
+  bombaCogida() {
+    this.estado_juego = MyScene.TEXTO
+    document.getElementById("message").style.display = "block";
+    this.texto = document.getElementById("message").innerHTML = "<p>Nuevo Objeto: Bomba </p><p><p><p><p>Pulsa la 'e' para usar la bomba y destruir un muro de rocas </p><p><p><p><p>Pulsa 'Enter' para continuar</p>"
+  }
 
-
+  espadaCogida() {
+    this.estado_juego = MyScene.TEXTO
+    this.cuadro = document.getElementById("message").style.display = "block";
+    this.texto = document.getElementById("message").innerHTML = "<p>Nuevo Objeto: Espada </p><p><p><p><p>El daño de tu espada a aumentado x2 </p><p><p><p><p>Pulsa 'Enter' para continuar</p>"
   }
 
   terminarJuego(){
@@ -685,6 +701,7 @@ class MyScene extends THREE.Scene {
   MyScene.DEAD = 2;
   MyScene.CHANGE_CAMERA = 3;
   MyScene.WIN = 4;
+  MyScene.TEXTO = 5;
 
 
 

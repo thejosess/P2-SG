@@ -37,7 +37,7 @@ class Bomba extends THREE.Object3D{
 
     update() {
         this.contador += 1
-        if(this.contador == 20) {
+        if(this.contador == 11) {
             this.explotando = false
             this.visible = false
         }

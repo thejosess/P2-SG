@@ -66,7 +66,7 @@ class Link extends THREE.Object3D{
 
         this.vidas_link = 8
 
-        this.bombas = 1
+        this.bombas = 10
     }
 
     cargarObstaculos(array_obstaculos){
@@ -514,14 +514,14 @@ class Link extends THREE.Object3D{
               this.array_obstaculos[this.array_obstaculos.length-1].visible=false
               this.array_obstaculos.pop()
               this.espada_roja = true
-              
+              objetos[0].object.parent.parent.espadaCogida()
             }
 
             if(objetos[0].object.name == "cubo_mar") {
               this.array_obstaculos.pop()
               this.array_obstaculos[this.array_obstaculos.length-1].visible=false
               this.array_obstaculos.pop()
-                            
+              objetos[0].object.parent.parent.bombaCogida()              
               this.bombas += 1
               
             }
@@ -543,6 +543,7 @@ class Link extends THREE.Object3D{
                 this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                 this.array_obstaculos.pop()
                 this.espada_roja = true
+                objetos[0].object.parent.parent.espadaCogida()
                 
               }
 
@@ -550,7 +551,7 @@ class Link extends THREE.Object3D{
                 this.array_obstaculos.pop()
                 this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                 this.array_obstaculos.pop()
-                                
+                objetos[0].object.parent.parent.bombaCogida()                
                 this.bombas += 1
                 
               }
@@ -572,6 +573,7 @@ class Link extends THREE.Object3D{
                   this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                   this.array_obstaculos.pop()
                   this.espada_roja = true
+                  objetos[0].object.parent.parent.espadaCogida()
                   
                 }
 
@@ -579,7 +581,7 @@ class Link extends THREE.Object3D{
                   this.array_obstaculos.pop()
                   this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                   this.array_obstaculos.pop()
-                                    
+                  objetos[0].object.parent.parent.bombaCogida()                  
                   this.bombas += 1
                   
                 }
@@ -601,6 +603,7 @@ class Link extends THREE.Object3D{
                     this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                     this.array_obstaculos.pop()
                     this.espada_roja = true
+                    objetos[0].object.parent.parent.espadaCogida()
                     
                   }
 
@@ -608,7 +611,7 @@ class Link extends THREE.Object3D{
                     this.array_obstaculos.pop()
                     this.array_obstaculos[this.array_obstaculos.length-1].visible=false
                     this.array_obstaculos.pop()
-                                        
+                    objetos[0].object.parent.parent.bombaCogida()                    
                     this.bombas += 1
                   }
                 }
