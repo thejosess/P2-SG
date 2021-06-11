@@ -1,11 +1,4 @@
 import * as THREE from './libs/three.module.js'
-import { MTLLoader } from './libs/MTLLoader.js'
-import { OBJLoader } from './libs/OBJLoader.js'
-import * as TWEEN from '../libs/tween.esm.js'
-import { Vector3 } from './libs/three.module.js'
-import {Arbusto} from './Arbusto.js'
-
-import {Roca} from './Roca.js'
 import { Camino } from './Camino.js'
 import { Arbusto_desierto } from './Arbusto_desierto.js'
 import {Octorok_with_attack} from './Octorok_with_attack.js'

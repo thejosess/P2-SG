@@ -3,7 +3,6 @@ import { MTLLoader } from './libs/MTLLoader.js'
 import { OBJLoader } from './libs/OBJLoader.js'
 import * as TWEEN from '../libs/tween.esm.js'
 import { Vector3 } from './libs/three.module.js'
-import { Bomba } from './Bomba.js'
 
 
 
